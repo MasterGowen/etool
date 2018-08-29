@@ -24,6 +24,11 @@ class Person(models.Model):
         verbose_name = 'персона'
         verbose_name_plural = 'персоны'
 
+    def get_person_projects(self, user):
+        registrations = ProjectUserRegistration.objects.filter(person=self)
+        projects = [r.project for r in registrations]
+        return projects
+
     def __str__(self):
         if self.first_name and self.last_name:
             return ' '.join([str(self.first_name), str(self.last_name)])
@@ -66,6 +71,28 @@ class EventUserRegistration(models.Model):
 
     person = models.ForeignKey("Person", verbose_name="Персона", on_delete=models.CASCADE)
     event = models.ForeignKey("Event", verbose_name="Событие", on_delete=models.CASCADE)
+    role = models.CharField("Тип регистрации", max_length=8, choices=ROLES)
+
+    class Meta:
+        unique_together = ('person', 'event',)
+
+    def __str__(self):
+        return " ".join([str(self.person), str(self.event), str(self.role)])
+
+
+class ProjectUserRegistration(models.Model):
+    class Meta:
+        verbose_name = 'регистрация пользователя на событие'
+        verbose_name_plural = 'регистрации пользователей на события'
+
+    ROLES = (
+        ("student", "Студент"),
+        ("staff", "Преподаватель"),
+        ("admin", "Администратор"),
+    )
+
+    person = models.ForeignKey("Person", verbose_name="Персона", on_delete=models.CASCADE)
+    project = models.ForeignKey("Project", verbose_name="Событие", on_delete=models.CASCADE)
     role = models.CharField("Тип регистрации", max_length=8, choices=ROLES)
 
     class Meta:
