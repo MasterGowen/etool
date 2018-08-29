@@ -40,24 +40,6 @@ class Person(models.Model):
         instance.person.save()
 
 
-class Event(models.Model):
-    STATUSES = (
-        ('h', "Скрыт"),
-        ('p', "Опубликован"),
-    )
-    title = models.CharField("Название события", max_length=256, blank=False)
-    description = models.TextField("Описание события", blank=True, default="")
-    status = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
-    _startdate = models.DateTimeField("Начало события", blank=True, null=True)
-    _enddate = models.DateTimeField("Конец события", blank=True, null=True)
-
-    subevents = models.ManyToManyField("Subevent")
-
-    class Meta:
-        verbose_name = 'событие'
-        verbose_name_plural = 'события'
-
-
 class Subevent(models.Model):
     STATUSES = (
         ('h', "Скрыт"),
@@ -109,3 +91,29 @@ class Project(models.Model):
     class Meta:
         verbose_name = 'проект'
         verbose_name_plural = 'проекты'
+
+
+class Event(models.Model):
+    STATUSES = (
+        ('h', "Скрыт"),
+        ('p', "Опубликован"),
+    )
+    title = models.CharField("Название события", max_length=256, blank=False)
+    description = models.TextField("Описание события", blank=True, default="")
+    status = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
+    _startdate = models.DateTimeField("Начало события", blank=True, null=True)
+    _enddate = models.DateTimeField("Конец события", blank=True, null=True)
+
+    subevents = models.ManyToManyField("Subevent")
+
+    def get_students(self):
+        registrations = EventUserRegistration.objects.filter(event=self, role="student")
+        return list(registrations)
+
+    def get_staff(self):
+        registrations = EventUserRegistration.objects.filter(event=self, role="staff")
+        return list(registrations)
+
+    class Meta:
+        verbose_name = 'событие'
+        verbose_name_plural = 'события'
