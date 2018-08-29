@@ -1,1 +1,15 @@
 {% extends "base.html" %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column is-half is-offset-one-quarter">
+            <div class="box">
+                <div class="content">
+                    {% block account %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
