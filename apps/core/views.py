@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
+from .models import Event
+
 
 def index(request):
-    return render(request, "index.html")
+    context = dict()
+    context["published_events"] = Event.objects.filter(status="p")
+    return render(request, "index.html", context)

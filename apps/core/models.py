@@ -84,13 +84,11 @@ class EventUserRegistration(models.Model):
 
     person = models.ForeignKey("Person", verbose_name="Персона", on_delete=models.CASCADE)
     event = models.ForeignKey("Event", verbose_name="Событие", on_delete=models.CASCADE)
-    type = models.CharField("Тип регистрации", max_length=8, choices=ROLES)
+    role = models.CharField("Тип регистрации", max_length=8, choices=ROLES)
 
     class Meta:
         unique_together = ('person', 'event',)
 
     def __str__(self):
-        return " ".join([str(self.person), str(self.event), str(self.type)])
+        return " ".join([str(self.person), str(self.event), str(self.role)])
 
-    def get_type_display(self):
-        return str(self.type)
