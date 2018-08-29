@@ -3,39 +3,109 @@
 <html>
 <head>
     <title>{% block head_title %}{% endblock %}</title>
-    {% block extra_head %}
-    {% endblock %}
-    <script src='{% static "js/jquery.min.js" %}' ></script>
+
+    <link rel="stylesheet" href="{% static "css/bulma.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/app.css" %}"/>
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
-{% block body %}
-
+<nav class="navbar is-transparent is-dark">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+            <img src="{% static "img/logo.png" %}" alt="Softskills: раскачай себя по полной">
+        </a>
+        <div class="navbar-burger burger" data-target="navbar">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div id="navbar" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="https://bulma.io/">
+                Home
+            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="/documentation/overview/start/">
+                    Docs
+                </a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" href="/documentation/overview/start/">
+                        Overview
+                    </a>
+                    <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
+                        Modifiers
+                    </a>
+                    <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+                        Columns
+                    </a>
+                    <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
+                        Layout
+                    </a>
+                    <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
+                        Form
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
+                        Elements
+                    </a>
+                    <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
+                        Components
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="field is-grouped">
+                    {% if user.is_authenticated %}
+                        <p class="control">
+                            <a class="button" href="{% url 'account_logout' %}">
+                  <span class="icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                  </span>
+                                <span>Sign Out</span>
+                            </a>
+                        </p>
+                    {% else %}
+                        <p class="control">
+                            <a class="button" href="{% url 'account_signup' %}">
+                  <span class="icon">
+                    <i class="fas fa-user-plus"></i>
+                  </span>
+                                <span>Sign Up</span>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-primary" href="{% url 'account_login' %}">
+                  <span class="icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                  </span>
+                                <span>Sign In</span>
+                            </a>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
 {% if messages %}
-<div>
-    <strong>Messages:</strong>
-    <ul>
-        {% for message in messages %}
-        <li>{{message}}</li>
-        {% endfor %}
-    </ul>
-</div>
+        <div class="container">
+            {% for message in messages %}
+                <article class="message is-info">
+                    <div class="message-body"><strong>Messages:</strong> {{ message }}</div>
+                </article>
+            {% endfor %}
+        </div>
 {% endif %}
-
-<div>
-    <strong>Menu:</strong>
-    <ul>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
-        {% else %}
-        <li><a href="{% url 'account_login' %}">Sign In</a></li>
-        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-        {% endif %}
-    </ul>
-</div>
+<div class="container">
 {% block content %}
 {% endblock %}
-{% endblock %}
+</div>
 {% block extra_body %}
 {% endblock %}
 </body>
