@@ -92,3 +92,20 @@ class EventUserRegistration(models.Model):
     def __str__(self):
         return " ".join([str(self.person), str(self.event), str(self.role)])
 
+
+class Project(models.Model):
+    STATUSES = (
+        ('h', "Скрыт"),
+        ('p', "Опубликован"),
+    )
+    title = models.CharField("Название проекта", max_length=256, blank=False)
+    description = models.TextField("Описание проекта", blank=True, default="")
+    status = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
+    _startdate = models.DateTimeField("Начало проекта", blank=True, null=True)
+    _enddate = models.DateTimeField("Конец проекта", blank=True, null=True)
+
+    events = models.ManyToManyField("Event")
+
+    class Meta:
+        verbose_name = 'проект'
+        verbose_name_plural = 'проекты'

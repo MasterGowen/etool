@@ -7,6 +7,16 @@ from .models import *
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', '_startdate', '_enddate', "status")
     search_fields = ('title', 'description', "status")
+    filter_horizontal = ("subevents",)
+
+    list_filter = ("_startdate", "_enddate", "status")
+
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', '_startdate', '_enddate', "status")
+    search_fields = ('title', 'description', "status")
+    filter_horizontal = ("events",)
 
     list_filter = ("_startdate", "_enddate", "status")
 
