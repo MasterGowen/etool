@@ -40,3 +40,11 @@ class EventUserRegistrationAdmin(admin.ModelAdmin):
     list_display = ("__str__",)
     search_fields = ("__str__",)
     list_filter = ("person", "event", "role")
+
+
+@admin.register(ProjectUserRegistration)
+class ProjectUserRegistrationAdmin(admin.ModelAdmin):
+    fields = ("person", "project", "role")
+    list_display = ("__str__",)
+    search_fields = ("__str__",)
+    list_filter = ("person", "project", "role")

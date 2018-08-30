@@ -26,9 +26,4 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'проекты',
             },
         ),
-        migrations.RenameField(
-            model_name='eventuserregistration',
-            old_name='type',
-            new_name='role',
-        ),
     ]

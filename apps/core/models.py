@@ -24,7 +24,7 @@ class Person(models.Model):
         verbose_name = 'персона'
         verbose_name_plural = 'персоны'
 
-    def get_person_projects(self, user):
+    def get_person_projects(self):
         registrations = ProjectUserRegistration.objects.filter(person=self)
         projects = [r.project for r in registrations]
         return projects
@@ -71,7 +71,7 @@ class EventUserRegistration(models.Model):
 
     person = models.ForeignKey("Person", verbose_name="Персона", on_delete=models.CASCADE)
     event = models.ForeignKey("Event", verbose_name="Событие", on_delete=models.CASCADE)
-    role = models.CharField("Тип регистрации", max_length=8, choices=ROLES)
+    role = models.CharField("Роль", max_length=8, choices=ROLES)
 
     class Meta:
         unique_together = ('person', 'event',)
@@ -96,10 +96,10 @@ class ProjectUserRegistration(models.Model):
     role = models.CharField("Тип регистрации", max_length=8, choices=ROLES)
 
     class Meta:
-        unique_together = ('person', 'event',)
+        unique_together = ('person', 'project',)
 
     def __str__(self):
-        return " ".join([str(self.person), str(self.event), str(self.role)])
+        return f"<{self.person} - {self.project.title} - {self.role}>"
 
 
 class Project(models.Model):
@@ -113,7 +113,7 @@ class Project(models.Model):
     _startdate = models.DateTimeField("Начало проекта", blank=True, null=True)
     _enddate = models.DateTimeField("Конец проекта", blank=True, null=True)
 
-    events = models.ManyToManyField("Event")
+    events = models.ManyToManyField("Event", blank=True)
 
     class Meta:
         verbose_name = 'проект'
@@ -131,7 +131,7 @@ class Event(models.Model):
     _startdate = models.DateTimeField("Начало события", blank=True, null=True)
     _enddate = models.DateTimeField("Конец события", blank=True, null=True)
 
-    subevents = models.ManyToManyField("Subevent")
+    subevents = models.ManyToManyField("Subevent", blank=True)
 
     def get_students(self):
         registrations = EventUserRegistration.objects.filter(event=self, role="student")
