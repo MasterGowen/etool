@@ -1,4 +1,5 @@
-import os, sys
+import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '9585d(c42(rt*6)1124wd(+io44rtr#ziyb)&wy8i(79&zrzhh'
@@ -18,6 +19,13 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    # 'allauth.socialaccount.providers.discord',
+    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.instagram',
+    # 'allauth.socialaccount.providers.mailru',
+    'allauth.socialaccount.providers.vk',
     'core.apps.CoreConfig',
 ]
 
