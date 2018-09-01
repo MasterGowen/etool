@@ -1,13 +1,16 @@
-<div class="box">
-    <article class="media">
-        <div class="media-content">
-            <div class="content">
-                <p>
-                    <strong>{{project.title}}</strong>
-                    <br>
-                    {{project.description | safe}}
-                </p>
-            </div>
+{% extends "base.html" %}
+
+{% block content %}
+<article class="media">
+    <div class="media-content">
+        <div class="content">
+            <h1>{{project.title}}</h1>
+            <p>{{project.description | safe}}</p>
+            {% for event in project.events.all %}
+            {% include "event_inline.html" %}
+            {% endfor %}
+
         </div>
-    </article>
-</div>
+    </div>
+</article>
+{% endblock %}

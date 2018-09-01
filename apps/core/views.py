@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import Event, Project, Person
+from .models import Project, Person
 
 
 def index(request):
@@ -14,3 +14,10 @@ def dashboard(request):
     context["published_projects"] = Project.objects.filter(status="p")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "dashboard.html", context)
+
+
+def project(request, pk):
+    context = dict()
+    context["project"] = Project.objects.get(pk=pk)
+    context["person"] = Person.objects.get(user=request.user)
+    return render(request, "project.html", context)
