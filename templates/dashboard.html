@@ -2,6 +2,8 @@
 
 {% block content %}
 Все проекты слушателя:
-    {{ person }}
-    {{ person.get_person_projects }}
+{{ person }}
+{% for project in person.get_person_projects %}
+{% include "project.html" %}
+{% endfor %}
 {% endblock %}
