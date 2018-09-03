@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<article class="media">
-    <div class="media-content">
         <div class="content">
             <h1>{{project.title}}</h1>
             <p>{{project.description | safe}}</p>
@@ -11,6 +9,4 @@
             {% endfor %}
 
         </div>
-    </div>
-</article>
 {% endblock %}

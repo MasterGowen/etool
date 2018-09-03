@@ -1,9 +1,14 @@
 {% extends "base.html" %}
-
 {% block content %}
 Все проекты слушателя:
 {{ person }}
+
+    <div class="columns">
 {% for project in person.get_person_projects %}
+    <div class="column">
 {% include "project_inline.html" %}
+    </div>
 {% endfor %}
+        <div class="column"></div><div class="column"></div>
+    </div>
 {% endblock %}
