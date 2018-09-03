@@ -8,6 +8,24 @@
                         <br>
                         {{event.description | safe}}
                     </p>
+                    <div class="staff">
+                        <p>Преподаватели:</p>
+                        <ul>
+                            {% for staff in event.get_staff %}
+                            <li>{{ staff }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="students">
+                        <p>Студенты:</p>
+                        <ul>
+                            {% for student in event.get_students %}
+                            <li>{{ student }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
                 </a>
             </div>
         </div>

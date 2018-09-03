@@ -119,6 +119,15 @@ class Project(models.Model):
         verbose_name = 'проект'
         verbose_name_plural = 'проекты'
 
+    def get_students(self):
+        registrations = [s.person for s in EventUserRegistration.objects.filter(event__in=self.events.all(), role="student")]
+        return list(registrations)
+
+    def get_staff(self):
+        registrations = [s.person for s in EventUserRegistration.objects.filter(event__in=self.events.all(), role="staff")]
+        registrations += [s.person for s in ProjectUserRegistration.objects.filter(project=self, role="staff")]
+        return list(registrations)
+
 
 class Event(models.Model):
     STATUSES = (
@@ -134,11 +143,11 @@ class Event(models.Model):
     subevents = models.ManyToManyField("Subevent", blank=True)
 
     def get_students(self):
-        registrations = EventUserRegistration.objects.filter(event=self, role="student")
+        registrations = [s.person for s in EventUserRegistration.objects.filter(event=self, role="student")]
         return list(registrations)
 
     def get_staff(self):
-        registrations = EventUserRegistration.objects.filter(event=self, role="staff")
+        registrations = [s.person for s in EventUserRegistration.objects.filter(event=self, role="staff")]
         return list(registrations)
 
     class Meta:

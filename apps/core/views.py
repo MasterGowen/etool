@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import UpdateView
 
 from .models import Project, Person
 
@@ -21,3 +22,15 @@ def project(request, pk):
     context["project"] = Project.objects.get(pk=pk)
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "project.html", context)
+
+
+class PersonUpdate(UpdateView):
+    model = Person
+    success_url = '/dashboard'
+    fields = ["first_name", "last_name", "second_name", "sex", "department", "group_number", "institute"]
+    template_name = "person_form.html"
+
+    def get(self, request, **kwargs):
+        self.object = Person.objects.get(user=self.request.user)
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)

@@ -8,6 +8,14 @@
                         <br>
                         {{project.description | safe}}
                     </p>
+                    <div class="staff">
+                        <p>Преподаватели:</p>
+                        <ul>
+                            {% for staff in project.get_staff %}
+                            <li>{{ staff }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </a>
             </div>
         </div>
