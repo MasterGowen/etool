@@ -29,6 +29,12 @@ class Person(models.Model):
         projects = [r.project for r in registrations]
         return projects
 
+    def is_full(self):
+        return all([
+            self.first_name != "",
+            self.last_name != ""
+        ])
+
     def __str__(self):
         if self.first_name and self.last_name:
             return ' '.join([str(self.first_name), str(self.last_name)])
