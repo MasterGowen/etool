@@ -3,19 +3,17 @@
 <html>
 <head>
     <title>{% block head_title %}{% endblock %}</title>
-
     <link rel="stylesheet" href="{% static "css/bulma.min.css" %}"/>
     <link rel="stylesheet" href="{% static "css/bulma-extensions.min.css" %}"/>
     <link rel="stylesheet" href="{% static "css/app.css" %}"/>
     <script src="{% static "js/jquery.min.js" %}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
-
     {% block extra_head %}{% endblock %}
 </head>
 <body>
 <nav class="navbar is-transparent is-dark">
     <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
+        <a class="navbar-item" href="/">
             <img src="{% static "img/logo.png" %}" alt="Softskills: раскачай себя по полной">
         </a>
         <div class="navbar-burger burger" data-target="navbar">
@@ -24,73 +22,101 @@
             <span></span>
         </div>
     </div>
+
     <div id="navbar" class="navbar-menu">
+        {% if user.is_authenticated %}
         <div class="navbar-start">
-            <a class="navbar-item" href="https://bulma.io/">
-                Home
+            <a class="navbar-item" href="/dashboard/">
+                Dashboard
             </a>
+            {% if person.is_full %}
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="/documentation/overview/start/">
-                    Docs
+                <a class="navbar-link" href="/projects/">
+                    Проекты
+                </a>
+                {% for project in person.get_person_projects %}
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="/projects/{{project.id}}/">
+                            {{ project.title }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="/projects/">
+                    Диагностики
                 </a>
                 <div class="navbar-dropdown is-boxed">
                     <a class="navbar-item" href="/documentation/overview/start/">
-                        Overview
+                        Диагностика 1
                     </a>
-                    <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
-                        Modifiers
-                    </a>
-                    <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
-                        Columns
-                    </a>
-                    <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
-                        Layout
-                    </a>
-                    <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
-                        Form
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
-                        Elements
-                    </a>
-                    <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
-                        Components
+                     <a class="navbar-item" href="/documentation/overview/start/">
+                        Диагностика 1
                     </a>
                 </div>
             </div>
+            {% endif %}
         </div>
+        {% endif %}
         <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="field is-grouped">
-                    {% if user.is_authenticated %}
-                        <p class="control">
-                            <a class="button" href="{% url 'account_logout' %}">
-                  <span class="icon">
-                    <i class="fas fa-sign-out-alt"></i>
-                  </span>
+            {% if user.is_authenticated %}
+                {% if person.is_full %}
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link" href="/person/">
+                            {{ person }}
+                        </a>
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="/person/">
+                                Диагностика 1
+                            </a>
+                            <a class="navbar-item" href="/person/">
+                                Диагностика 1
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item" href="{% url 'account_logout' %}">
+                                <span class="icon">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span>
                                 <span>Sign Out</span>
                             </a>
-                        </p>
-                    {% else %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a class="button" href="{% url 'account_logout' %}">
+                                <span class="icon">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span>
+                                <span>Sign Out</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="navbar-item">
+                    <div class="field is-grouped">
                         <p class="control">
                             <a class="button" href="{% url 'account_signup' %}">
-                  <span class="icon">
-                    <i class="fas fa-user-plus"></i>
-                  </span>
+                                <span class="icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </span>
                                 <span>Sign Up</span>
                             </a>
                         </p>
                         <p class="control">
                             <a class="button is-primary" href="{% url 'account_login' %}">
-                  <span class="icon">
-                    <i class="fas fa-sign-in-alt"></i>
-                  </span>
+                                <span class="icon">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </span>
                                 <span>Sign In</span>
                             </a>
                         </p>
-                    {% endif %}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </nav>

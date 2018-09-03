@@ -15,6 +15,10 @@ def devide(a, b):
 def index(request):
     context = dict()
     context["published_projects"] = Project.objects.filter(status="p")
+    if request.user.is_authenticated:
+        context["person"] = Person.objects.get(user=request.user)
+    else:
+        context["person"] = None
     return render(request, "index.html", context)
 
 

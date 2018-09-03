@@ -1,23 +1,16 @@
 <div class="box">
-    <article class="media">
-        <div class="media-content">
-            <div class="content">
-                <a href="/projects/{{project.id}}/">
-                    <p>
-                        <strong>{{project.title}}</strong>
-                        <br>
-                        {{project.description | safe}}
-                    </p>
-                    <div class="staff">
-                        <p>Преподаватели:</p>
-                        <ul>
-                            {% for staff in project.get_staff %}
-                            <li>{{ staff }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </a>
-            </div>
+    <div class="content">
+        <a href="/projects/{{ project.id }}/">
+            <h1>{{ project.title }}</h1>
+            <p>{{ project.description | safe }}</p>
+        </a>
+        <div class="staff">
+            <p>Преподаватели:</p>
+            <ul>
+                {% for staff in project.get_staff %}
+                    <li>{{ staff }}</li>
+                {% endfor %}
+            </ul>
         </div>
-    </article>
+    </div>
 </div>
