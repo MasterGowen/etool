@@ -10,6 +10,10 @@
                 {% for staff in project.get_staff %}
                     <li>{{ staff }}</li>
                 {% endfor %}
+
+                {% for image in project.get_images %}
+                <img src="{{ image.image.url }}" height="420">
+                {% endfor %}
             </ul>
         </div>
     </div>

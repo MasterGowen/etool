@@ -1,14 +1,21 @@
 {% extends "base.html" %}
+{% load custom_filters %}
 {% block content %}
 Все проекты слушателя:
 {{ person }}
 
-    <div class="columns">
-{% for project in person.get_person_projects %}
+<div class="columns">
+
+    {% for project in person.get_person_projects %}
     <div class="column">
-{% include "project_inline.html" %}
+        {% include "project_inline.html" %}
     </div>
-{% endfor %}
-        <div class="column"></div><div class="column"></div>
-    </div>
+    {% endfor %}
+    {% if person.get_person_projects|length|divide:3 == 1 %}
+    <div class="column"></div>
+    <div class="column"></div>
+    {% elif person.get_person_projects|length|divide:3 == 2 %}
+    <div class="column"></div>
+    {% endif %}
+</div>
 {% endblock %}

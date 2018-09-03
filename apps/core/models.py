@@ -108,6 +108,16 @@ class ProjectUserRegistration(models.Model):
         return f"<{self.person} - {self.project.title} - {self.role}>"
 
 
+class ProjectImage(models.Model):
+    image = models.FileField(upload_to="images/%Y/%m/%d")
+    project = models.ForeignKey("Project", on_delete=models.CASCADE, related_name='images')
+
+
+class EventImage(models.Model):
+    image = models.FileField(upload_to="images/%Y/%m/%d")
+    event = models.ForeignKey("Event", on_delete=models.CASCADE, related_name='images')
+
+
 class Project(models.Model):
     STATUSES = (
         ('h', "Скрыт"),
@@ -134,6 +144,9 @@ class Project(models.Model):
         registrations += [s.person for s in ProjectUserRegistration.objects.filter(project=self, role="staff")]
         return list(registrations)
 
+    def get_images(self):
+        return ProjectImage.objects.filter(project=self)
+
 
 class Event(models.Model):
     STATUSES = (
@@ -155,6 +168,9 @@ class Event(models.Model):
     def get_staff(self):
         registrations = [s.person for s in EventUserRegistration.objects.filter(event=self, role="staff")]
         return list(registrations)
+
+    def get_images(self):
+        return EventImage.objects.filter(event=self)
 
     class Meta:
         verbose_name = 'событие'

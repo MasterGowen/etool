@@ -1,15 +1,8 @@
-from django import template
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 
 from .models import Project, Person
 
-register = template.Library()
-
-
-@register.filter
-def devide(a, b):
-    return a % b
 
 
 def index(request):

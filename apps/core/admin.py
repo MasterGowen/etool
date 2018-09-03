@@ -3,6 +3,14 @@ from django.contrib import admin
 from .models import *
 
 
+class ProjectImageInline(admin.StackedInline):
+    model = ProjectImage
+
+
+class EventImageInline(admin.StackedInline):
+    model = EventImage
+
+
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', '_startdate', '_enddate', "status")
@@ -10,6 +18,7 @@ class EventAdmin(admin.ModelAdmin):
     filter_horizontal = ("subevents",)
 
     list_filter = ("_startdate", "_enddate", "status")
+    inlines = [EventImageInline]
 
 
 @admin.register(Project)
@@ -19,6 +28,7 @@ class ProjectAdmin(admin.ModelAdmin):
     filter_horizontal = ("events",)
 
     list_filter = ("_startdate", "_enddate", "status")
+    inlines = [ProjectImageInline]
 
 
 @admin.register(Subevent)
