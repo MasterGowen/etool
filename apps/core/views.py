@@ -30,6 +30,9 @@ class PersonUpdate(UpdateView):
     fields = ["first_name", "last_name", "second_name", "sex", "department", "group_number", "institute"]
     template_name = "person_form.html"
 
+    def get_object(self, queryset=None):
+        return Person.objects.get(user=self.request.user)
+
     def get(self, request, **kwargs):
         self.object = Person.objects.get(user=self.request.user)
         context = self.get_context_data(object=self.object)
