@@ -118,6 +118,16 @@ class EventImage(models.Model):
     event = models.ForeignKey("Event", on_delete=models.CASCADE, related_name='images')
 
 
+class ProjectFile(models.Model):
+    file = models.FileField(upload_to="files/%Y/%m/%d")
+    project = models.ForeignKey("Project", on_delete=models.CASCADE, related_name='files')
+
+
+class EventFile(models.Model):
+    file = models.FileField(upload_to="files/%Y/%m/%d")
+    event = models.ForeignKey("Event", on_delete=models.CASCADE, related_name='files')
+
+
 class Project(models.Model):
     STATUSES = (
         ('h', "Скрыт"),

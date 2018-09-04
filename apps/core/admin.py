@@ -11,6 +11,14 @@ class EventImageInline(admin.StackedInline):
     model = EventImage
 
 
+class ProjectFileInline(admin.StackedInline):
+    model = ProjectFile
+
+
+class EventFileInline(admin.StackedInline):
+    model = EventFile
+
+
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', '_startdate', '_enddate', "status")
@@ -18,7 +26,7 @@ class EventAdmin(admin.ModelAdmin):
     filter_horizontal = ("subevents",)
 
     list_filter = ("_startdate", "_enddate", "status")
-    inlines = [EventImageInline]
+    inlines = [EventImageInline, EventFileInline]
 
 
 @admin.register(Project)
@@ -28,7 +36,7 @@ class ProjectAdmin(admin.ModelAdmin):
     filter_horizontal = ("events",)
 
     list_filter = ("_startdate", "_enddate", "status")
-    inlines = [ProjectImageInline]
+    inlines = [ProjectImageInline, ProjectFileInline]
 
 
 @admin.register(Subevent)
@@ -58,3 +66,4 @@ class ProjectUserRegistrationAdmin(admin.ModelAdmin):
     list_display = ("__str__",)
     search_fields = ("__str__",)
     list_filter = ("person", "project", "role")
+
