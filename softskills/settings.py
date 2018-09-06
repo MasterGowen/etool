@@ -6,7 +6,7 @@ SECRET_KEY = '9585d(c42(rt*6)1124wd(+io44rtr#ziyb)&wy8i(79&zrzhh'
 DEBUG = True
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["softskills-ural.ru"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -63,24 +63,27 @@ WSGI_APPLICATION = 'softskills.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'softskills',
+        'HOST': 'localhost',
+        'USER': 'softskills',
+        'PASSWORD': 'H8fwkjhgTijfd',
     }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+#    {
+#        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+#    },
+#    {
+#        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+#    },
+#    {
+#        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+#    },
+#    {
+#        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+#    },
 ]
 
 LANGUAGE_CODE = 'ru'
