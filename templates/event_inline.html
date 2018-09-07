@@ -1,33 +1,68 @@
-<div class="box">
-    <article class="media">
-        <div class="media-content">
-            <div class="content">
-                <a href="/events/{{event.id}}/">
-                    <p>
-                        <strong>{{event.title}}</strong>
-                        <br>
-                        {{event.description | safe}}
-                    </p>
-                    <div class="staff">
-                        <p>Преподаватели:</p>
-                        <ul>
-                            {% for staff in event.get_staff %}
-                            <li>{{ staff }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+<div class="column">
+{#    <article class="media">#}
+{#        <div class="media-content">#}
+{#            <div class="content">#}
+{#                <a href="/events/{{event.id}}/">#}
+{#                    <p>#}
+{#                        <strong>{{event.title}}</strong>#}
+{#                        <br>#}
+{#                        {{event.description | safe}}#}
+{#                    </p>#}
+{#                    <div class="staff">#}
+{#                        <p>Преподаватели:</p>#}
+{#                        <ul>#}
+{#                            {% for staff in event.get_staff %}#}
+{#                            <li>{{ staff }}</li>#}
+{#                            {% endfor %}#}
+{#                        </ul>#}
+{#                    </div>#}
+{##}
+{#                    <div class="students">#}
+{#                        <p>Студенты:</p>#}
+{#                        <ul>#}
+{#                            {% for student in event.get_students %}#}
+{#                            <li>{{ student }}</li>#}
+{#                            {% endfor %}#}
+{#                        </ul>#}
+{#                    </div>#}
+{##}
+{#                </a>#}
+{#            </div>#}
+{#        </div>#}
+{#    </article>#}
 
-                    <div class="students">
-                        <p>Студенты:</p>
-                        <ul>
-                            {% for student in event.get_students %}
-                            <li>{{ student }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+<div class="card">
+    <div class="card-content">
+        <div class="media">
 
-                </a>
+            <div class="media-content">
+                <p class="title is-4">{{ event.title }}</p>
+                <p class="subtitle is-6">{{ event.description | safe }}</p>
             </div>
+
         </div>
-    </article>
+{#        {% for staff in project.get_staff %}#}
+{#            <div class="media">#}
+{#                <div class="media-left">#}
+{#                    <figure class="image is-24x24">#}
+{#                        <i class="far fa-2x fa-user-circle"></i>#}
+{#                    </figure>#}
+{#                </div>#}
+{##}
+{##}
+{#                <div class="media-content">#}
+{#                    <p class="title is-6">{{ staff }}</p>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#        {% endfor %}#}
+{#        <div class="content">#}
+{#            <br>{{ event.datastart }}#}
+{#            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>#}
+{#        </div>#}
+    </div>
+    <footer class="card-footer">
+        <a href="/events/{{ event.id }}/" class="card-footer-item">Перейти к событию</a>
+    </footer>
+</div>
 </div>

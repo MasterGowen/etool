@@ -1,21 +1,126 @@
 {% extends "base.html" %}
 {% load custom_filters %}
 {% block content %}
-Все проекты слушателя:
-{{ person }}
+    <!-- Hero content: will be in the middle -->
 
-<div class="columns">
 
-    {% for project in person.get_person_projects %}
-    <div class="column">
-        {% include "project_inline.html" %}
+
+
+    <section class="section">
+        <div class="container">
+
+            <h1 class="title">Диагностики</h1>
+            <h2 class="subtitle">
+                Набор уникальных профессиональных психодиагностических методик преднозначенных повысить эффективность
+                вашего обучения
+            </h2>
+
+        </div>
+    </section>
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <div class="card">
+                    <div class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-6">Диагностика 1</p>
+                                <p class="title is-4">Структура мотивации</p>
+                                <p class="subtitle is-6">Исследование структуры мотивации участия испытуемых в
+                                    исследовании.</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            Дата старта:<br>
+
+                            <time datetime="2016-1-1">10:00 - 10.09.2018</time>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item" disabled="disabled">Пройти диагностику</a>
+                    </footer>
+                </div>
+            </div>
+            <div class="column">
+
+                <div class="card">
+                    <div class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-6">Диагностика 2</p>
+                                <p class="title is-4">Коммуникативная соц. компетентность</p>
+                                <p class="subtitle is-6">Данная методика предназначена для получения более полного
+                                    представления о личности, составления вероятностного прогноза успешности ее
+                                    профессиональной деятельности.</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            Дата старта:<br>
+                            <time datetime="2016-1-1">10:00 - 10.09.2018</time>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">Пройти диагностику</a>
+                    </footer>
+                </div>
+            </div>
+            <div class="column">
+
+                <div class="card">
+                    <div class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-6"> Диагностика 3 </p>
+                                <p class="title is-4"> Самооценка</p>
+                                <p class="subtitle is-6">Исследование самооценки личности.</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            Дата старта:<br>
+                            <time datetime="2016-1-1">10:00 - 10.09.2018</time>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">Пройти диагностику</a>
+                    </footer>
+                </div>
+            </div>
+
+        </div>
     </div>
-    {% endfor %}
-    {% if person.get_person_projects|length|divide:3 == 1 %}
-    <div class="column"></div>
-    <div class="column"></div>
-    {% elif person.get_person_projects|length|divide:3 == 2 %}
-    <div class="column"></div>
-    {% endif %}
-</div>
+
+
+    <section class="section">
+        <div class="container">
+
+            <h1 class="title">Образовательный Наборы</h1>
+            <h2 class="subtitle">
+                Краткое описаине ваших проектов
+            </h2>
+
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="columns">
+            {% for project in person.get_person_projects %}
+                <div class="column">
+                    {% include "project_inline.html" %}
+                </div>
+            {% endfor %}
+            {% if person.get_person_projects|length|divide:3 == 2 %}
+                <div class="column"></div>
+                <div class="column"></div>
+            {% elif person.get_person_projects|length|divide:3 == 1 %}
+                <div class="column"></div>
+            {% endif %}
+
+        </div>
+    </div>
 {% endblock %}

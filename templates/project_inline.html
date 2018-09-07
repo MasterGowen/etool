@@ -1,20 +1,61 @@
-<div class="box">
-    <div class="content">
-        <a href="/projects/{{ project.id }}/">
-            <h1>{{ project.title }}</h1>
-            <p>{{ project.description | safe }}</p>
-        </a>
-        <div class="staff">
-            <p>Преподаватели:</p>
-            <ul>
-                {% for staff in project.get_staff %}
-                    <li>{{ staff }}</li>
-                {% endfor %}
+{#<div class="box">#}
+{#    <div class="content">#}
+{#        <a href="/projects/{{ project.id }}/">#}
+{#            <h1>{{ project.title }}</h1>#}
+{#            <p>{{ project.description | safe }}</p>#}
+{#        </a>#}
+{#        <div class="staff">#}
+{#            <p>Преподаватели:</p>#}
+{#            <ul>#}
+{#                {% for staff in project.get_staff %}#}
+{#                    <li>{{ staff }}</li>#}
+{#                {% endfor %}#}
+{##}
+{#                {% for image in project.get_images %}#}
+{#                <img src="{{ image.image.url }}" height="420">#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
 
-                {% for image in project.get_images %}
-                <img src="{{ image.image.url }}" height="420">
-                {% endfor %}
-            </ul>
+<div class="card">
+    {#  <div class="card-image">#}
+    {#    <figure class="image is-4by3">#}
+    {#      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">#}
+    {#    </figure>#}
+    {#  </div>#}
+
+    <div class="card-content">
+        <div class="media">
+
+            <div class="media-content">
+                <p class="title is-4">{{ project.title }}</p>
+                <p class="subtitle is-6">{{ project.description | safe }}</p>
+            </div>
+
+        </div>
+        {% for staff in project.get_staff %}
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-24x24">
+                        <i class="far fa-2x fa-user-circle"></i>
+                    </figure>
+                </div>
+
+
+                <div class="media-content">
+                    <p class="title is-6">{{ staff }}</p>
+                </div>
+
+            </div>
+        {% endfor %}
+        <div class="content">
+            <br>
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </div>
     </div>
+    <footer class="card-footer">
+        <a href="/projects/{{ project.id }}/" class="card-footer-item">Перейти к набору</a>
+    </footer>
 </div>
