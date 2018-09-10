@@ -35,7 +35,7 @@ def project(request, pk):
 def diagnostic(request, pk):
     if request.method == "GET":
         context = dict()
-        context["diagnostic"] = Project.objects.get(pk=pk)
+        context["diagnostic"] = Diagnostic.objects.get(pk=pk)
         context["person"] = Person.objects.get(user=request.user)
         return render(request, "diagnostic.html", context)
     elif request.method == "POST":
