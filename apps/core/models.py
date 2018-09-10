@@ -27,7 +27,7 @@ class Person(models.Model):
     def get_person_projects(self):
         registrations = ProjectUserRegistration.objects.filter(person=self)
         projects = [r.project for r in registrations]
-        return projects
+        return projects if projects else []
 
     def is_full(self):
         return all([

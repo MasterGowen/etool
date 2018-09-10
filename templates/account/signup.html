@@ -11,11 +11,38 @@
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+{#  {{ form.as_p }}#}
+    <div class="field"><label class="label" for="id_username">Имя пользователя на английском языке:</label>
+        <div class="control has-icons-left">
+            <input class="input" type="text" name="username" placeholder="Имя пользователя" autofocus="autofocus" minlength="1" maxlength="150" required="" id="id_username">
+            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+        </div>
+    </div>
+    <div class="field"><label class="label" for="id_email">E-mail (опционально):</label>
+        <div class="control has-icons-left">
+            <input class="input" type="email" name="email" placeholder="E-mail адрес" id="id_email">
+            <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" for="id_password1">Пароль:</label>
+        <div class="control has-icons-left">
+            <input class="input" type="password" name="password1" placeholder="Пароль" required="" id="id_password1">
+            <span class="icon is-small is-left"><i class="fas fa-key"></i></span>
+        </div>
+    </div>
+    <div class="field"><label class="label" for="id_password2">Пароль (еще раз):</label> <div class="control has-icons-left">
+        <input class="input" type="password" name="password2" placeholder="Пароль (еще раз)" required="" id="id_password2">
+        <span class="icon is-small is-left"><i class="fas fa-key"></i></span>
+    </div></div>
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+<div class="field is-grouped">
+  <div class="control">
+  <button class="button is-primary" type="submit">{% trans "Sign Up" %}</button>
+  </div>
+</div>
 </form>
 
 {% endblock %}

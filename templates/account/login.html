@@ -14,16 +14,15 @@
             of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
             for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-        <div class="socialaccount_ballot">
-            <ul class="socialaccount_providers">
+        <div class="socialaccount_ballot" style="text-align: center">
+
                 {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-            </ul>
-<div class="is-divider" data-content="{% trans 'or' %}"></div>
-
-
         </div>
 
         {% include "socialaccount/snippets/login_extra.html" %}
+
+        <div class="is-divider" data-content="{% trans 'or' %}"></div>
+
 
     {% else %}
         <p>{% blocktrans %}If you have not created an account yet, then please
