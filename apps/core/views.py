@@ -40,7 +40,7 @@ def diagnostic(request, pk):
         return render(request, "diagnostic.html", context)
     elif request.method == "POST":
         answer = request.POST.get("answer")
-        diagnostic = Project.objects.get(pk=pk)
+        diagnostic = Diagnostic.objects.get(pk=pk)
         person = Person.objects.get(user=request.user)
 
         SD = StudentDiag.objects.create(diagnostic=diagnostic,
