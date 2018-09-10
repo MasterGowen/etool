@@ -50,15 +50,18 @@
                     <span class="badge" data-badge="0">Диагностики</span>
                 </a>
                 <div class="navbar-dropdown is-boxed">
-                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">1 Структура мотивации</span></a>
-                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">2 Самооценка</span></a>
-                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">3 Коммуникат соц компетентность</span></a>
-                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">4 Стрессоустойчивость и соц адаптация</span></a>
-                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">5 Логические закономерности</span></a>
-                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">6 Тест креативности</span></a>
-                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">7 Исследовательский потенциал</span></a>
-                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">8 Личностная креативность</span></a>
-                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">9 Личность лидера</span></a>
+                    {% for d in diagnostics %}
+                        <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">{{ d.title }}</span></a>
+                    {% endfor %}
+                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">1 Структура мотивации</span></a>-->
+                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">2 Самооценка</span></a>-->
+                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">3 Коммуникат соц компетентность</span></a>-->
+                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">4 Стрессоустойчивость и соц адаптация</span></a>-->
+                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">5 Логические закономерности</span></a>-->
+                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">6 Тест креативности</span></a>-->
+                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">7 Исследовательский потенциал</span></a>-->
+                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">8 Личностная креативность</span></a>-->
+                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">9 Личность лидера</span></a>-->
                 </div>
             </div>
             {% endif %}

@@ -18,6 +18,7 @@ def dashboard(request):
     context = dict()
     context["published_projects"] = Project.objects.filter(status="p")
     context["person"] = Person.objects.get(user=request.user)
+    context["diagnostics"] = Diagnostic.objects.all()
     if not context["person"].is_full():
         return redirect("/person?next=/dashboard")
     return render(request, "dashboard.html", context)
