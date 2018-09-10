@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 
-from .models import Project, Person
-
+from .models import Project, Person, Diagnostic, StudentDiag
 
 
 def index(request):
@@ -10,6 +9,7 @@ def index(request):
     context["published_projects"] = Project.objects.filter(status="p")
     if request.user.is_authenticated:
         context["person"] = Person.objects.get(user=request.user)
+        return redirect("/dashboard")
     else:
         context["person"] = None
     return render(request, "index.html", context)
@@ -19,6 +19,7 @@ def dashboard(request):
     context = dict()
     context["published_projects"] = Project.objects.filter(status="p")
     context["person"] = Person.objects.get(user=request.user)
+    context["diagnostics"] = Diagnostic.objects.all()
     if not context["person"].is_full():
         return redirect("/person?next=/dashboard")
     return render(request, "dashboard.html", context)
@@ -26,15 +27,34 @@ def dashboard(request):
 
 def project(request, pk):
     context = dict()
-    context["project"] = Project.objects.get(pk=pk)
+    context["project"] = Diagnostic.objects.get(pk=pk)
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "project.html", context)
+
+
+def diagnostic(request, pk):
+    if request.method == "GET":
+        context = dict()
+        context["diagnostic"] = Diagnostic.objects.get(pk=pk)
+        context["person"] = Person.objects.get(user=request.user)
+        return render(request, "diagnostic.html", context)
+    elif request.method == "POST":
+        answer = request.POST.get("answer")
+        diagnostic = Diagnostic.objects.get(pk=pk)
+        person = Person.objects.get(user=request.user)
+
+        SD = StudentDiag.objects.create(
+            diagnostic=diagnostic,
+            person=person,
+            answer=answer
+        )
+        return redirect("/dashboard")
 
 
 class PersonUpdate(UpdateView):
     model = Person
     success_url = '/dashboard'
-    fields = ["first_name", "last_name", "second_name", "sex", "department", "group_number", "institute"]
+    fields = ["first_name", "last_name", "second_name", "sex", "institute", "department", "group_number", ]
     template_name = "person_form.html"
 
     def get_object(self, queryset=None):
