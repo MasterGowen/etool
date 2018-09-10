@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 
@@ -39,9 +41,10 @@ def diagnostic(request, pk):
         context["person"] = Person.objects.get(user=request.user)
         return render(request, "diagnostic.html", context)
     elif request.method == "POST":
-        answer = request.POST.get("answer")
         diagnostic = Diagnostic.objects.get(pk=pk)
         person = Person.objects.get(user=request.user)
+
+        answer = json.dumps(request.POST)
 
         print(request.POST)
 
