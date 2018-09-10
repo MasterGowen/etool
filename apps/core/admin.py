@@ -70,10 +70,10 @@ class ProjectUserRegistrationAdmin(admin.ModelAdmin):
 
 @admin.register(Diagnostic)
 class DiagnosticAdmin(admin.ModelAdmin):
-    fields = ("title",)
+    list_display = ("title",)
 
 
 @admin.register(StudentDiag)
 class StudentDiagAdmin(admin.ModelAdmin):
-    fields = ["student", "diagnostic"]
+    list_display = ["student", "diagnostic"]
     search_fields = ["student", "diagnostic"]
