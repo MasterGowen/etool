@@ -43,7 +43,7 @@ def diagnostic(request, pk):
         diagnostic = Project.objects.get(pk=pk)
         person = Person.objects.get(user=request.user)
 
-        SD = StudentDiag.create(diagnostic=diagnostic,
+        SD = StudentDiag.objects.create(diagnostic=diagnostic,
                                 person=person,
                                 answer=answer)
         return redirect("/dashboard")
