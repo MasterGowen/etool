@@ -1,8 +1,71 @@
-{% extends "base.html" %}
+{% extends "account/base.html" %}
 
-{% block content %}
-<form method="post" action="">{% csrf_token %}
-{{form.as_p}}
-    <input type="submit"/>
+{% block account %}
+    <form method="post" action="">{% csrf_token %}
+        {#{{form.as_p}}#}
+        <div class="field">
+            <label class="label" for="id_first_name">Имя:</label>
+            <div class="control has-icons-left">
+                <input class="input" type="text" name="first_name" value="" maxlength="32"
+                       id="id_first_name">
+                <span class="icon is-small is-left"><i class="fas fa-user-graduate"></i></span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="id_last_name">Фамилия:</label>
+            <div class="control has-icons-left">
+                <input class="input" type="text" name="last_name" value="" maxlength="32"
+                       id="id_last_name">
+                <span class="icon is-small is-left"><i class="fas fa-user-graduate"></i></span>
+            </div>
+        </div>
+        <div class="field"><label class="label" for="id_second_name">Отчество:</label>
+            <div class="control has-icons-left">
+                <input class="input" type="text" name="second_name" maxlength="32" id="id_second_name">
+                <span class="icon is-small is-left"><i class="fas fa-user-graduate"></i></span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="id_sex">Пол:</label>
+            <div class="control">
+                <div class="select">
+                    <select name="sex" id="id_sex">
+                        <option value="U" selected="">Не выбран</option>
+                        <option value="F">Женский</option>
+                        <option value="M">Мужской</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="id_institute">Университет:</label>
+            <div class="control has-icons-left">
+                <input class="input" type="text" name="institute" maxlength="1024" id="id_institute">
+                <span class="icon is-small is-left"><i class="fas fa-university"></i></span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="id_department">Институт:</label>
+            <div class="control has-icons-left">
+                <input class="input" type="text" name="department" maxlength="1024" id="id_department">
+                <span class="icon is-small is-left"><i class="fas fa-school"></i></span>
+            </div>
+        </div>
+            <div class="field is-expanded">
+
+
+            <label class="label" for="id_group_number">Номер группы:</label>
+                  <div class="field has-addons">
+        <p class="control">
+          <a class="button is-static">
+            №
+          </a>
+        </p>
+        <p class="control is-expanded">
+                <input class="input" type="text" name="group_number" maxlength="1024"
+                       id="id_group_number"></div>
+
+        </div>
+        <input class="button is-primary" type="submit"/>
     </form>
 {% endblock %}

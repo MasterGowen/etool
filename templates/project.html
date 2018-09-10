@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <div class="content">
-            <h1>{{project.title}}</h1>
-            <p>{{project.description | safe}}</p>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">{{project.title}}</h1>
+            <h2 class="subtitle">{{project.description | safe}}</h2>
+        </div>
+    </section>
+    <div class="container">
+        <div class="columns">
             {% for event in project.events.all %}
             {% include "event_inline.html" %}
             {% endfor %}
-
         </div>
+    </div>
 {% endblock %}

@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="{% static "css/bulma.min.css" %}"/>
     <link rel="stylesheet" href="{% static "css/bulma-extensions.min.css" %}"/>
     <link rel="stylesheet" href="{% static "css/app.css" %}"/>
-    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/jquery.min.js" %}" defer></script>
+    <script src="{% static "js/app.js" %}" defer></script>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     {% block extra_head %}{% endblock %}
 </head>
@@ -31,28 +32,33 @@
             </a>
             {% if person.is_full %}
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="/projects/">
+                <a class="navbar-link">
                     Проекты
                 </a>
+            <div class="navbar-dropdown is-boxed">
                 {% for project in person.get_person_projects %}
-                    <div class="navbar-dropdown is-boxed">
+
                         <a class="navbar-item" href="/projects/{{project.id}}/">
                             {{ project.title }}
                         </a>
-                    </div>
+
                 {% endfor %}
+            </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" href="/projects/">
-                    Диагностики
+                    <span class="badge" data-badge="0">Диагностики</span>
                 </a>
                 <div class="navbar-dropdown is-boxed">
-                    <a class="navbar-item" href="/documentation/overview/start/">
-                        Диагностика 1
-                    </a>
-                     <a class="navbar-item" href="/documentation/overview/start/">
-                        Диагностика 1
-                    </a>
+                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">1 Структура мотивации</span></a>
+                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">2 Самооценка</span></a>
+                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">3 Коммуникат соц компетентность</span></a>
+                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">4 Стрессоустойчивость и соц адаптация</span></a>
+                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">5 Логические закономерности</span></a>
+                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">6 Тест креативности</span></a>
+                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">7 Исследовательский потенциал</span></a>
+                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">8 Личностная креативность</span></a>
+                    <a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">9 Личность лидера</span></a>
                 </div>
             </div>
             {% endif %}
@@ -62,15 +68,18 @@
             {% if user.is_authenticated %}
                 {% if person.is_full %}
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link" href="/person/">
+                        <a class="navbar-link">
                             {{ person }}
                         </a>
                         <div class="navbar-dropdown is-boxed">
                             <a class="navbar-item" href="/person/">
-                                Диагностика 1
+                                Изменить профиль
                             </a>
-                            <a class="navbar-item" href="/person/">
-                                Диагностика 1
+                            <a class="navbar-item" href="/accounts/password/change/">
+                                Изменить пароль
+                            </a>
+                            <a class="navbar-item" href="/accounts/email/">
+                                Изменить email
                             </a>
                             <hr class="navbar-divider">
                             <a class="navbar-item" href="{% url 'account_logout' %}">
@@ -129,11 +138,13 @@
             {% endfor %}
         </div>
 {% endif %}
-<div class="container">
+
 {% block content %}
 {% endblock %}
-</div>
+
 {% block extra_body %}
 {% endblock %}
+
 </body>
+
 </html>
