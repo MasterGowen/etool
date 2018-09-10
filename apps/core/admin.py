@@ -75,5 +75,5 @@ class DiagnosticAdmin(admin.ModelAdmin):
 
 @admin.register(StudentDiag)
 class StudentDiagAdmin(admin.ModelAdmin):
-    list_display = ["student", "diagnostic"]
-    search_fields = ["student", "diagnostic"]
+    list_display = ["person", "diagnostic"]
+    search_fields = ["person", "diagnostic"]
