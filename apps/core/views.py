@@ -9,6 +9,7 @@ def index(request):
     context["published_projects"] = Project.objects.filter(status="p")
     if request.user.is_authenticated:
         context["person"] = Person.objects.get(user=request.user)
+        return redirect("/dashboard")
     else:
         context["person"] = None
     return render(request, "index.html", context)
@@ -45,6 +46,7 @@ def diagnostic(request, pk):
         SD = StudentDiag.create(diagnostic=diagnostic,
                                 person=person,
                                 answer=answer)
+        return redirect("/dashboard")
 
 
 class PersonUpdate(UpdateView):
