@@ -14,6 +14,7 @@
 <h1>{{ diagnostic.title }}</h1>
 <div class="diag">
     <form method="POST" action=".">
+        {% csrf_token %}
         {{ diagnostic.html | safe }}
         <input type="submit" value="Отправить"/>
     </form>
