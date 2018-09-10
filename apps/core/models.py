@@ -199,6 +199,6 @@ class Diagnostic(models.Model):
 
 class StudentDiag(models.Model):
     diagnostic = models.ForeignKey(Diagnostic, on_delete=models.CASCADE,)
-    student = models.ForeignKey(Person, on_delete=models.CASCADE,)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE,)
     answer = models.TextField("Ответ студента", null=True, blank=True)
     analisys = models.TextField("Анализ диагностики", null=True, blank=True)
