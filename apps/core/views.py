@@ -43,6 +43,8 @@ def diagnostic(request, pk):
         diagnostic = Diagnostic.objects.get(pk=pk)
         person = Person.objects.get(user=request.user)
 
+        print(request.POST)
+
         SD = StudentDiag.objects.create(
             diagnostic=diagnostic,
             person=person,
