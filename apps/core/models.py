@@ -15,10 +15,10 @@ class Person(models.Model):
         ('M', 'Мужской'),
     )
 
-    sex = models.CharField(max_length=1, choices=SEXES, default='U')
-    department = models.CharField('Кафедра/Институт', max_length=1024, blank=True, null=True)
+    sex = models.CharField("Пол", max_length=1, choices=SEXES, default='U')
+    department = models.CharField('Институт', max_length=1024, blank=True, null=True)
     group_number = models.CharField('Номер группы', max_length=1024, blank=True, null=True)
-    institute = models.CharField('Институт/Университет', max_length=1024, blank=True, null=True)
+    institute = models.CharField('Университет', max_length=1024, blank=True, null=True)
 
     class Meta:
         verbose_name = 'персона'
@@ -185,3 +185,20 @@ class Event(models.Model):
     class Meta:
         verbose_name = 'событие'
         verbose_name_plural = 'события'
+
+
+class Diagnostic(models.Model):
+    title = models.CharField("Название диагностики", max_length=1024, blank=False)
+    html = models.TextField("Отображение", blank=True, null=True)
+    check_func = models.TextField("Функция проверки", blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'диагностика'
+        verbose_name_plural = 'диагностики'
+
+
+class StudentDiag(models.Model):
+    diagnostic = models.ForeignKey(Diagnostic)
+    student = models.ForeignKey(Person)
+    answer = models.TextField("Ответ студента", null=True, blank=True)
+    analisys = models.TextField("Анализ диагностики", null=True, blank=True)

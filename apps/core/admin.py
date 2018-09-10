@@ -67,3 +67,13 @@ class ProjectUserRegistrationAdmin(admin.ModelAdmin):
     search_fields = ("__str__",)
     list_filter = ("person", "project", "role")
 
+
+@admin.register(Diagnostic)
+class DiagnosticAdmin(admin.ModelAdmin):
+    fields = ("title",)
+
+
+@admin.register(StudentDiag)
+class StudentDiagAdmin(admin.ModelAdmin):
+    fields = ["student", "diagnostic"]
+    search_fields = ["student", "diagnostic"]
