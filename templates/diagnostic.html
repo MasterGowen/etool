@@ -14,7 +14,7 @@
 <h1>{{ diagnostic.title }}</h1>
 <div class="diag">
     <form method="POST" action=".">
-        {{ diagnostic.html | save }}
+        {{ diagnostic.html | safe }}
         <input type="submit" value="Отправить"/>
     </form>
 </div>
