@@ -208,8 +208,11 @@ class Diagnostic(models.Model):
         return StudentDiag.objects.filter(diagnostic=self, person=person).exists()
 
     @property
-    def is_open(self):
-        return self.enddate > timezone.now() > self.startdate
+    def status(self):
+        if self.enddate > timezone.now() > self.startdate:
+            return "open"
+        else:
+            return "close"
 
 
 
