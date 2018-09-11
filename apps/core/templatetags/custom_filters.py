@@ -10,4 +10,7 @@ def divide(a, b):
 
 @register.filter
 def has_answer(diag, person):
-    return diag.has_answer(person)
+    if diag.has_answer(person):
+        return "completed"
+    else:
+        return ""
