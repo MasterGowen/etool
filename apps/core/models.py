@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 import datetime
+from django.utils import timezone
 import pytz
 from django.conf import settings
 
@@ -208,7 +209,7 @@ class Diagnostic(models.Model):
 
     @property
     def is_open(self):
-        return self.enddate.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)) > datetime.datetime.now() > self.startdate.replace(tzinfo=pytz.timezone(settings.TIME_ZONE))
+        return self.enddate > timezone.now() > self.startdate
 
 
 
