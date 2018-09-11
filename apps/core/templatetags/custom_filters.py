@@ -5,7 +5,7 @@ register = template.Library()
 
 @register.filter
 def divide(a, b):
-    return b % a
+    return a % b
 
 
 @register.filter
