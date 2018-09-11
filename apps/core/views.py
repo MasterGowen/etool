@@ -30,7 +30,7 @@ def dashboard(request):
 def project(request, pk):
     context = dict()
     context["project"] = Diagnostic.objects.get(pk=pk)
-    context["diagnostic"] = Diagnostic.objects.get(pk=pk)
+    context["diagnostics"] = Diagnostic.objects.all()
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "project.html", context)
 
