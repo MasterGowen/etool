@@ -2,10 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import datetime
 from django.utils import timezone
-import pytz
-from django.conf import settings
 
 
 class Person(models.Model):
@@ -213,7 +210,6 @@ class Diagnostic(models.Model):
             return "open"
         else:
             return "close"
-
 
 
 class StudentDiag(models.Model):
