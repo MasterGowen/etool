@@ -193,8 +193,8 @@ class Diagnostic(models.Model):
     image = models.ImageField("Изображение", blank=True, null=True)
     html = models.TextField("Отображение", blank=True, null=True)
     check_func = models.TextField("Функция проверки", blank=True, null=True)
-    startdate = models.DateTimeField("Дата начала")
-    enddate = models.DateTimeField("Дата завершения")
+    startdate = models.DateTimeField("Дата начала", blank=True, null=True)
+    enddate = models.DateTimeField("Дата завершения", blank=True, null=True)
 
     class Meta:
         verbose_name = 'диагностика'
