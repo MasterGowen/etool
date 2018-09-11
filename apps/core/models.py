@@ -208,7 +208,7 @@ class Diagnostic(models.Model):
 
     @property
     def is_open(self):
-        return self.enddate.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)) > datetime.datetime.now() > self.startdate.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)
+        return self.enddate.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)) > datetime.datetime.now() > self.startdate.replace(tzinfo=pytz.timezone(settings.TIME_ZONE))
 
 
 
