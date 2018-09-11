@@ -4,20 +4,11 @@
 <html>
 <head>
     <title>{% block head_title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static " css
-    /bulma.min.css" %}"/>
-    <link rel="stylesheet" href="{% static " css
-    /bulma-extensions.min.css" %}"/>
-    <link rel="stylesheet" href="{% static " css
-    /app.css" %}"/>
-    <script src="{% static " js
-    /jquery.min.js" %}" defer></script>
-    <
-    script
-    src = "{% static "
-    js / app.js
-    " %}"
-    defer ></script>
+    <link rel="stylesheet" href="{% static "css/bulma.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/bulma-extensions.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/app.css" %}"/>
+    <script src="{% static "js/jquery.min.js" %}" defer></script>
+    <script src="{% static "js/app.js" %}" defer></script>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     {% block extra_head %}{% endblock %}
 </head>
@@ -25,7 +16,7 @@
 <nav class="navbar is-transparent is-dark">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            <img src="{% static " img/logo.png" %}" alt="Softskills: раскачай себя по полной">
+            <img src="{% static "img/logo.png" %}" alt="Softskills: раскачай себя по полной">
         </a>
         <div class="navbar-burger burger" data-target="navbar">
             <span></span>
@@ -45,15 +36,15 @@
                 <a class="navbar-link">
                     Проекты
                 </a>
-                <div class="navbar-dropdown is-boxed">
-                    {% for project in person.get_person_projects %}
+            <div class="navbar-dropdown is-boxed">
+                {% for project in person.get_person_projects %}
 
-                    <a class="navbar-item" href="/projects/{{project.id}}/">
-                        {{ project.title }}
-                    </a>
+                        <a class="navbar-item" href="/projects/{{project.id}}/">
+                            {{ project.title }}
+                        </a>
 
-                    {% endfor %}
-                </div>
+                {% endfor %}
+            </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" href="/projects/">
@@ -61,11 +52,12 @@
                 </a>
                 <div class="navbar-dropdown is-boxed">
                     {% for d in diagnostics %}
-                        {% if d|has_answer:person == "completed" %}
+                    {% if d|has_answer:person == "completed" %}
                         <a class="navbar-item" href="/diagnostic/{{d.pk}}"><span class="badge is-badge-dark" data-badge="{{d|has_answer:person}}">{{ d.title }}</span></a>
-                        {% else %}
-                        <a class="navbar-item" href="/diagnostic/{{d.pk}}"><span class="badge is-badge-dark" data-badge="{{d.status}}">{{ d.title }}</span></a>
-                        {% endif %}
+                    {% else %}
+
+                    <a class="navbar-item" href="/diagnostic/{{d.pk}}"><span class="badge is-badge-dark" data-badge="{{d.status}}">{{ d.title }}</span></a>
+                    {%endif%}
                     {% endfor %}
                     <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">1 Структура мотивации</span></a>-->
                     <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">2 Самооценка</span></a>-->
@@ -83,77 +75,77 @@
         {% endif %}
         <div class="navbar-end">
             {% if user.is_authenticated %}
-            {% if person.is_full %}
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    {{ person }}
-                </a>
-                <div class="navbar-dropdown is-boxed">
-                    <a class="navbar-item" href="/person/">
-                        Изменить профиль
-                    </a>
-                    <a class="navbar-item" href="/accounts/password/change/">
-                        Изменить пароль
-                    </a>
-                    <a class="navbar-item" href="/accounts/email/">
-                        Изменить email
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item" href="{% url 'account_logout' %}">
-                                <span class="icon">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                </span>
-                        <span>Sign Out</span>
-                    </a>
-                </div>
-            </div>
-            {% else %}
-            <div class="navbar-item">
-                <div class="field is-grouped">
-                    <p class="control">
-                        <a class="button" href="{% url 'account_logout' %}">
-                                <span class="icon">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                </span>
-                            <span>Sign Out</span>
+                {% if person.is_full %}
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            {{ person }}
                         </a>
-                    </p>
-                </div>
-            </div>
-            {% endif %}
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="/person/">
+                                Изменить профиль
+                            </a>
+                            <a class="navbar-item" href="/accounts/password/change/">
+                                Изменить пароль
+                            </a>
+                            <a class="navbar-item" href="/accounts/email/">
+                                Изменить email
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item" href="{% url 'account_logout' %}">
+                                <span class="icon">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span>
+                                <span>Sign Out</span>
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a class="button" href="{% url 'account_logout' %}">
+                                <span class="icon">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span>
+                                <span>Sign Out</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
             {% else %}
-            <div class="navbar-item">
-                <div class="field is-grouped">
-                    <p class="control">
-                        <a class="button" href="{% url 'account_signup' %}">
+                <div class="navbar-item">
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <a class="button" href="{% url 'account_signup' %}">
                                 <span class="icon">
                                     <i class="fas fa-user-plus"></i>
                                 </span>
-                            <span>Sign Up</span>
-                        </a>
-                    </p>
-                    <p class="control">
-                        <a class="button is-primary" href="{% url 'account_login' %}">
+                                <span>Sign Up</span>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-primary" href="{% url 'account_login' %}">
                                 <span class="icon">
                                     <i class="fas fa-sign-in-alt"></i>
                                 </span>
-                            <span>Sign In</span>
-                        </a>
-                    </p>
+                                <span>Sign In</span>
+                            </a>
+                        </p>
+                    </div>
                 </div>
-            </div>
             {% endif %}
         </div>
     </div>
 </nav>
 {% if messages %}
-<div class="container">
-    {% for message in messages %}
-    <article class="message is-info">
-        <div class="message-body"><strong>Messages:</strong> {{ message }}</div>
-    </article>
-    {% endfor %}
-</div>
+        <div class="container">
+            {% for message in messages %}
+                <article class="message is-info">
+                    <div class="message-body"><strong>Messages:</strong> {{ message }}</div>
+                </article>
+            {% endfor %}
+        </div>
 {% endif %}
 
 {% block content %}
