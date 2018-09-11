@@ -189,8 +189,12 @@ class Event(models.Model):
 
 class Diagnostic(models.Model):
     title = models.CharField("Название диагностики", max_length=1024, blank=False)
+    description = models.TextField("Описание события", blank=True, default="")
+    image = models.ImageField("Изображение", blank=True, null=True)
     html = models.TextField("Отображение", blank=True, null=True)
     check_func = models.TextField("Функция проверки", blank=True, null=True)
+    startdate = models.DateTimeField("Дата начала")
+    enddate = models.DateTimeField("Дата завершения")
 
     class Meta:
         verbose_name = 'диагностика'
