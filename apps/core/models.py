@@ -200,6 +200,9 @@ class Diagnostic(models.Model):
         verbose_name = 'диагностика'
         verbose_name_plural = 'диагностики'
 
+    def has_answer(self, person):
+        return StudentDiag.objects.filter(diagnostic=self, person=person).exists()
+
 
 class StudentDiag(models.Model):
     diagnostic = models.ForeignKey(Diagnostic, on_delete=models.CASCADE,)
