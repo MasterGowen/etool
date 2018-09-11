@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import datetime
 
 
 class Person(models.Model):
@@ -202,6 +203,11 @@ class Diagnostic(models.Model):
 
     def has_answer(self, person):
         return StudentDiag.objects.filter(diagnostic=self, person=person).exists()
+
+    @property
+    def is_open(self):
+        return datetime.datetime.now() > self.startdate
+
 
 
 class StudentDiag(models.Model):

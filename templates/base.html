@@ -52,7 +52,7 @@
                 </a>
                 <div class="navbar-dropdown is-boxed">
                     {% for d in diagnostics %}
-                        <a class="navbar-item" href="/diagnostic/{{d.pk}}"><span class="badge is-badge-dark {{d|has_answer:person}}" data-badge="close">{{ d.title }}</span></a>
+                        <a class="navbar-item" href="/diagnostic/{{d.pk}}"><span class="badge is-badge-dark" data-badge="{{d|has_answer:person}}">{{ d.title }}</span></a>
                     {% endfor %}
                     <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">1 Структура мотивации</span></a>-->
                     <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">2 Самооценка</span></a>-->
