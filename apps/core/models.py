@@ -51,6 +51,13 @@ class Person(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.person.save()
 
+    def count_open(self):
+        count = 0
+        for d in Diagnostic.objects.all():
+            if not d.has_answer(self) and d.status == "open":
+                count += 1
+        return count
+
 
 class Subevent(models.Model):
     STATUSES = (

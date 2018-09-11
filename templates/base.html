@@ -48,7 +48,7 @@
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" href="/projects/">
-                    <span class="badge" data-badge="0">Диагностики</span>
+                    <span class="badge" data-badge="{{ person.count_open }}">Диагностики</span>
                 </a>
                 <div class="navbar-dropdown is-boxed">
                     {% for d in diagnostics %}
