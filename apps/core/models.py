@@ -196,10 +196,13 @@ class Event(models.Model):
 
 
 class Diagnostic(models.Model):
+    TYPES = (("h", "html"), ("j", "json"))
     title = models.CharField("Название диагностики", max_length=1024, blank=False)
     description = models.TextField("Описание события", blank=True, default="")
+    type = models.CharField("Тип", choices=TYPES, max_length=1, default="h")
     image = models.ImageField("Изображение", blank=True, null=True)
     html = models.TextField("Отображение", blank=True, null=True)
+    json = models.TextField("json", blank=True, null=True)
     check_func = models.TextField("Функция проверки", blank=True, null=True)
     startdate = models.DateTimeField("Дата начала", blank=True, null=True)
     enddate = models.DateTimeField("Дата завершения", blank=True, null=True)
