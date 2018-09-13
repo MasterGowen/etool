@@ -43,6 +43,14 @@ def projects(request):
     return render(request, "projects.html", context)
 
 
+def diagnostics(request):
+    context = dict()
+    context["projects"] = Project.objects.all()
+    context["diagnostics"] = Diagnostic.objects.all()
+    context["person"] = Person.objects.get(user=request.user)
+    return render(request, "diagnostics.html", context)
+
+
 def diagnostic(request, pk):
     if request.method == "GET":
         context = dict()
