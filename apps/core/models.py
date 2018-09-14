@@ -204,8 +204,10 @@ class Diagnostic(models.Model):
     html = models.TextField("Отображение", blank=True, null=True)
     json = models.TextField("json", blank=True, null=True)
     check_func = models.TextField("Функция проверки", blank=True, null=True)
+    weight = models.IntegerField("Вес", default=0, blank=False, null=False)
     startdate = models.DateTimeField("Дата начала", blank=True, null=True)
     enddate = models.DateTimeField("Дата завершения", blank=True, null=True)
+
 
     class Meta:
         verbose_name = 'диагностика'
