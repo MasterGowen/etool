@@ -8,7 +8,7 @@ from .models import Project, Person, Diagnostic, StudentDiag
 
 def index(request):
     context = dict()
-    context["published_projects"] = Project.objects.filter(published="p")
+    context["published_projects"] = Project.objects.filter(status="p")
     if request.user.is_authenticated:
         context["person"] = Person.objects.get(user=request.user)
         return redirect("/dashboard")
@@ -19,7 +19,7 @@ def index(request):
 
 def dashboard(request):
     context = dict()
-    context["published_projects"] = Project.objects.filter(published="p")
+    context["published_projects"] = Project.objects.filter(status="p")
     context["person"] = Person.objects.get(user=request.user)
     if request.user.is_staff:
         context["diagnostics"] = Diagnostic.objects.order_by("weight")
