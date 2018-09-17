@@ -21,7 +21,10 @@ def dashboard(request):
     context = dict()
     context["published_projects"] = Project.objects.filter(status="p")
     context["person"] = Person.objects.get(user=request.user)
-    context["diagnostics"] = Diagnostic.objects.order_by("weight")
+    if request.user.is_staff:
+        context["diagnostics"] = Diagnostic.objects.order_by("weight")
+    else:
+        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
     if not context["person"].is_full():
         return redirect("/person?next=/dashboard")
     return render(request, "dashboard.html", context)
@@ -30,7 +33,10 @@ def dashboard(request):
 def project(request, pk):
     context = dict()
     context["project"] = Project.objects.get(pk=pk)
-    context["diagnostics"] = Diagnostic.objects.order_by("weight")
+    if request.user.is_staff:
+        context["diagnostics"] = Diagnostic.objects.order_by("weight")
+    else:
+        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "project.html", context)
 
@@ -38,7 +44,10 @@ def project(request, pk):
 def projects(request):
     context = dict()
     context["projects"] = Project.objects.all()
-    context["diagnostics"] = Diagnostic.objects.order_by("weight")
+    if request.user.is_staff:
+        context["diagnostics"] = Diagnostic.objects.order_by("weight")
+    else:
+        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "projects.html", context)
 
@@ -46,7 +55,10 @@ def projects(request):
 def diagnostics(request):
     context = dict()
     context["projects"] = Project.objects.all()
-    context["diagnostics"] = Diagnostic.objects.order_by("weight")
+    if request.user.is_staff:
+        context["diagnostics"] = Diagnostic.objects.order_by("weight")
+    else:
+        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "diagnostics.html", context)
 
@@ -55,7 +67,10 @@ def diagnostic(request, pk):
     if request.method == "GET":
         context = dict()
         context["diagnostic"] = Diagnostic.objects.get(pk=pk)
-        context["diagnostics"] = Diagnostic.objects.order_by("weight")
+        if request.user.is_staff:
+            context["diagnostics"] = Diagnostic.objects.order_by("weight")
+        else:
+            context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
         context["person"] = Person.objects.get(user=request.user)
         return render(request, "diagnostic.html", context)
     elif request.method == "POST":

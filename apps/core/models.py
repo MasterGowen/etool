@@ -196,6 +196,10 @@ class Event(models.Model):
 
 
 class Diagnostic(models.Model):
+    STATUSES = (
+        ('h', "Скрыт"),
+        ('p', "Опубликован"),
+    )
     TYPES = (("h", "html"), ("j", "json"))
     title = models.CharField("Название диагностики", max_length=1024, blank=False)
     description = models.TextField("Описание диагностики", blank=True, default="")
@@ -209,6 +213,7 @@ class Diagnostic(models.Model):
     weight = models.IntegerField("Вес", default=0, blank=False, null=False)
     startdate = models.DateTimeField("Дата начала", blank=True, null=True)
     enddate = models.DateTimeField("Дата завершения", blank=True, null=True)
+    status = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
 
 
     class Meta:
