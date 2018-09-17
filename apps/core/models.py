@@ -225,9 +225,12 @@ class Diagnostic(models.Model):
 
     @property
     def status(self):
-        if self.enddate > timezone.now() > self.startdate:
-            return "open"
-        else:
+        try:
+            if self.enddate > timezone.now() > self.startdate:
+                return "open"
+            else:
+                return "close"
+        except:
             return "close"
 
 
