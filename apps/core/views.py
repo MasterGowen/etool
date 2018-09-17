@@ -8,7 +8,7 @@ from .models import Project, Person, Diagnostic, StudentDiag
 
 def index(request):
     context = dict()
-    context["published_projects"] = Project.objects.filter(status="p")
+    context["published_projects"] = Project.objects.filter(published="p")
     if request.user.is_authenticated:
         context["person"] = Person.objects.get(user=request.user)
         return redirect("/dashboard")
@@ -19,12 +19,12 @@ def index(request):
 
 def dashboard(request):
     context = dict()
-    context["published_projects"] = Project.objects.filter(status="p")
+    context["published_projects"] = Project.objects.filter(published="p")
     context["person"] = Person.objects.get(user=request.user)
     if request.user.is_staff:
         context["diagnostics"] = Diagnostic.objects.order_by("weight")
     else:
-        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+        context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     if not context["person"].is_full():
         return redirect("/person?next=/dashboard")
     return render(request, "dashboard.html", context)
@@ -36,7 +36,7 @@ def project(request, pk):
     if request.user.is_staff:
         context["diagnostics"] = Diagnostic.objects.order_by("weight")
     else:
-        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+        context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "project.html", context)
 
@@ -47,7 +47,7 @@ def projects(request):
     if request.user.is_staff:
         context["diagnostics"] = Diagnostic.objects.order_by("weight")
     else:
-        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+        context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "projects.html", context)
 
@@ -58,7 +58,7 @@ def diagnostics(request):
     if request.user.is_staff:
         context["diagnostics"] = Diagnostic.objects.order_by("weight")
     else:
-        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+        context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "diagnostics.html", context)
 
@@ -70,7 +70,7 @@ def diagnostic(request, pk):
         if request.user.is_staff:
             context["diagnostics"] = Diagnostic.objects.order_by("weight")
         else:
-            context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+            context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
         context["person"] = Person.objects.get(user=request.user)
         return render(request, "diagnostic.html", context)
     elif request.method == "POST":
