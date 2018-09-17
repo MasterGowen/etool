@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static "css/app.css" %}"/>
     <script src="{% static "js/jquery.min.js" %}" defer></script>
     <script src="{% static "js/app.js" %}" defer></script>
+     <script src="{% static "js/bulma-extensions.min.js" %}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     {% block extra_head %}{% endblock %}
 </head>
@@ -155,5 +156,8 @@
 {% endblock %}
 
 </body>
-
+<script type="text/javascript">
+{% block js %}
+{% endblock %}
+</script>
 </html>
