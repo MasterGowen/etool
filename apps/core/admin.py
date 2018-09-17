@@ -70,7 +70,7 @@ class ProjectUserRegistrationAdmin(admin.ModelAdmin):
 
 @admin.register(Diagnostic)
 class DiagnosticAdmin(admin.ModelAdmin):
-    list_display = ("title",)
+    list_display = ("title", "status")
 
 
 @admin.register(StudentDiag)
