@@ -3,6 +3,8 @@ import json
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 
+from django.http import HttpResponseForbidden
+
 from .models import Project, Person, Diagnostic, StudentDiag
 
 
@@ -24,7 +26,7 @@ def dashboard(request):
     if request.user.is_staff:
         context["diagnostics"] = Diagnostic.objects.order_by("weight")
     else:
-        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+        context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     if not context["person"].is_full():
         return redirect("/person?next=/dashboard")
     return render(request, "dashboard.html", context)
@@ -36,7 +38,7 @@ def project(request, pk):
     if request.user.is_staff:
         context["diagnostics"] = Diagnostic.objects.order_by("weight")
     else:
-        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+        context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "project.html", context)
 
@@ -47,7 +49,7 @@ def projects(request):
     if request.user.is_staff:
         context["diagnostics"] = Diagnostic.objects.order_by("weight")
     else:
-        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+        context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "projects.html", context)
 
@@ -58,7 +60,7 @@ def diagnostics(request):
     if request.user.is_staff:
         context["diagnostics"] = Diagnostic.objects.order_by("weight")
     else:
-        context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+        context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "diagnostics.html", context)
 
@@ -70,7 +72,7 @@ def diagnostic(request, pk):
         if request.user.is_staff:
             context["diagnostics"] = Diagnostic.objects.order_by("weight")
         else:
-            context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
+            context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
         context["person"] = Person.objects.get(user=request.user)
         return render(request, "diagnostic.html", context)
     elif request.method == "POST":
@@ -102,3 +104,12 @@ class PersonUpdate(UpdateView):
         self.object = Person.objects.get(user=self.request.user)
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
+
+def a_persons(request):
+    if request.user.is_staff:
+        context = dict()
+        context["persons"] = Person.objects.all()
+        return render(request, "a_persons.html", context)
+    else:
+        return HttpResponseForbidden()

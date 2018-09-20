@@ -53,7 +53,7 @@ class Person(models.Model):
 
     def count_open(self):
         count = 0
-        for d in Diagnostic.objects.all():
+        for d in Diagnostic.objects.filter(published="p"):
             if not d.has_answer(self) and d.status == "open":
                 count += 1
         return count
@@ -213,8 +213,7 @@ class Diagnostic(models.Model):
     weight = models.IntegerField("Вес", default=0, blank=False, null=False)
     startdate = models.DateTimeField("Дата начала", blank=True, null=True)
     enddate = models.DateTimeField("Дата завершения", blank=True, null=True)
-    status = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
-
+    published = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
 
     class Meta:
         verbose_name = 'диагностика'
@@ -225,14 +224,20 @@ class Diagnostic(models.Model):
 
     @property
     def status(self):
-        if self.enddate > timezone.now() > self.startdate:
-            return "open"
+        if self.enddate:
+            if self.enddate > timezone.now() > self.startdate:
+                return "open"
+            else:
+                return "close"
         else:
-            return "close"
+            if timezone.now() > self.startdate:
+                return "open"
+            else:
+                return "close"
 
 
 class StudentDiag(models.Model):
-    diagnostic = models.ForeignKey(Diagnostic, on_delete=models.CASCADE,)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE,)
+    diagnostic = models.ForeignKey(Diagnostic, on_delete=models.CASCADE, )
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, )
     answer = models.TextField("Ответ студента", null=True, blank=True)
     analisys = models.TextField("Анализ диагностики", null=True, blank=True)

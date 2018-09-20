@@ -17,42 +17,80 @@
 
         </div>
     </section>
+{#    <div class="container">#}
+{#        <div class="columns">#}
+{#            {% for d in diagnostics %}#}
+{#                <div class="column">#}
+{#                    <div class="card">#}
+{#                        <div class="card-image">#}
+{#                        </div>#}
+{#                        <div class="card-content">#}
+{#                            <div class="media">#}
+{#                                <div class="media-content">#}
+{#                                    <p class="title is-6"> Диагностика {{ forloop.counter }}</p>#}
+{#                                    <p class="title is-4">{{ d.title }}</p>#}
+{#                                    <p class="subtitle is-6">{{ d.description }}</p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="content">#}
+{#                                Дата старта:<br>#}
+{##}
+{#                                <time datetime="">{{ d.startdate }}</time>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <footer class="card-footer">#}
+{#                            <a href="/diagnostic/{{ d.id }}/" class="card-footer-item" disabled="disabled">Пройти диагностику</a>#}
+{#                        </footer>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#            {% if diagnostics|length|divide:3 == 2 %}#}
+{#                <div class="column"></div>#}
+{#                <div class="column"></div>#}
+{#            {% elif diagnostics|length|divide:3 == 1 %}#}
+{#                <div class="column"></div>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    </div>#}
+
     <div class="container">
-        <div class="columns">
-            {% for d in diagnostics %}
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
+    <div class='carousel carousel-animated carousel-animate-slide' data-size="4">
+  <div class='carousel-container'>
+      {% for d in diagnostics %}
+        <div class='carousel-item'>
+        <div class="card">
+                  <div class="card-image">
                         </div>
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
-                                    <p class="title is-6"> Диагностика {{ forloop.counter }}</p>
-                                    <p class="title is-4">{{ d.title }}</p>
+                                    <p class="subtitle is-6"> Диагностика {{ forloop.counter }}</p>
+                                    <p class="subtitle is-5">{{ d.title }}</p>
                                     <p class="subtitle is-6">{{ d.description }}</p>
                                 </div>
                             </div>
                             <div class="content">
-                                Дата старта:<br>
-
-                                <time datetime="">{{ d.startdate }}</time>
+                                <p class="subtitle is-6">Дата старта:<br>
+                                    <time datetime="">{{ d.startdate }}</time></p>
                             </div>
                         </div>
                         <footer class="card-footer">
                             <a href="/diagnostic/{{ d.id }}/" class="card-footer-item" disabled="disabled">Пройти диагностику</a>
                         </footer>
-                    </div>
-                </div>
-            {% endfor %}
-            {% if diagnostics|length|divide:3 == 2 %}
-                <div class="column"></div>
-                <div class="column"></div>
-            {% elif diagnostics|length|divide:3 == 1 %}
-                <div class="column"></div>
-            {% endif %}
         </div>
+        </div>
+      {% endfor %}
+  </div>
+  <div class="carousel-navigation is-centered">
+    <div class="carousel-nav-left">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
     </div>
-
+    <div class="carousel-nav-right">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>
+     </div>
 
     <section class="section">
         <div class="container">
@@ -81,4 +119,9 @@
 
         </div>
     </div>
+
+{% endblock %}
+
+{% block js %}
+var carousels = bulmaExtensions.bulmaCarousel.attach();
 {% endblock %}
