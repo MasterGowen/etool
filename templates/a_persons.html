@@ -11,10 +11,35 @@
 
 
 {% block content %}
+<table class="table">
+<thead>
+<tr>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Отчество</th>
+    <th>Пол</th>
+    <th>Инситут</th>
+    <th>Номер группы</th>
+    <th>user</th>
+</tr>
+</thead>
+<tbody>
 
 {% for p in persons %}
-<p>{{ p.first_name }}</p>
+    <tr>
+    <td>{{ p.first_name }}</td>
+    <td>{{ p.last_name }}</td>
+    <td>{{ p.second_name }}</td>
+    <td>{{ p.sex }}</td>
+    <td>{{ p.department }}</td>
+    <td>{{ p.group_number }}</td>
+    <td>{{ p.user }}</td>
+    </tr>
 {% endfor %}
+
+</tbody>
+</table>
+
 {% endblock %}
 {% endblock %}
 {% block extra_body %}
