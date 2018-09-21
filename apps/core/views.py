@@ -3,7 +3,8 @@ import json
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 
-from django.http import HttpResponseForbidden
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 from .models import Project, Person, Diagnostic, StudentDiag
 
@@ -106,10 +107,10 @@ class PersonUpdate(UpdateView):
         return self.render_to_response(context)
 
 
+@staff_member_required
 def a_persons(request):
-    if request.user.is_staff:
-        context = dict()
-        context["persons"] = Person.objects.filter(user__is_staff=False)
-        return render(request, "a_persons.html", context)
-    else:
-        return HttpResponseForbidden()
+    context = dict()
+    context["persons"] = Person.objects.filter(user__is_staff=False)
+    context["person"] = Person.objects.get(user=request.user)
+    return render(request, "a_persons.html", context)
+
