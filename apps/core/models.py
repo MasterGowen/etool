@@ -20,6 +20,7 @@ class Person(models.Model):
     department = models.CharField('Институт', max_length=1024, blank=True, null=True)
     group_number = models.CharField('Номер группы', max_length=1024, blank=True, null=True)
     institute = models.CharField('Университет', max_length=1024, blank=True, null=True)
+    checked = models.BooleanField("Персона проверена", default=False)
 
     class Meta:
         verbose_name = 'персона'
