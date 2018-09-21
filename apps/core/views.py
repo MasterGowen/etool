@@ -109,7 +109,7 @@ class PersonUpdate(UpdateView):
 def a_persons(request):
     if request.user.is_staff:
         context = dict()
-        context["persons"] = Person.objects.all()
+        context["persons"] = Person.objects.filter(user__is_staff=False)
         return render(request, "a_persons.html", context)
     else:
         return HttpResponseForbidden()
