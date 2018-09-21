@@ -86,6 +86,8 @@ AUTH_PASSWORD_VALIDATORS = [
 #    },
 ]
 
+LOGIN_URL = "/accounts/login/"
+
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Asia/Yekaterinburg'
