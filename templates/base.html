@@ -72,7 +72,16 @@
                 </div>
             </div>
             {% endif %}
+            {% if user.is_staff %}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Staff</a>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="/persons/">Список участников</a>
+                    </div>
+                </div>
+            {% endif %}
         </div>
+
         {% endif %}
         <div class="navbar-end">
             {% if user.is_authenticated %}
