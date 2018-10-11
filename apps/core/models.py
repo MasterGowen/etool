@@ -1,3 +1,6 @@
+import json
+
+import requests
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -202,6 +205,7 @@ class Diagnostic(models.Model):
         ('p', "Опубликован"),
     )
     TYPES = (("h", "html"), ("j", "json"))
+    slug = models.CharField("Slug", blank=False, null=False, default="sample")
     title = models.CharField("Название диагностики", max_length=1024, blank=False)
     description = models.TextField("Описание диагностики", blank=True, default="")
     short_description = models.TextField("Краткое описание диагностики", blank=True, default="")
@@ -244,3 +248,7 @@ class StudentDiag(models.Model):
     analisys = models.TextField("Анализ диагностики", null=True, blank=True)
     result = models.TextField("Результат диагностики", null=True, blank=True)
     is_checked = models.BooleanField("Проверена", default=False)
+
+    def send(self):
+        r = requests.post(f'http://localhost:5051/v1/ssd/{self.diagnostic.slug}/', data=json.loads(self.answer))
+        return (r.json())
