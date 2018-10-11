@@ -242,3 +242,5 @@ class StudentDiag(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, )
     answer = models.TextField("Ответ студента", null=True, blank=True)
     analisys = models.TextField("Анализ диагностики", null=True, blank=True)
+    result = models.TextField("Результат диагностики", null=True, blank=True)
+    is_checked = models.BooleanField("Проверена", default=False)
