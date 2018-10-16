@@ -255,7 +255,5 @@ class StudentDiag(models.Model):
         self.answer = json.dumps(q)
 
         r = requests.post(f'http://softskills-ural.ru:5051/v1/ssd/{self.diagnostic.slug}/', data={"answer": self.answer})
-        if r.json()["statusCode"] == 200:
-            print(r.json()["result"]["result"])
-            self.analisys = r.json()["result"]["result"]
-            self.save()
+        print(r.json()["result"]["result"])
+        self.analisys = r.json()["result"]["result"]
