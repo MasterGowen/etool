@@ -250,5 +250,5 @@ class StudentDiag(models.Model):
     is_checked = models.BooleanField("Проверена", default=False)
 
     def send(self):
-        r = requests.post(f'http://softskills-ural.ru:5051/v1/ssd/{self.diagnostic.slug}/', data=json.loads(self.answer))
+        r = requests.post(f'http://softskills-ural.ru:5051/v1/ssd/{self.diagnostic.slug}/', data={"answer": json.loads(self.answer)})
         return (r.json())
