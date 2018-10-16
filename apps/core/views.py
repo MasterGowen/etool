@@ -89,6 +89,10 @@ def diagnostic(request, pk):
             person=person,
             answer=answer
         )
+
+        q = json.loads(SD.answer)
+        q.pop('csrfmiddlewaretoken', None)
+        SD.answer = json.dumps(q)
         return redirect("/dashboard")
 
 

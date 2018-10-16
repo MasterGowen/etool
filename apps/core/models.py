@@ -250,6 +250,10 @@ class StudentDiag(models.Model):
     is_checked = models.BooleanField("Проверена", default=False)
 
     def send(self):
+        q = json.loads(self.answer)
+        q.pop('csrfmiddlewaretoken', None)
+        self.answer = json.dumps(q)
+
         r = requests.post(f'http://softskills-ural.ru:5051/v1/ssd/{self.diagnostic.slug}/', data={"answer": self.answer})
         if r.json()["statusCode"] == 200:
             print(r.json()["result"]["result"])
