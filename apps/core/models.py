@@ -215,6 +215,8 @@ class Diagnostic(models.Model):
     json = models.TextField("json", blank=True, null=True)
     check_func = models.TextField("Функция проверки", blank=True, null=True)
     render = models.TextField("Функция отрисовки", blank=True, null=True)
+    render_result = models.TextField("Функция отрисовки ответа", blank=True, null=True)
+
     weight = models.IntegerField("Вес", default=0, blank=False, null=False)
     startdate = models.DateTimeField("Дата начала", blank=True, null=True)
     enddate = models.DateTimeField("Дата завершения", blank=True, null=True)
