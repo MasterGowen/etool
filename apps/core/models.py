@@ -255,5 +255,5 @@ class StudentDiag(models.Model):
         self.answer = json.dumps(q)
 
         r = requests.post(f'http://softskills-ural.ru:5051/v1/ssd/{self.diagnostic.slug}/', data={"answer": self.answer})
-        print(r.json()["result"]["result"])
+        print(r.json())
         self.analisys = r.json()["result"]["result"]
