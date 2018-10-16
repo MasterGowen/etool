@@ -268,6 +268,8 @@ class StudentDiag(models.Model):
         q.pop('csrfmiddlewaretoken', None)
         self.answer = json.dumps(q)
 
+        print(self.diagnostic.check_func)
+
         r = requests.post(f'http://softskills-ural.ru:5051/v1/ssd/check/', data={"answer": self.answer, "check_func": self.diagnostic.check_func})
         try:
             if r.status_code == 200:
