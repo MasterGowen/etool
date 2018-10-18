@@ -44,19 +44,20 @@
         <td><a href="/persons/activate/{{p.id}}/">Activate</a></td>
     {% endif %}
         {% for d in diagnostics %}
-            {% for sd in p.get_person_diagnostics %}
-                {% if d.id == sd.diagnostic.id %}
-                    <td>
-                        {% if sd.is_checked %}
-                        <a href="/persons/recheck/{{sd.id}}/">"{{sd.diagnostic.title}}" Перепроверить</a><br>
-                        <a href="/persons/result/{{sd.id}}/">"{{sd.diagnostic.title}}" Результат</a>
-                        {% else %}
-                        <a href="/persons/recheck/{{sd.id}}/">"{{sd.diagnostic.title}}" Проверить</a><br>
-                        {% endif %}
-                    </td>
-                {% endif %}
-            {% endfor %}
+            <td>
+                {% for sd in p.get_person_diagnostics %}
+                    {% if d.id == sd.diagnostic.id %}
 
+                            {% if sd.is_checked %}
+                            <a href="/persons/recheck/{{sd.id}}/">"{{sd.diagnostic.title}}" Перепроверить</a><br>
+                            <a href="/persons/result/{{sd.id}}/">"{{sd.diagnostic.title}}" Результат</a>
+                            {% else %}
+                            <a href="/persons/recheck/{{sd.id}}/">"{{sd.diagnostic.title}}" Проверить</a><br>
+                            {% endif %}
+
+                    {% endif %}
+                {% endfor %}
+            </td>
         {% endfor %}
 
     </tr>
