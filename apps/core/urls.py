@@ -9,7 +9,7 @@ urlpatterns = [
     path('person/', login_required(PersonUpdate.as_view()), name="person_update"),
     path('projects/<int:pk>/', project),
     path('projects/', projects),
-    path('persons/', a_persons),
+    path('persons/', a_persons, name="persons"),
     path('persons/activate/<int:pk>/', a_persons_activate),
     path('diagnostics/', diagnostics),
     path('diagnostic/<int:pk>/', diagnostic),
