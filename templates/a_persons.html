@@ -42,10 +42,10 @@
         {% for sd in p.get_person_diagnostics %}
         <td>
             {% if sd.is_checked %}
-            <a href="/persons/recheck/{{d.id}}/">"{{sd.diagnostic.title}}" Перепроверить</a><br>
-            <a href="/persons/result/{{d.id}}/">"{{sd.diagnostic.title}}" Результат</a>
+            <a href="/persons/recheck/{{sd.id}}/">"{{sd.diagnostic.title}}" Перепроверить</a><br>
+            <a href="/persons/result/{{sd.id}}/">"{{sd.diagnostic.title}}" Результат</a>
             {% else %}
-            <a href="/persons/recheck/{{d.id}}/">"{{sd.diagnostic.title}}" Проверить</a><br>
+            <a href="/persons/recheck/{{sd.id}}/">"{{sd.diagnostic.title}}" Проверить</a><br>
             {% endif %}
         </td>
         {% endfor %}
