@@ -102,6 +102,14 @@ def a_persons_activate(request, pk):
         return redirect("persons")
 
 
+def a_persons_deactivate(request, pk):
+    if request.method == "GET":
+        p = Person.objects.get(pk=pk)
+        p.checked = False
+        p.save()
+        return redirect("persons")
+
+
 class PersonUpdate(UpdateView):
     model = Person
     success_url = '/dashboard'
