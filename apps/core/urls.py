@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import path
 
-from .views import index, dashboard, project, PersonUpdate, diagnostic, projects, diagnostics, a_persons, a_persons_activate, a_persons_deactivate, a_diagnostic_recheck
+from .views import *
 
 urlpatterns = [
     path('', login_required(index), name="index"),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('persons/activate/<int:pk>/', a_persons_activate),
     path('persons/deactivate/<int:pk>/', a_persons_deactivate),
     path('persons/recheck/<int:pk>/', a_diagnostic_recheck),
+    path('persons/result/<int:pk>/', a_diagnostic_result),
     path('diagnostics/', diagnostics),
     path('diagnostic/<int:pk>/', diagnostic),
 ]

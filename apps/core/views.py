@@ -117,6 +117,12 @@ def a_diagnostic_recheck(request, pk):
         return redirect("persons")
 
 
+def a_diagnostic_result(request, pk):
+    if request.method == "GET":
+        sd = StudentDiag.objects.get(pk=pk)
+        return render("d_result.html", {"sd": sd})
+
+
 class PersonUpdate(UpdateView):
     model = Person
     success_url = '/dashboard'
