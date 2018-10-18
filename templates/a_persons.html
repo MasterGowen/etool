@@ -35,7 +35,7 @@
     <td>{{ p.group_number }}</td>
     <td>{{ p.user }}</td>
         {% if p.checked %}
-        <td><a href="/persons/deactivate/{{p.id}}/">Activate</a></td>
+        <td><a href="/persons/deactivate/{{p.id}}/">Deactivate</a></td>
         {% else %}
         <td><a href="/persons/activate/{{p.id}}/">Activate</a></td>
     {% endif %}
