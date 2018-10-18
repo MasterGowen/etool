@@ -80,8 +80,6 @@ def diagnostic(request, pk):
 
         answer = json.dumps(request.POST)
 
-        print(request.POST)
-
         SD = StudentDiag.objects.create(
             diagnostic=diagnostic,
             person=person,
@@ -92,6 +90,11 @@ def diagnostic(request, pk):
         q.pop('csrfmiddlewaretoken', None)
         SD.answer = json.dumps(q)
         return redirect("/dashboard")
+
+
+def my_diagnostic(request, pk):
+    sd = StudentDiag.objects.filter(person=request.user, diagnostic__id=pk)[0]
+    return render(request, "d_result.html", {"sd": sd})
 
 
 def a_persons_activate(request, pk):

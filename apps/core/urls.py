@@ -16,4 +16,5 @@ urlpatterns = [
     path('persons/result/<int:pk>/', a_diagnostic_result),
     path('diagnostics/', diagnostics),
     path('diagnostic/<int:pk>/', diagnostic),
+    path('my_diagnostic/<int:pk>/', my_diagnostic),
 ]
