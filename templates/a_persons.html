@@ -34,6 +34,11 @@
     <td>{{ p.department }}</td>
     <td>{{ p.group_number }}</td>
     <td>{{ p.user }}</td>
+        {% if p.checked %}
+    <td>{{ p.checked }}</td>
+        {% else %}
+        <td><a href="/persons/activate/{{p.id}}">Activate</a></td>
+    {% endif %}
     </tr>
 {% endfor %}
 
