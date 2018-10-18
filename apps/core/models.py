@@ -30,15 +30,16 @@ class Person(models.Model):
         verbose_name_plural = 'персоны'
 
     def get_person_diagnostics(self):
-        sds = []
-        ds = Diagnostic.objects.all()
-        for d in ds:
-            try:
-                sd = StudentDiag.objects.filter(person=self, diagnostic=d)
-                sds.append(sd)
-            except:
-                pass
-        return sds
+        # sds = []
+        # ds = Diagnostic.objects.all()
+        # for d in ds:
+        #     try:
+        #         sd = StudentDiag.objects.filter(person=self, diagnostic=d)
+        #         sds.append(sd)
+        #     except:
+        #         pass
+        # return sds
+        return StudentDiag.objects.filter(person=self)
 
     def get_person_projects(self):
         registrations = ProjectUserRegistration.objects.filter(person=self)
