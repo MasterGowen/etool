@@ -1,10 +1,8 @@
 import json
 
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
-
-from django.contrib.admin.views.decorators import staff_member_required
-
 
 from .models import Project, Person, Diagnostic, StudentDiag
 
@@ -96,6 +94,14 @@ def diagnostic(request, pk):
         return redirect("/dashboard")
 
 
+def a_persons_activate(request, pk):
+    if request.method == "GET":
+        p = Person.objects.get(pk=pk)
+        p.checked = True
+        p.save()
+        return redirect("persons")
+
+
 class PersonUpdate(UpdateView):
     model = Person
     success_url = '/dashboard'
@@ -117,4 +123,3 @@ def a_persons(request):
     context["persons"] = Person.objects.filter(user__is_staff=False)
     context["person"] = Person.objects.get(user=request.user)
     return render(request, "a_persons.html", context)
-
