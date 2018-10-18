@@ -93,7 +93,7 @@ def diagnostic(request, pk):
 
 
 def my_diagnostic(request, pk):
-    sd = StudentDiag.objects.filter(person__user=request.user, diagnostic__id=pk)[0]
+    sd = StudentDiag.objects.filter(person__user=request.user, diagnostic__id=pk)
     return render(request, "d_result.html", {"sd": sd})
 
 
