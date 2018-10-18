@@ -110,6 +110,13 @@ def a_persons_deactivate(request, pk):
         return redirect("persons")
 
 
+def a_diagnostic_recheck(request, pk):
+    if request.method == "GET":
+        sd = StudentDiag.objects.get(pk=pk)
+        sd.send()
+        return redirect("persons")
+
+
 class PersonUpdate(UpdateView):
     model = Person
     success_url = '/dashboard'
