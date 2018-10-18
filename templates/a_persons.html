@@ -21,6 +21,9 @@
     <th>Инситут</th>
     <th>Номер группы</th>
     <th>user</th>
+    {% for sd in p.get_person_diagnostics %}
+    <th>{{ sd.diagnostic.title }}</th>
+    {% endfor %}
 </tr>
 </thead>
 <tbody>
