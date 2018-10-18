@@ -39,6 +39,9 @@
         {% else %}
         <td><a href="/persons/activate/{{p.id}}/">Activate</a></td>
     {% endif %}
+        {% for d in p.get_person_diagnostics %}
+        <td><a href="/persons/recheck/{{p.id}}/{{d.id}}/">"{{d.diagnostic.title}}" Перепроверить</a></td>
+        {% endfor %}
     </tr>
 {% endfor %}
 
