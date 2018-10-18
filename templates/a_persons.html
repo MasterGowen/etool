@@ -21,8 +21,8 @@
     <th>Инситут</th>
     <th>Номер группы</th>
     <th>user</th>
-    {% for sd in diagnostics %}
-    <th>{{ sd.diagnostic.title }}</th>
+    {% for d in diagnostics %}
+    <th>{{ d.title }}</th>
     {% endfor %}
 </tr>
 </thead>
