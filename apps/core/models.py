@@ -29,6 +29,10 @@ class Person(models.Model):
         verbose_name = 'персона'
         verbose_name_plural = 'персоны'
 
+    def get_person_diagnostics(self):
+        d = StudentDiag.objects.filter(person=self)
+        return d
+
     def get_person_projects(self):
         registrations = ProjectUserRegistration.objects.filter(person=self)
         projects = [r.project for r in registrations]
