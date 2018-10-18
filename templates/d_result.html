@@ -13,9 +13,10 @@
 {% block content %}
 
 
+{{ sd.diagnostic.title }}
 {{sd.analisys}}
 <script>
-    {{ sd.diagnostic.render_result }}
+    {{ sd.diagnostic.check_func }}
 </script>
 
 {% endblock %}
