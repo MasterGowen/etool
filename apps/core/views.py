@@ -120,7 +120,7 @@ def a_diagnostic_recheck(request, pk):
 def a_diagnostic_result(request, pk):
     if request.method == "GET":
         sd = StudentDiag.objects.get(pk=pk)
-        return render("d_result.html", {"sd": sd})
+        return render(request, "d_result.html", {"sd": sd})
 
 
 class PersonUpdate(UpdateView):
