@@ -34,7 +34,7 @@ class Person(models.Model):
         ds = Diagnostic.objects.all()
         for d in ds:
             try:
-                sd = StudentDiag.objects.filter(person=self, diagnostic=d)[-1]
+                sd = StudentDiag.objects.filter(person=self, diagnostic=d)
                 sds.append(sd)
             except:
                 pass
