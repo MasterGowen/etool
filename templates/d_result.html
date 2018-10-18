@@ -16,7 +16,7 @@
 {{ sd.diagnostic.title }}
 {{sd.analisys}}
 <script>
-    {{ sd.diagnostic.check_func }}
+    {{ sd.diagnostic.render_result | safe }}
 </script>
 
 {% endblock %}
