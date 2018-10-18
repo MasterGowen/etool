@@ -54,6 +54,8 @@
                         <a href="/persons/recheck/{{sd.id}}/">"{{sd.diagnostic.title}}" Проверить</a><br>
                         {% endif %}
                     </td>
+                {% else %}
+                    <td></td>
                 {% endif %}
             {% endfor %}
         {% endfor %}
