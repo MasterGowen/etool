@@ -39,10 +39,14 @@
         {% else %}
         <td><a href="/persons/activate/{{p.id}}/">Activate</a></td>
     {% endif %}
-        {% for d in p.get_person_diagnostics %}
+        {% for sd in p.get_person_diagnostics %}
         <td>
-            <a href="/persons/recheck/{{d.id}}/">"{{d.diagnostic.title}}" Перепроверить</a><br>
-            <a href="/persons/result/{{d.id}}/">"{{d.diagnostic.title}}" Результат</a>
+            {% if sd.is_checked %}
+            <a href="/persons/recheck/{{d.id}}/">"{{sd.diagnostic.title}}" Перепроверить</a><br>
+            <a href="/persons/result/{{d.id}}/">"{{sd.diagnostic.title}}" Результат</a>
+            {% else %}
+            <a href="/persons/recheck/{{d.id}}/">"{{sd.diagnostic.title}}" Проверить</a><br>
+            {% endif %}
         </td>
         {% endfor %}
     </tr>
