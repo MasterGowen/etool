@@ -14,8 +14,38 @@
 
 <h1>{{ project.title }}</h1>
 <h2>{{ event.title }}</h2>
-{{project_registrations}}
-{{event_registrations}}
+
+    <h3>Зарегистрированные на проект:</h3>
+<table>
+    <thead>
+        <th>ФИО</th>
+        <th>Присутствует</th>
+    </thead>
+    <tbody>
+        {% for p in project_registrations %}
+            <tr>
+                <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+        <h3>Зарегистрированные на мероприятие:</h3>
+<table>
+    <thead>
+        <th>ФИО</th>
+        <th>Присутствует</th>
+    </thead>
+    <tbody>
+        {% for p in event_registrations %}
+            <tr>
+                <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 
 {% endblock %}
