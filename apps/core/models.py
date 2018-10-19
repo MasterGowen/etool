@@ -299,6 +299,6 @@ class StudentDiag(models.Model):
 
 
 class Visit(models.Model):
-    project = models.ForeignKey("Project", on_delete=models.CASCADE)
-    event = models.ForeignKey("Event", on_delete=models.CASCADE)
-    person = models.ForeignKey("Person", on_delete=models.CASCADE)
+    project = models.ForeignKey("Project", on_delete=models.CASCADE, null=True)
+    event = models.ForeignKey("Event", on_delete=models.CASCADE, null=True)
+    person = models.ForeignKey("Person", on_delete=models.CASCADE, null=True)
