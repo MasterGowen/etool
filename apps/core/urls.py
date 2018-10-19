@@ -17,4 +17,6 @@ urlpatterns = [
     path('diagnostics/', diagnostics),
     path('diagnostic/<int:pk>/', diagnostic),
     path('my_diagnostic/<int:pk>/', my_diagnostic),
+
+    path('events/', a_events, name="events"),
 ]

@@ -148,3 +148,12 @@ def a_persons(request):
     context["person"] = Person.objects.get(user=request.user)
     context["diagnostics"] = Diagnostic.objects.all()
     return render(request, "a_persons.html", context)
+
+@staff_member_required
+def a_events(request):
+    context = dict()
+    context["persons"] = Person.objects.filter(user__is_staff=False)
+    context["person"] = Person.objects.get(user=request.user)
+    context["diagnostics"] = Diagnostic.objects.all()
+    context["projects"] = Project.objects.all()
+    return render(request, "a_events.html", context)
