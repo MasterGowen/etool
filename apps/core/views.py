@@ -4,7 +4,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 
-from .models import Project, Person, Diagnostic, StudentDiag
+from .models import *
 
 
 def index(request):
@@ -157,3 +157,16 @@ def a_events(request):
     context["diagnostics"] = Diagnostic.objects.all()
     context["projects"] = Project.objects.all()
     return render(request, "a_events.html", context)
+
+
+@staff_member_required
+def a_events_visit(request, pk):
+    event = Event.objects.get(pk=pk)
+    context = dict()
+    context["ewvent"] = event
+    context["persons"] = Person.objects.filter(user__is_staff=False)
+    context["event_registrations"] = event.get_students()
+    context["project_registrations"] = event.get_project_students()
+    return render(request, "a_event_visit.html", context)
+
+

@@ -203,6 +203,12 @@ class Event(models.Model):
         registrations = [s.person for s in EventUserRegistration.objects.filter(event=self, role="staff")]
         return list(registrations)
 
+    def get_project_students(self):
+        project = Project.objects.filter(events__in=[self])
+        registrations = [s.person for s in ProjectUserRegistration.objects.filter(project=project, role="student")]
+        return registrations
+
+
     def get_images(self):
         return EventImage.objects.filter(event=self)
 
