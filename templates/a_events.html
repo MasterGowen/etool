@@ -12,7 +12,10 @@
 
 {% block content %}
 {% for p in projects %}
-<p>{{ p.title }}</p>
+    <h2>{{ p.title }}</h2>
+    {% for e in p.events %}
+        <h3>{{ e.title }}</h3>
+    {% endfor %}
 {% endfor %}
 
 {% endblock %}
