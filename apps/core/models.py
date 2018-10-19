@@ -205,7 +205,7 @@ class Event(models.Model):
 
     def get_project_students(self):
         projects = self.project_set.filter(events__in=[self])
-        registrations = [s.person.id for s in ProjectUserRegistration.objects.filter(project__in=projects).distinct("id")]
+        registrations = [s.person.id for s in ProjectUserRegistration.objects.filter(project__in=projects)]
         registrations = Person.objects.filter(pk__in=[set(registrations)])
         return registrations
 
