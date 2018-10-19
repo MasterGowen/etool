@@ -13,7 +13,7 @@
 {% block content %}
 {% for p in projects %}
     <h2>{{ p.title }}</h2>
-    {% for e in p.events %}
+    {% for e in p.events.all %}
         <h3>{{ e.title }}</h3>
     {% endfor %}
 {% endfor %}
