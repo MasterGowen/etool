@@ -1,5 +1,3 @@
-import json
-
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
@@ -149,6 +147,7 @@ def a_persons(request):
     context["diagnostics"] = Diagnostic.objects.all()
     return render(request, "a_persons.html", context)
 
+
 @staff_member_required
 def a_events(request):
     context = dict()
@@ -170,6 +169,15 @@ def a_events_visit(request, project_pk, pk):
     context["persons"] = Person.objects.filter(user__is_staff=False)
     context["event_registrations"] = event.get_students()
     context["project_registrations"] = event.get_project_students()
+    context["visits"] = Visit.objects.filter(event=event, project=project)
     return render(request, "a_event_visit.html", context)
 
 
+@staff_member_required
+def a_events_visit_add(request, project_pk, pk, person_pk):
+    event = Event.objects.get(pk=pk)
+    project = Project.objects.get(pk=project_pk)
+    person = Person.objects.get(pk=person_pk)
+
+    Visit.objects.create(event=event, person=person, project=project)
+    return redirect("events_visit", project_pk=project_pk, pk=pk)

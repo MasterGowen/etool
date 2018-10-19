@@ -209,7 +209,6 @@ class Event(models.Model):
         registrations = Person.objects.filter(pk__in=list(set(registrations)))
         return registrations
 
-
     def get_images(self):
         return EventImage.objects.filter(event=self)
 
@@ -297,3 +296,9 @@ class StudentDiag(models.Model):
                 self.save()
         except:
             pass
+
+
+class Visit(models.Model):
+    project = models.ManyToManyField("Project")
+    event = models.ManyToManyField("Event")
+    person = models.ManyToManyField("Person")

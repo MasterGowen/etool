@@ -41,7 +41,7 @@
         {% for p in event_registrations %}
             <tr>
                 <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
-                <td></td>
+                <td><a href="{{ p.id }}">Отметить</a></td>
             </tr>
         {% endfor %}
     </tbody>
