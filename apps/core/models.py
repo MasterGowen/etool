@@ -204,8 +204,8 @@ class Event(models.Model):
         return list(registrations)
 
     def get_project_students(self):
-        project = Project.objects.filter(events__in=[self])
-        registrations = [s.person for s in ProjectUserRegistration.objects.filter(project=project, role="student")]
+        projects = self.project_set.filter(events__in=[self])
+        registrations = [s.person for s in ProjectUserRegistration.objects.filter(project__in=projects, role="student")]
         return registrations
 
 
