@@ -160,10 +160,13 @@ def a_events(request):
 
 
 @staff_member_required
-def a_events_visit(request, pk):
+def a_events_visit(request, project_pk, pk):
     event = Event.objects.get(pk=pk)
+    project = Project.objects.get(pk=project_pk)
+
     context = dict()
-    context["ewvent"] = event
+    context["project"] = project
+    context["event"] = event
     context["persons"] = Person.objects.filter(user__is_staff=False)
     context["event_registrations"] = event.get_students()
     context["project_registrations"] = event.get_project_students()

@@ -15,7 +15,7 @@
     <h2>{{ p.title }}</h2>
     {% for e in p.events.all %}
         <h3>{{ e.title }}</h3>
-        <a href="{{ e.id }}/">Отметить посещение</a>
+        <a href="/{{p.id}}/{{ e.id }}/">Отметить посещение</a>
     {% endfor %}
 {% endfor %}
 

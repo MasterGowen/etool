@@ -19,5 +19,5 @@ urlpatterns = [
     path('my_diagnostic/<int:pk>/', my_diagnostic),
 
     path('events/', a_events, name="events"),
-    path('events/<int:pk>/', a_events_visit, name="events_visit"),
+    path('events/<int:project_pk>/<int:pk>/', a_events_visit, name="events_visit"),
 ]
