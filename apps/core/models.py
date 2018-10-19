@@ -299,6 +299,6 @@ class StudentDiag(models.Model):
 
 
 class Visit(models.Model):
-    project = models.ManyToManyField("Project")
-    event = models.ManyToManyField("Event")
-    person = models.ManyToManyField("Person")
+    project = models.ForeignKey("Project")
+    event = models.ForeignKey("Event")
+    person = models.ForeignKey("Person")
