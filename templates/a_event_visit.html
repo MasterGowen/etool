@@ -25,7 +25,8 @@
             </thead>
             <tbody>
             {% for p in project_registrations %}
-                <tr>
+
+                <tr>{{ p }}
                     <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
                     {% if p in visits %}
                         <td><a href="{{ p.id }}/uncheck/">Удалить</a></td>
