@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom_filters %}
 {% block head_title %}
     Индекс
 {% endblock %}
@@ -11,6 +12,7 @@
 
 
     {% block content %}
+        {{ visits }}
 
         <h1>{{ project.title }}</h1>
         <h2>{{ event.title }}</h2>
@@ -23,19 +25,14 @@
             </thead>
             <tbody>
             {% for p in project_registrations %}
-                {% for v in visits %}
-                    {% if v.person == p %}
-                        <tr>
-                            <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
-                            <td><a href="{{ p.id }}/uncheck/">Удалить</a></td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
-                            <td><a href="{{ p.id }}">Отметить</a></td>
-                        </tr>
+                <tr>
+                    <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
+                    {% if p in visits %}
+                        <td><a href="{{ p.id }}/uncheck/">Удалить</a></td>
+                    {% else %}
+                        <td><a href="{{ p.id }}">Отметить</a></td>
                     {% endif %}
-                {% endfor %}
+                </tr>
             {% endfor %}
             </tbody>
         </table>

@@ -132,6 +132,7 @@ class ProjectUserRegistration(models.Model):
         return f"<{self.person} - {self.project.title} - {self.role}>"
 
 
+
 class ProjectImage(models.Model):
     image = models.FileField(upload_to="images/%Y/%m/%d")
     project = models.ForeignKey("Project", on_delete=models.CASCADE, related_name='images')
@@ -211,6 +212,9 @@ class Event(models.Model):
 
     def get_images(self):
         return EventImage.objects.filter(event=self)
+
+    def visited_by(self, person, project):
+        return Visit.objects.filter(event=self, person=person, project=project)
 
     class Meta:
         verbose_name = 'событие'
