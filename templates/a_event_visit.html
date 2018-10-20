@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block head_title %}
-Индекс
+    Индекс
 {% endblock %}
 
 {% block extra_head %}
@@ -10,45 +10,49 @@
 {% block body %}
 
 
-{% block content %}
+    {% block content %}
 
-<h1>{{ project.title }}</h1>
-<h2>{{ event.title }}</h2>
+        <h1>{{ project.title }}</h1>
+        <h2>{{ event.title }}</h2>
 
-    <h3>Зарегистрированные на проект:</h3>
-<table>
-    <thead>
-        <th>ФИО</th>
-        <th>Присутствует</th>
-    </thead>
-    <tbody>
-        {% for p in project_registrations %}
-            <tr>
-                <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
-                <td><a href="{{ p.id }}">Отметить</a></td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        <h3>Зарегистрированные на проект:</h3>
+        <table>
+            <thead>
+            <th>ФИО</th>
+            <th>Присутствует</th>
+            </thead>
+            <tbody>
+            {% for p in project_registrations %}
+                {% for v in visits %}
+                    {% if v.person == p %}
+                        <tr>
+                            <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
+                            <td><a href="{{ p.id }}">Отметить</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
 
         <h3>Зарегистрированные на мероприятие:</h3>
-<table>
-    <thead>
-        <th>ФИО</th>
-        <th>Присутствует</th>
-    </thead>
-    <tbody>
-        {% for p in event_registrations %}
-            <tr>
-                <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
-                <td><a href="{{ p.id }}">Отметить</a></td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        <table>
+            <thead>
+            <th>ФИО</th>
+            <th>Присутствует</th>
+            </thead>
+            <tbody>
+            {% for p in event_registrations %}
+                <tr>
+                    <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
+                    <td><a href="{{ p.id }}">Отметить</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
 
-{% endblock %}
+    {% endblock %}
 {% endblock %}
 {% block extra_body %}
 {% endblock %}
