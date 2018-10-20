@@ -189,5 +189,5 @@ def a_events_visit_remove(request, project_pk, pk, person_pk):
     project = Project.objects.get(pk=project_pk)
     person = Person.objects.get(pk=person_pk)
 
-    Visit.objects.filter(event=event, person=person, project=project).remove()
+    Visit.objects.filter(event=event, person=person, project=project).delete()
     return redirect("events_visit", project_pk=project_pk, pk=pk)
