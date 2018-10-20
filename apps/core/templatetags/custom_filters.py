@@ -14,8 +14,3 @@ def has_answer(diag, person):
         return "completed"
     else:
         return ""
-
-
-@register.filter
-def visited_project(event, project):
-    return event.visited_by(person, project)
