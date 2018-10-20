@@ -13,58 +13,62 @@
 
     {% block content %}
 
-        <h1>{{ project.title }}</h1>
-        <h2>{{ event.title }}</h2>
+        <section class="section">
+            <div class="container">
 
-        {% if project_registrations or event_registrations %}
+                <h1>{{ project.title }}</h1>
+                <h2>{{ event.title }}</h2>
 
-            {% if project_registrations %}
+                {% if project_registrations or event_registrations %}
 
-                <h3>Зарегистрированные на проект:</h3>
-                <table>
-                    <thead>
-                    <th>ФИО</th>
-                    <th>Присутствует</th>
-                    </thead>
-                    <tbody>
-                    {% for p in project_registrations %}
-                        <tr>
-                            <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
-                            {% if p.id in visits %}
-                                <td><a href="{{ p.id }}/uncheck/">Удалить</a></td>
-                            {% else %}
-                                <td><a href="{{ p.id }}">Отметить</a></td>
-                            {% endif %}
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                    {% if project_registrations %}
 
-            {% endif %}
+                        <h3>Зарегистрированные на проект:</h3>
+                        <table>
+                            <thead>
+                            <th>ФИО</th>
+                            <th>Присутствует</th>
+                            </thead>
+                            <tbody>
+                            {% for p in project_registrations %}
+                                <tr>
+                                    <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
+                                    {% if p.id in visits %}
+                                        <td><a href="{{ p.id }}/uncheck/">Удалить</a></td>
+                                    {% else %}
+                                        <td><a href="{{ p.id }}">Отметить</a></td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
 
-            {% if event_registrations %}
+                    {% endif %}
+                    </div>
+                    <div class="container">
+                        {% if event_registrations %}
 
-                <h3>Зарегистрированные на мероприятие:</h3>
-                <table>
-                    <thead>
-                    <th>ФИО</th>
-                    <th>Присутствует</th>
-                    </thead>
-                    <tbody>
-                    {% for p in event_registrations %}
-                        <tr>
-                            <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
-                            <td><a href="{{ p.id }}">Отметить</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% endif %}
-
-        {% else %}
-            <p>Никто не зарегистрировался на мероприятие.</p>
-        {% endif %}
-
+                            <h3>Зарегистрированные на мероприятие:</h3>
+                            <table>
+                                <thead>
+                                <th>ФИО</th>
+                                <th>Присутствует</th>
+                                </thead>
+                                <tbody>
+                                {% for p in event_registrations %}
+                                    <tr>
+                                        <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
+                                        <td><a href="{{ p.id }}">Отметить</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <p>Никто не зарегистрировался на мероприятие.</p>
+                {% endif %}
+        </section>
 
     {% endblock %}
 {% endblock %}
