@@ -27,6 +27,11 @@
                     {% if v.person == p %}
                         <tr>
                             <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
+                            <td><a href="{{ p.id }}/uncheck/">Удалить</a></td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td>{{ p.last_name }} {{ p.first_name }} {{ p.second_name }}</td>
                             <td><a href="{{ p.id }}">Отметить</a></td>
                         </tr>
                     {% endif %}

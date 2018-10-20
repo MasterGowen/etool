@@ -181,3 +181,13 @@ def a_events_visit_add(request, project_pk, pk, person_pk):
 
     Visit.objects.create(event=event, person=person, project=project)
     return redirect("events_visit", project_pk=project_pk, pk=pk)
+
+
+@staff_member_required
+def a_events_visit_remove(request, project_pk, pk, person_pk):
+    event = Event.objects.get(pk=pk)
+    project = Project.objects.get(pk=project_pk)
+    person = Person.objects.get(pk=person_pk)
+
+    Visit.objects.filter(event=event, person=person, project=project).remove()
+    return redirect("events_visit", project_pk=project_pk, pk=pk)
