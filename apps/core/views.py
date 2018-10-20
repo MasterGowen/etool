@@ -169,7 +169,7 @@ def a_events_visit(request, project_pk, pk):
     context["persons"] = Person.objects.filter(user__is_staff=False)
     context["event_registrations"] = event.get_students()
     context["project_registrations"] = event.get_project_students()
-    context["visits"] = Visit.objects.filter(event=event, project=project).values("person")
+    context["visits"] = Visit.objects.filter(event=event, project=project).values("person__id")
     return render(request, "a_event_visit.html", context)
 
 
