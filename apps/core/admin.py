@@ -39,6 +39,15 @@ class ProjectAdmin(admin.ModelAdmin):
     inlines = [ProjectImageInline, ProjectFileInline]
 
 
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', '_startdate', '_enddate', "status")
+    search_fields = ('title', 'description', "status")
+    filter_horizontal = ("projects",)
+
+    list_filter = ("_startdate", "_enddate", "status")
+
+
 @admin.register(Subevent)
 class SubeventAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', '_startdate', '_enddate', "status")
@@ -50,6 +59,14 @@ class SubeventAdmin(admin.ModelAdmin):
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
     list_display = ("__str__", "first_name", "last_name", "second_name", "institute")
+
+
+@admin.register(CourseUserRegistration)
+class CourseUserRegistrationAdmin(admin.ModelAdmin):
+    fields = ("person", "course", "role")
+    list_display = ("__str__",)
+    search_fields = ("__str__",)
+    list_filter = ("person", "course", "role")
 
 
 @admin.register(EventUserRegistration)

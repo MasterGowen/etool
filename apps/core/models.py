@@ -132,6 +132,27 @@ class ProjectUserRegistration(models.Model):
         return f"<{self.person} - {self.project.title} - {self.role}>"
 
 
+class CourseUserRegistration(models.Model):
+    class Meta:
+        verbose_name = 'регистрация пользователя на курс'
+        verbose_name_plural = 'регистрации пользователей на курс'
+
+    ROLES = (
+        ("student", "Студент"),
+        ("staff", "Преподаватель"),
+        ("admin", "Администратор"),
+    )
+
+    person = models.ForeignKey("Person", verbose_name="Персона", on_delete=models.CASCADE)
+    course = models.ForeignKey("Course", verbose_name="Курс", on_delete=models.CASCADE)
+    role = models.CharField("Тип регистрации", max_length=8, choices=ROLES)
+
+    class Meta:
+        unique_together = ('person', 'course',)
+
+    def __str__(self):
+        return f"<{self.person} - {self.project.title} - {self.role}>"
+
 
 class ProjectImage(models.Model):
     image = models.FileField(upload_to="images/%Y/%m/%d")
@@ -151,6 +172,23 @@ class ProjectFile(models.Model):
 class EventFile(models.Model):
     file = models.FileField(upload_to="files/%Y/%m/%d")
     event = models.ForeignKey("Event", on_delete=models.CASCADE, related_name='files')
+
+
+class Course(models.Model):
+    STATUSES = (
+        ('h', "Скрыт"),
+        ('p', "Опубликован"),
+    )
+    title = models.CharField("Название проекта", max_length=256, blank=False)
+    description = models.TextField("Описание проекта", blank=True, default="")
+    status = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
+    _startdate = models.DateTimeField("Начало проекта", blank=True, null=True)
+    _enddate = models.DateTimeField("Конец проекта", blank=True, null=True)
+    projects = models.ManyToManyField("Project", blank=True)
+
+    class Meta:
+        verbose_name = 'курс'
+        verbose_name_plural = 'курсы'
 
 
 class Project(models.Model):
