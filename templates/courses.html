@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block head_title %}
+    Курсы
+{% endblock %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block body %}
+
+    {% block content %}
+        {% for c in courses %}
+            <p>{{ c.title }}</p>
+        {% endfor %}
+
+    {% endblock %}
+
+{% endblock %}
+{% block extra_body %}
+{% endblock %}

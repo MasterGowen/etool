@@ -121,6 +121,12 @@ def a_diagnostic_result(request, pk):
         return render(request, "d_result.html", {"sd": sd})
 
 
+def courses(request):
+    context = dict()
+    context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
+    return render(request, "courses.html", context)
+
+
 class PersonUpdate(UpdateView):
     model = Person
     success_url = '/dashboard'
