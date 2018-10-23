@@ -179,8 +179,13 @@ class Course(models.Model):
         ('h', "Скрыт"),
         ('p', "Опубликован"),
     )
+    TYPES = (
+        ('simple', 'Обычный'),
+        ('minor', "Майнор")
+    )
     title = models.CharField("Название курса", max_length=256, blank=False)
     description = models.TextField("Описание курса", blank=True, default="")
+    type = models.CharField("Тип курса", choices=TYPES, null=False, blank=False, default="simple")
     status = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
     _startdate = models.DateTimeField("Начало курса", blank=True, null=True)
     _enddate = models.DateTimeField("Конец курса", blank=True, null=True)
