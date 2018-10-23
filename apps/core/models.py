@@ -179,11 +179,11 @@ class Course(models.Model):
         ('h', "Скрыт"),
         ('p', "Опубликован"),
     )
-    title = models.CharField("Название проекта", max_length=256, blank=False)
-    description = models.TextField("Описание проекта", blank=True, default="")
+    title = models.CharField("Название курса", max_length=256, blank=False)
+    description = models.TextField("Описание курса", blank=True, default="")
     status = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
-    _startdate = models.DateTimeField("Начало проекта", blank=True, null=True)
-    _enddate = models.DateTimeField("Конец проекта", blank=True, null=True)
+    _startdate = models.DateTimeField("Начало курса", blank=True, null=True)
+    _enddate = models.DateTimeField("Конец курса", blank=True, null=True)
     projects = models.ManyToManyField("Project", blank=True)
 
     class Meta:
@@ -207,6 +207,9 @@ class Project(models.Model):
     class Meta:
         verbose_name = 'проект'
         verbose_name_plural = 'проекты'
+
+    def str(self):
+        return self.title
 
     def get_students(self):
         registrations = [s.person for s in EventUserRegistration.objects.filter(event__in=self.events.all(), role="student")]
