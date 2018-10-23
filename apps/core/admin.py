@@ -41,11 +41,11 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', '_startdate', '_enddate', "status")
+    list_display = ('title', 'type', 'description', '_startdate', '_enddate', "status")
     search_fields = ('title', 'description', "status")
     filter_horizontal = ("projects",)
 
-    list_filter = ("_startdate", "_enddate", "status")
+    list_filter = ("type", "_startdate", "_enddate", "status")
 
 
 @admin.register(Subevent)
