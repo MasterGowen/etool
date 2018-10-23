@@ -124,7 +124,7 @@ def a_diagnostic_result(request, pk):
 def courses(request):
     context = dict()
     context["courses"] = Course.objects.filter(published="p")
-    context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
+    context["diagnostics"] = Diagnostic.objects.filter(status="p").order_by("weight")
     return render(request, "courses.html", context)
 
 
