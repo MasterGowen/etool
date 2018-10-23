@@ -208,7 +208,7 @@ class Project(models.Model):
         verbose_name = 'проект'
         verbose_name_plural = 'проекты'
 
-    def str(self):
+    def __str__(self):
         return self.title
 
     def get_students(self):
