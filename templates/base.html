@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static "css/app.css" %}"/>
     <script src="{% static "js/jquery.min.js" %}" defer></script>
     <script src="{% static "js/app.js" %}" defer></script>
-     <script src="{% static "js/bulma-extensions.min.js" %}"></script>
+    <script src="{% static "js/bulma-extensions.min.js" %}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     {% block extra_head %}{% endblock %}
 </head>
@@ -28,60 +28,68 @@
 
     <div id="navbar" class="navbar-menu">
         {% if user.is_authenticated %}
-        <div class="navbar-start">
-            <a class="navbar-item" href="/dashboard/">
-                Dashboard
-            </a>
-            {% if person.is_full %}
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Проекты
+            <div class="navbar-start">
+                <a class="navbar-item" href="/dashboard/">
+                    Dashboard
                 </a>
-            <div class="navbar-dropdown is-boxed">
-                {% for project in person.get_person_projects %}
+                {% if person.is_full %}
 
-                        <a class="navbar-item" href="/projects/{{project.id}}/">
-                            {{ project.title }}
+                    <div class="navbar-item is-hoverable">
+                        <a class="navbar-item" href="/courses/">
+                            Курсы
                         </a>
-
-                {% endfor %}
-            </div>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="/projects/">
-                    <span class="badge" data-badge="{{ person.count_open }}">Диагностики</span>
-                </a>
-                <div class="navbar-dropdown is-boxed">
-                    {% for d in diagnostics %}
-                    {% if d|has_answer:person == "completed" %}
-                        <a class="navbar-item" href="/diagnostic/{{d.pk}}"><span class="badge is-badge-dark" data-badge="{{d|has_answer:person}}">{{ d.title }}</span></a>
-                    {% else %}
-
-                    <a class="navbar-item" href="/diagnostic/{{d.pk}}"><span class="badge is-badge-dark" data-badge="{{d.status}}">{{ d.title }}</span></a>
-                    {%endif%}
-                    {% endfor %}
-                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">1 Структура мотивации</span></a>-->
-                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">2 Самооценка</span></a>-->
-                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">3 Коммуникат соц компетентность</span></a>-->
-                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">4 Стрессоустойчивость и соц адаптация</span></a>-->
-                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">5 Логические закономерности</span></a>-->
-                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">6 Тест креативности</span></a>-->
-                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">7 Исследовательский потенциал</span></a>-->
-                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">8 Личностная креативность</span></a>-->
-                    <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">9 Личность лидера</span></a>-->
-                </div>
-            </div>
-            {% endif %}
-            {% if user.is_staff %}
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">Staff</a>
-                    <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/persons/">Список участников</a>
-                        <a class="navbar-item" href="/events/">Список мероприятий</a>
                     </div>
-                </div>
-            {% endif %}
-        </div>
+
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Проекты
+                        </a>
+                        <div class="navbar-dropdown is-boxed">
+                            {% for project in person.get_person_projects %}
+
+                                <a class="navbar-item" href="/projects/{{ project.id }}/">
+                                    {{ project.title }}
+                                </a>
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link" href="/projects/">
+                            <span class="badge" data-badge="{{ person.count_open }}">Диагностики</span>
+                        </a>
+                        <div class="navbar-dropdown is-boxed">
+                            {% for d in diagnostics %}
+                                {% if d|has_answer:person == "completed" %}
+                                    <a class="navbar-item" href="/diagnostic/{{ d.pk }}"><span class="badge is-badge-dark" data-badge="{{ d|has_answer:person }}">{{ d.title }}</span></a>
+                                {% else %}
+
+                                    <a class="navbar-item" href="/diagnostic/{{ d.pk }}"><span class="badge is-badge-dark" data-badge="{{ d.status }}">{{ d.title }}</span></a>
+                                {% endif %}
+                            {% endfor %}
+                            <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">1 Структура мотивации</span></a>-->
+                            <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">2 Самооценка</span></a>-->
+                            <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">3 Коммуникат соц компетентность</span></a>-->
+                            <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">4 Стрессоустойчивость и соц адаптация</span></a>-->
+                            <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">5 Логические закономерности</span></a>-->
+                            <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">6 Тест креативности</span></a>-->
+                            <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">7 Исследовательский потенциал</span></a>-->
+                            <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">8 Личностная креативность</span></a>-->
+                            <!--<a class="navbar-item"><span class="badge is-badge-dark" data-badge="close">9 Личность лидера</span></a>-->
+                        </div>
+                    </div>
+                {% endif %}
+                {% if user.is_staff %}
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">Staff</a>
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="/persons/">Список участников</a>
+                            <a class="navbar-item" href="/events/">Список мероприятий</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
 
         {% endif %}
         <div class="navbar-end">
@@ -118,7 +126,7 @@
                                 <span class="icon">
                                     <i class="fas fa-sign-out-alt"></i>
                                 </span>
-                                <span>Sign Out</span>
+                                    <span>Sign Out</span>
                                 </a>
                             </p>
                         </div>
@@ -150,13 +158,13 @@
     </div>
 </nav>
 {% if messages %}
-        <div class="container">
-            {% for message in messages %}
-                <article class="message is-info">
-                    <div class="message-body"><strong>Messages:</strong> {{ message }}</div>
-                </article>
-            {% endfor %}
-        </div>
+    <div class="container">
+        {% for message in messages %}
+            <article class="message is-info">
+                <div class="message-body"><strong>Messages:</strong> {{ message }}</div>
+            </article>
+        {% endfor %}
+    </div>
 {% endif %}
 
 {% block content %}
@@ -167,7 +175,7 @@
 
 </body>
 <script type="text/javascript">
-{% block js %}
-{% endblock %}
+    {% block js %}
+    {% endblock %}
 </script>
 </html>
