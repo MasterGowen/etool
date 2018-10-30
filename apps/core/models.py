@@ -202,7 +202,7 @@ class Course(models.Model):
         return f"Курс: {self.title}"
 
     def enroll(self, person):
-        CourseUserRegistration.create(
+        CourseUserRegistration.objects.create(
             person=person,
             course=self,
             role="student"
