@@ -145,13 +145,13 @@ class CourseUserRegistration(models.Model):
 
     person = models.ForeignKey("Person", verbose_name="Персона", on_delete=models.CASCADE)
     course = models.ForeignKey("Course", verbose_name="Курс", on_delete=models.CASCADE)
-    role = models.CharField("Тип регистрации", max_length=8, choices=ROLES)
+    role = models.CharField("Тип регистрации", max_length=8, choices=ROLES, default="student")
 
     class Meta:
         unique_together = ('person', 'course',)
 
     def __str__(self):
-        return f"<{self.person} - {self.project.title} - {self.role}>"
+        return f"<{self.person} - {self.course.title} - {self.role}>"
 
 
 class ProjectImage(models.Model):
