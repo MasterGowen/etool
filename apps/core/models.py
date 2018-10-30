@@ -3,6 +3,7 @@ import json
 import requests
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
@@ -24,6 +25,8 @@ class Person(models.Model):
     group_number = models.CharField('Номер группы', max_length=1024, blank=True, null=True)
     institute = models.CharField('Университет', max_length=1024, blank=True, null=True)
     checked = models.BooleanField("Персона проверена", default=False)
+
+    current_course = models.ForeignKey("Course")
 
     class Meta:
         verbose_name = 'персона'
@@ -314,6 +317,10 @@ class Diagnostic(models.Model):
                 return "open"
             else:
                 return "close"
+
+    @classmethod
+    def get_for_course(cls, course):
+        cls.objects.filter(Q(courses=None) | Q(courses=course)).filter(published="p").order_by("weight")
 
 
 class StudentDiag(models.Model):

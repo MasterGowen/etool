@@ -6,20 +6,22 @@ from .models import *
 
 
 def index(request):
-    context = dict()
-    context["published_projects"] = Project.objects.filter(status="p")
     if request.user.is_authenticated:
-        context["person"] = Person.objects.get(user=request.user)
-        return redirect("/dashboard")
-    else:
-        context["person"] = None
-    return render(request, "index.html", context)
+        person = Person.objects.get(user=request.user)
+        course = person.current_course
+        if course:
+            return redirect("/dashboard")
+
+    return redirect("/courses")
 
 
 def dashboard(request):
+    person = Person.objects.get(user=request.user)
+    course = person.current_course
+
     context = dict()
-    context["published_projects"] = Project.objects.filter(status="p")
-    context["person"] = Person.objects.get(user=request.user)
+    context["published_projects"] = course.projects.filter(status="p")
+    context["person"] = person
     context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     if not context["person"].is_full():
         return redirect("/person?next=/dashboard")
