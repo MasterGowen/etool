@@ -2,7 +2,7 @@
 {% load static %}
 {% load custom_filters %}
 {% block head_title %}
-  Курсы
+    Курсы
 {% endblock %}
 
 {% block extra_head %}
@@ -10,46 +10,50 @@
 
 {% block body %}
 
-  {% block content %}
+    {% block content %}
 
-    <section class="section">
-      <div class="container">
+        <section class="section">
+            <div class="container">
 
-        <h1 class="title">Курсы</h1>
-        <h2 class="subtitle">
-          Список курсов доступных для записи
-        </h2>
-      </div>
-    </section>
-    <div class="container">
-    <div class="columns">
-
-      {% for c in courses %}
-
-
-
-        <div class="column">
-          <div class="card">
-            <div class="card-content">
-              <p class="title">
-                {{ c.title }}
-              </p>
-              <p class="subtitle">
-                {{ c.description }}
-              </p>
+                <h1 class="title">Курсы</h1>
+                <h2 class="subtitle">
+                    Список курсов доступных для записи
+                </h2>
             </div>
-            <footer class="card-footer">
-              <p class="card-footer-item">
-              </p>
-              <p class="card-footer-item enroll">
-                <a href="/courses/enroll/{{c.id}}/">Записаться на курс</a>
-              </p>
-            </footer>
-          </div>
+        </section>
+        <div class="container">
+        <div class="columns">
+
+            {% for c in courses %}
+
+
+
+                <div class="column">
+                    <div class="card">
+                        <div class="card-content">
+                            <p class="title">
+                                {{ c.title }}
+                            </p>
+                            <p class="subtitle">
+                                {{ c.description }}
+                            </p>
+                        </div>
+                        <footer class="card-footer">
+                            <p class="card-footer-item">
+                            </p>
+                            <p class="card-footer-item enroll">
+                                {% if c|enrolled:person %}
+                                    <a href="/courses/enroll/{{ c.id }}/">Записаться на курс</a>
+                                {% else %}
+                                    <p>Вы записаны на курс</p>
+                                {% endif %}
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      {% endfor %}
-    </div>
-  {% endblock %}
+    {% endblock %}
 
 </div>
 {% endblock %}
