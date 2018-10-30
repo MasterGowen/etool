@@ -210,6 +210,14 @@ class Course(models.Model):
         person.current_course = self
         person.save()
 
+    def unenroll(self, person):
+        CourseUserRegistration.objects.filter(
+            person=person,
+            course=self,
+        ).delete()
+        person.current_course = None
+        person.save()
+
 
 class Project(models.Model):
     STATUSES = (

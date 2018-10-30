@@ -138,6 +138,13 @@ def enroll(request, pk):
     return redirect('/')
 
 
+def unenroll(request, pk):
+    course = Course.objects.get(pk=pk)
+    person = Person.objects.filter(user=request.user).first()
+    course.unenroll(person)
+    return redirect('/')
+
+
 class PersonUpdate(UpdateView):
     model = Person
     success_url = '/dashboard'
