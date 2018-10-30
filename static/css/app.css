@@ -1,1 +1,7 @@
 nav.navbar { margin-bottom: 0.5rem;}
+.card-footer-item.enroll {
+    background-color: aliceblue;
+}
+.card-footer-item.enroll:hover {
+    background-color: #a5e6ff;
+}
