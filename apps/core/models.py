@@ -195,6 +195,9 @@ class Course(models.Model):
         verbose_name = 'курс'
         verbose_name_plural = 'курсы'
 
+    def __str__(self):
+        return f"Курс: {self.title}"
+
 
 class Project(models.Model):
     STATUSES = (
