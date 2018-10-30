@@ -125,7 +125,7 @@ def courses(request):
     context = dict()
     context["person"] = Person.objects.get(user=request.user)
     context["courses"] = Course.objects.filter(status="p")
-    context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
+    context["diagnostics"] = Diagnostic.objects.filter(published="p", courses=None).order_by("weight")
     return render(request, "courses.html", context)
 
 

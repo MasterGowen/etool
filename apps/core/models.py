@@ -293,6 +293,8 @@ class Diagnostic(models.Model):
     enddate = models.DateTimeField("Дата завершения", blank=True, null=True)
     published = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
 
+    courses = models.ManyToManyField("Course", blank=True)
+
     class Meta:
         verbose_name = 'диагностика'
         verbose_name_plural = 'диагностики'
