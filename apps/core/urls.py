@@ -25,4 +25,5 @@ urlpatterns = [
 
     path('courses/', courses, name="courses"),
     path('courses/enroll/<int:pk>/', enroll),
+    path('courses/unenroll/<int:pk>/', unenroll),
 ]
