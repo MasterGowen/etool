@@ -131,6 +131,13 @@ def courses(request):
     return render(request, "courses.html", context)
 
 
+def enroll(request, pk):
+    course = Course.objects.get(pk=pk)
+    person = Person.objects.filter(user=request.user)
+    course.enroll(person)
+    return redirect('/')
+
+
 class PersonUpdate(UpdateView):
     model = Person
     success_url = '/dashboard'

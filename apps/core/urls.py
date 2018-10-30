@@ -24,4 +24,5 @@ urlpatterns = [
     path('events/<int:project_pk>/<int:pk>/<int:person_pk>/uncheck/', a_events_visit_remove, name="events_visit_remove"),
 
     path('courses/', courses, name="courses"),
+    path('courses/enroll/<int:pk>/', enroll),
 ]

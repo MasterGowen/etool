@@ -201,6 +201,15 @@ class Course(models.Model):
     def __str__(self):
         return f"Курс: {self.title}"
 
+    def enroll(self, person):
+        CourseUserRegistration.create(
+            person=person,
+            course=self,
+            role="student"
+        )
+        person.current_course = self
+        person.save()
+
 
 class Project(models.Model):
     STATUSES = (
