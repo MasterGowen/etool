@@ -133,7 +133,7 @@ def courses(request):
 
 def enroll(request, pk):
     course = Course.objects.get(pk=pk)
-    person = Person.objects.filter(user=request.user)
+    person = Person.objects.filter(user=request.user).first()
     course.enroll(person)
     return redirect('/')
 
