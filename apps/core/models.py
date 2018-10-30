@@ -26,7 +26,7 @@ class Person(models.Model):
     institute = models.CharField('Университет', max_length=1024, blank=True, null=True)
     checked = models.BooleanField("Персона проверена", default=False)
 
-    current_course = models.ForeignKey("Course", on_delete=models.SET_NULL)
+    current_course = models.ForeignKey("Course", on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = 'персона'
