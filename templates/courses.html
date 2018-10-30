@@ -40,12 +40,15 @@
                         </div>
                         <footer class="card-footer">
                             <p class="card-footer-item">
+                              {% if c|enrolled:person %}
+                              Вы записаны на курс
+                              {% endif %}
                             </p>
                             <p class="card-footer-item enroll">
                                 {% if not c|enrolled:person %}
                                     <a href="/courses/enroll/{{ c.id }}/">Записаться на курс</a>
                                 {% else %}
-                                    Вы записаны на курс
+                                    <a href="/courses/unenroll/{{ c.id }}/">Отписаться на курс</a>
                                 {% endif %}
                             </p>
                         </footer>
