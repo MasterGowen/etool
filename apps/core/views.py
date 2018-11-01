@@ -20,7 +20,7 @@ def dashboard(request):
     course = person.current_course
 
     context = dict()
-    if course.projects:
+    if course:
         context["published_projects"] = course.projects.filter(status="p")
     context["person"] = person
     context["courses"] = Course.objects.filter(pk__in=list(CourseUserRegistration.objects.filter(person=person).values_list("course", flat=True)))
