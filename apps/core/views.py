@@ -22,7 +22,7 @@ def dashboard(request):
     context = dict()
     context["published_projects"] = course.projects.filter(status="p")
     context["person"] = person
-    context["courses"] = CourseUserRegistration.objects.filter(person=person).values_list("course", flat=True)
+    context["courses"] = Course.objects.filter(pk__in=list(CourseUserRegistration.objects.filter(person=person).values_list("course", flat=True)))
     context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
     if not context["person"].is_full():
         return redirect("/person?next=/dashboard")
