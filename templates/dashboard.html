@@ -148,7 +148,7 @@
                           {% if c.projects %}
                     {% if c.projects.count == 1 %}
                         {% for p in c.projects.all %}
-                            <div class="timeline is-centered">
+                            <div class="timeline is-left">
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">Start</span>
                                 </header>
@@ -156,7 +156,7 @@
                                 <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
                                     <div class="timeline-content">
-                                        <p class="heading">{{ e.startdate }}</p>
+                                        <p class="heading">{{ e._startdate }}</p>
                                         <p>{{ e.title }}</p>
                                     </div>
                                 </div>
