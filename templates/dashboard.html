@@ -148,7 +148,7 @@
                           {% if c.projects %}
                     {% if c.projects.count == 1 %}
                         {% for p in c.projects.all %}
-                            {% for e in p.events.all %}
+                            {% for e in p.events.all|sort_by:"-_startdate" %}
                             <div class="timeline is-centered">
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">Start</span>
