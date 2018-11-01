@@ -103,7 +103,18 @@
     </section>
 
     <div class="container">
-        <div class="columns">
+        <section class="section">
+        <div class="container">
+
+            <h1 class="title">Ваша проектная проетная работа</h1>
+            <h2 class="subtitle">
+                Ваша тема по проектной работе: Название темы
+            </h2>
+            <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
+        </div>
+    </section>
+
+        <div class="columns is-hidden">
             {% for project in person.get_person_projects %}
                 <div class="column">
                     {% include "project_inline.html" %}
@@ -154,20 +165,6 @@
     <span class="tag is-medium is-primary">End</span>
   </header>
 </div>
-
-    <section class="section">
-        <div class="container">
-
-            <h1 class="title">Ваша проектная проетная работа</h1>
-            <h2 class="subtitle">
-                Ваша тема по проектной работе: Название темы
-            </h2>
-            <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
-        </div>
-    </section>
-
-
-
 
     </div>
 
