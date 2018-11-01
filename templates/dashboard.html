@@ -93,131 +93,131 @@
 
 
     {% for c in courses %}
+        {% if c|enrolled:person %}
 
-        {#     THEME     #}
+            {#     THEME     #}
 
-        <div class="container">
-            {% if themes|for_course_len:c  > 0 %}
-                <section class="section">
-                    <div class="container">
+            <div class="container">
+                {% if themes|for_course_len:c  > 0 %}
+                    <section class="section">
+                        <div class="container">
 
-                        <h1 class="title">Ваша проектная проетная работа</h1>
-                        <h2 class="subtitle">
-                            Ваша тема по проектной работе:
-                            {% for t in person_themes %}
-                                {% if t.course == c %}
-                                    {{ t }}
-                                {% endif %}
+                            <h1 class="title">Ваша проектная проетная работа</h1>
+                            <h2 class="subtitle">
+                                Ваша тема по проектной работе:
+                                {% for t in person_themes %}
+                                    {% if t.course == c %}
+                                        {{ t }}
+                                    {% endif %}
+                                {% endfor %}
+                            </h2>
+                            <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
+                        </div>
+                    </section>
+                {% endif %}
+
+
+                {#    PROJECTS #}
+
+                {% if c.projects.all %}
+                    {% if c.projects.all.count > 1 %}
+                        <div class="columns">
+                            {% for project in c.projects.all %}
+                                <div class="column">
+                                    {% include "project_inline.html" %}
+                                </div>
                             {% endfor %}
-                        </h2>
-                        <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
-                    </div>
-                </section>
-            {% endif %}
-
-
-            {#    PROJECTS #}
-        {{ c.projects.all }}
-            {% if c.projects.all %}
-                {{ c.projects.all.count }}
-                {% if c.projects.all.count > 1 %}
-
-                    <div class="columns">
-                        {% for project in c.projects.all %}
-                            <div class="column">
-                                {% include "project_inline.html" %}
-                            </div>
-                        {% endfor %}
-                        {% if c.projects.all|length|divide:3 == 2 %}
-                            <div class="column"></div>
-                            <div class="column"></div>
-                        {% elif c.projects.all|length|divide:3 == 1 %}
-                            <div class="column"></div>
-                        {% endif %}
-
-                    </div>
-                {% endif %}
-            {% endif %}
-
-            {#    EVENTS #}
-
-
-            {% if c.projects %}
-                {% if c.projects.count == 1 %}
-                    {% for p in c.projects.all %}
-
-                        <div class="timeline is-centered">
-                            <header class="timeline-header">
-                                <span class="tag is-medium is-primary">Start</span>
-                            </header>
-                            <div class="timeline-item is-primary">
-                                <div class="timeline-marker is-primary"></div>
-                                <div class="timeline-content">
-                                    <p class="heading">January 2016</p>
-                                    <p>Timeline content - Can include any HTML element</p>
-                                </div>
-                            </div>
-                            <div class="timeline-item is-warning">
-                                <div class="timeline-marker is-warning is-image is-32x32">
-                                    <img src="http://bulma.io/images/placeholders/32x32.png">
-                                </div>
-                                <div class="timeline-content">
-                                    <p class="heading">February 2016</p>
-                                    <p>Timeline content - Can include any HTML element</p>
-                                </div>
-                            </div>
-                            <header class="timeline-header">
-                                <span class="tag is-primary">2017</span>
-                            </header>
-                            <div class="timeline-item is-danger">
-                                <div class="timeline-marker is-danger is-icon">
-                                    <i class="fa fa-flag"></i>
-                                </div>
-                                <div class="timeline-content">
-                                    <p class="heading">March 2017</p>
-                                    <p>Timeline content - Can include any HTML element</p>
-                                </div>
-                            </div>
-                            <header class="timeline-header">
-                                <span class="tag is-medium is-primary">End</span>
-                            </header>
-                        </div>
-
-                        </div>
-
-                        {% for e in p.events.all %}
-                            {{ e }}
-                        {% endfor %}
-                    {% endfor %}
-                {% endif %}
-            {% endif %}
-
-
-        <div id="modal_theme" class="modal">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Изменить выбранную тему</p>
-                    <button class="delete" aria-label="close" onclick="$('#is-success').removeAttr('href');$('#modal_theme').removeClass('is-active')"></button>
-                </header>
-                <section class="modal-card-body">
-                    {% for t in themes %}
-                        <div class="field">
-                            {% if person|have_theme:t %}
-                                <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" checked><label for="theme_{{ t.id }}">{{ t }}</label>
-                            {% else %}
-                                <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">
-                                <label for="theme_{{ t.id }}">{{ t.theme }}</label>
+                            {% if c.projects.all|length|divide:3 == 2 %}
+                                <div class="column"></div>
+                                <div class="column"></div>
+                            {% elif c.projects.all|length|divide:3 == 1 %}
+                                <div class="column"></div>
                             {% endif %}
+
                         </div>
-                    {% endfor %}
-                </section>
-                <footer class="modal-card-foot">
-                    <a id="is-success" class="button is-success">Save changes</a>
-                    <button class="button" onclick="$('#is-success').removeAttr('href');$('#modal_theme').removeClass('is-active')">Cancel</button>
-                </footer>
+                    {% endif %}
+                {% endif %}
+
+                {#    EVENTS #}
+
+
+                {% if c.projects %}
+                    {% if c.projects.count == 1 %}
+                        {% for p in c.projects.all %}
+
+                            <div class="timeline is-centered">
+                                <header class="timeline-header">
+                                    <span class="tag is-medium is-primary">Start</span>
+                                </header>
+                                <div class="timeline-item is-primary">
+                                    <div class="timeline-marker is-primary"></div>
+                                    <div class="timeline-content">
+                                        <p class="heading">January 2016</p>
+                                        <p>Timeline content - Can include any HTML element</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item is-warning">
+                                    <div class="timeline-marker is-warning is-image is-32x32">
+                                        <img src="http://bulma.io/images/placeholders/32x32.png">
+                                    </div>
+                                    <div class="timeline-content">
+                                        <p class="heading">February 2016</p>
+                                        <p>Timeline content - Can include any HTML element</p>
+                                    </div>
+                                </div>
+                                <header class="timeline-header">
+                                    <span class="tag is-primary">2017</span>
+                                </header>
+                                <div class="timeline-item is-danger">
+                                    <div class="timeline-marker is-danger is-icon">
+                                        <i class="fa fa-flag"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <p class="heading">March 2017</p>
+                                        <p>Timeline content - Can include any HTML element</p>
+                                    </div>
+                                </div>
+                                <header class="timeline-header">
+                                    <span class="tag is-medium is-primary">End</span>
+                                </header>
+                            </div>
+
+                            </div>
+
+                            {% for e in p.events.all %}
+                                {{ e }}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+
+
+            <div id="modal_theme" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Изменить выбранную тему</p>
+                        <button class="delete" aria-label="close" onclick="$('#is-success').removeAttr('href');$('#modal_theme').removeClass('is-active')"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        {% for t in themes %}
+                            <div class="field">
+                                {% if person|have_theme:t %}
+                                    <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" checked><label for="theme_{{ t.id }}">{{ t }}</label>
+                                {% else %}
+                                    <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">
+                                    <label for="theme_{{ t.id }}">{{ t.theme }}</label>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </section>
+                    <footer class="modal-card-foot">
+                        <a id="is-success" class="button is-success">Save changes</a>
+                        <button class="button" onclick="$('#is-success').removeAttr('href');$('#modal_theme').removeClass('is-active')">Cancel</button>
+                    </footer>
+                </div>
             </div>
-        </div>
+        {% endif %}
     {% endfor %}
 {% endblock %}
 
