@@ -138,7 +138,7 @@
 
             {#    EVENTS #}
 
-            {% for c in courses %}
+
                 {% if c.projects %}
                     {% if c.projects.count == 1 %}
                         {% for p in c.projects.all %}
@@ -188,8 +188,6 @@
                         {% endfor %}
                     {% endif %}
                 {% endif %}
-            {% endfor %}
-
 
 
         <div id="modal_theme" class="modal">
