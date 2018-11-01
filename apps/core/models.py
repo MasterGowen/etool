@@ -291,9 +291,13 @@ class Event(models.Model):
         verbose_name_plural = 'события'
 
     def __str__(self):
+        s = ""
         if self.code:
-            return f"{self.code} {self._startdate} {self.title}"
-        return f"{self._startdate} {self.title}"
+            s += self.code
+        if self._enddate:
+            s += f" {self._startdate}"
+
+        return f"{s} {self.title}"
 
 
 class Diagnostic(models.Model):
