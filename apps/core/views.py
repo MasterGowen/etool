@@ -25,6 +25,7 @@ def dashboard(request):
     context["person"] = person
     context["courses"] = Course.objects.filter(pk__in=list(CourseUserRegistration.objects.filter(person=person).values_list("course", flat=True)))
     context["diagnostics"] = Diagnostic.objects.filter(published="p").order_by("weight")
+    context["themes"] = PrTheme.objects.all()
     if not context["person"].is_full():
         return redirect("/person?next=/dashboard")
     return render(request, "dashboard.html", context)
@@ -144,6 +145,13 @@ def unenroll(request, pk):
     course = Course.objects.get(pk=pk)
     person = Person.objects.filter(user=request.user).first()
     course.unenroll(person)
+    return redirect('/')
+
+
+def theme_choice(request, pk):
+    for t in PrTheme.objects.all():
+        t.students.remove(request.user.person)
+    PrTheme.objects.get(pk=pk).students.add(request.user.person)
     return redirect('/')
 
 
