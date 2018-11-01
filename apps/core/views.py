@@ -22,7 +22,7 @@ def dashboard(request):
     def get_person_themes():
         themes = []
         for t in PrTheme.objects.all():
-            if person in t.students:
+            if person in t.students.all():
                 themes.append(t)
         return themes
 
