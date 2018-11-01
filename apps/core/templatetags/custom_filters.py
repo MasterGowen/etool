@@ -25,4 +25,6 @@ def enrolled(course, person):
 
 @register.filter
 def have_theme(student, theme):
-    PrTheme.objects.filter(~Q(student__in=theme.students.all()))
+    if student in theme.students.all():
+        return True
+    return False
