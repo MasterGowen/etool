@@ -155,7 +155,7 @@
 
                                 <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
-                                    {% for e in p.events.all|sort_by:"-_startdate" %}
+                                    {% for e in p.events.all|sort_by:"_startdate" %}
                                         {% ifchanged e.startdate %}
                                             <hr>
                                         {% endifchanged %}
