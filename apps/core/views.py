@@ -158,7 +158,7 @@ def unenroll(request, pk):
 
 def theme_choice(request, pk, course_pk):
     PrTheme.objects.get(pk=pk).choice(request.user.person, Course.objects.get(pk=course_pk))
-    return redirect('/')
+    return redirect('/dashboard')
 
 
 class PersonUpdate(UpdateView):
