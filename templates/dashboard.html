@@ -136,7 +136,7 @@
         {% if person|have_theme:t %}
             <p>{{ t }}</p>
         {% else %}
-            <a href="theme_choice/{{ t.id }}">{{ t.theme }}</a>
+            <a href="/theme_choice/{{ t.id }}">{{ t.theme }}</a>
         {% endif %}
     {% endfor %}
 
