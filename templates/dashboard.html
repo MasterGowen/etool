@@ -142,11 +142,14 @@
     </header>
     <section class="modal-card-body">
     {% for t in themes %}
+      <div class="field">
         {% if person|have_theme:t %}
-            <input type="radio" name="themes" checked >{{ t }}
+          <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" checked ><label for="theme_{{ t.id }}">{{ t }}</label>
         {% else %}
-            <input type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">{{ t.theme }}
+            <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">
+          <label for="theme_{{ t.id }}">{{ t.theme }}</label>
         {% endif %}
+      </div>
     {% endfor %}
     </section>
     <footer class="modal-card-foot">
