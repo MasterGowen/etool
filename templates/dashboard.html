@@ -111,7 +111,11 @@
                                     {% endif %}
                                 {% endfor %}
                             </h2>
-                            <button class="button is-primary" onclick="$('#modal_theme_{{ t.id }}').addClass('is-active')">Изменить</button>
+                            {% for t in person_themes %}
+                                {% if t.course == c %}
+                                    <button class="button is-primary" onclick="$('#modal_theme_{{ t.id }}').addClass('is-active')">Изменить</button>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </section>
                 {% endif %}
