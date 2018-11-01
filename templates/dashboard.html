@@ -97,7 +97,7 @@
         {#     THEME     #}
 
         <div class="container">
-
+{{ themes|for_course_len:c }}
             {% if themes|for_course_len:c  > 0 %}
                 <section class="section">
                     <div class="container">
