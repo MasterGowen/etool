@@ -384,8 +384,8 @@ class Visit(models.Model):
 
 
 class PrTheme(models.Model):
-    theme = models.CharField("Тема проектной работы", max_length=4096, blank=False, null=True)
-    course = models.ForeignKey("Course", blank=True, on_delete=models.CASCADE)
+    theme = models.CharField("Тема проектной работы", max_length=4096, blank=False)
+    course = models.ForeignKey("Course", blank=True, on_delete=models.CASCADE, null=True)
     students = models.ManyToManyField("Person", blank=True)
 
     class Meta:
