@@ -289,6 +289,9 @@ class Event(models.Model):
         verbose_name = 'событие'
         verbose_name_plural = 'события'
 
+    def __str__(self):
+        return self.title
+
 
 class Diagnostic(models.Model):
     STATUSES = (
