@@ -145,12 +145,12 @@
         {% if person|have_theme:t %}
             <p><strong>{{ t }}</strong></p>
         {% else %}
-            <p><a href="/theme_choice/{{ t.id }}">{{ t.theme }}</a></p>
+            <p><a onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">{{ t.theme }}</a></p>
         {% endif %}
     {% endfor %}
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success">Save changes</button>
+      <a id="is-success" class="button is-success">Save changes</a>
       <button class="button">Cancel</button>
     </footer>
   </div>
