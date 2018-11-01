@@ -132,14 +132,8 @@
     {% endfor %}
 
 
-    {% for t in themes %}
-        {% if person|have_theme:t %}
-            <p><strong>{{ t }}</strong></p>
-        {% else %}
-            <p><a href="/theme_choice/{{ t.id }}">{{ t.theme }}</a></p>
-        {% endif %}
-    {% endfor %}
-  <div class="modal is-active">
+<button class="button" onclick="$('.modal').addClass('is-active')">Изменить выбранную тему</button>
+  <div class="modal ">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
@@ -147,7 +141,13 @@
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
-      <!-- Content ... -->
+    {% for t in themes %}
+        {% if person|have_theme:t %}
+            <p><strong>{{ t }}</strong></p>
+        {% else %}
+            <p><a href="/theme_choice/{{ t.id }}">{{ t.theme }}</a></p>
+        {% endif %}
+    {% endfor %}
     </section>
     <footer class="modal-card-foot">
       <button class="button is-success">Save changes</button>
