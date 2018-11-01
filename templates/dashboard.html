@@ -134,9 +134,9 @@
 
     {% for t in themes %}
         {% if person|have_theme:t %}
-            <p>{{ t }}</p>
+            <p><strong>{{ t }}</strong></p>
         {% else %}
-            <a href="/theme_choice/{{ t.id }}">{{ t.theme }}</a>
+            <p><a href="/theme_choice/{{ t.id }}">{{ t.theme }}</a></p>
         {% endif %}
     {% endfor %}
 
