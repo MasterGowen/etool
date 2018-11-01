@@ -119,18 +119,18 @@
             {#    PROJECTS #}
 
             {% if c.projects %}
-                {% if c.projects.count == 1 %}
+                {% if c.projects.count > 1 %}
 
                     <div class="columns is-hidden">
-                        {% for project in person.get_person_projects %}
+                        {% for project in person.c.projects %}
                             <div class="column">
                                 {% include "project_inline.html" %}
                             </div>
                         {% endfor %}
-                        {% if person.get_person_projects|length|divide:3 == 2 %}
+                        {% if c.projects|length|divide:3 == 2 %}
                             <div class="column"></div>
                             <div class="column"></div>
-                        {% elif person.get_person_projects|length|divide:3 == 1 %}
+                        {% elif c.projects|length|divide:3 == 1 %}
                             <div class="column"></div>
                         {% endif %}
 
