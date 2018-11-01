@@ -123,7 +123,7 @@
                 {% if c.projects.count > 1 %}
 
                     <div class="columns is-hidden">
-                        {% for project in person.c.projects %}
+                        {% for project in person.c.projects.all %}
                             <div class="column">
                                 {% include "project_inline.html" %}
                             </div>
