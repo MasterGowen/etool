@@ -200,7 +200,7 @@
                         <button class="delete" aria-label="close" onclick="$('#is-success').removeAttr('href');$('#modal_theme').removeClass('is-active')"></button>
                     </header>
                     <section class="modal-card-body">
-                        {% for t in themes %}
+                        {% for t in themes|for_course:c %}
                             <div class="field">
                                 {% if person|have_theme:t %}
                                     <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" checked><label for="theme_{{ t.id }}">{{ t }}</label>
