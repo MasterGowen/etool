@@ -105,8 +105,8 @@
                             <h1 class="title">Ваша проектная проетная работа</h1>
                             <h2 class="subtitle">
                                 Ваша тема по проектной работе:
-                                {% for t in person_themes %}
-                                    {% if t.course == c %}
+                                {% for t in themes|for_course:c %}
+                                    {% if person|have_theme:t %}
                                         {{ t }}
                                     {% endif %}
                                 {% endfor %}
