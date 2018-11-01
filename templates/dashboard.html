@@ -117,10 +117,8 @@
 
 
             {#    PROJECTS #}
-        {{ c.projects.all }}
-
-            {% if c.projects %}
-                {% if c.projects.count > 1 %}
+            {% if c.projects.all %}
+                {% if c.projects.all.count > 1 %}
 
                     <div class="columns is-hidden">
                         {% for project in person.c.projects.all %}
@@ -128,10 +126,10 @@
                                 {% include "project_inline.html" %}
                             </div>
                         {% endfor %}
-                        {% if c.projects|length|divide:3 == 2 %}
+                        {% if c.projects.all|length|divide:3 == 2 %}
                             <div class="column"></div>
                             <div class="column"></div>
-                        {% elif c.projects|length|divide:3 == 1 %}
+                        {% elif c.projects.all|length|divide:3 == 1 %}
                             <div class="column"></div>
                         {% endif %}
 
