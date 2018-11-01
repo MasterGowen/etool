@@ -122,8 +122,8 @@
     </div>
 
     {% for c in courses %}
-        {% if c.type ==  "minor" %}
-            {% if c.projects %}
+        {% if c.projects %}
+            {% if c.project_set.count == 1 %}
                 {% for p in c.projects.all %}
                     {% for e in p.events.all %}
                         {{ e }}
