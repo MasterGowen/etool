@@ -106,10 +106,8 @@
                         <h2 class="subtitle">
                             Ваша тема по проектной работе:
                             {% for t in themes|for_course:c %}
-                                {% if t.course == c %}
-                                    {% if person|have_theme:t %}
-                                        {{ t }}
-                                    {% endif %}
+                                {% if person|have_theme:t %}
+                                    {{ t }}
                                 {% endif %}
                             {% endfor %}
                             Ваша тема по проектной работе: {{ t.theme }}
