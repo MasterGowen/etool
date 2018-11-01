@@ -158,7 +158,8 @@
                                   {% for e in p.events.all|sort_by:"-_startdate" %}
                                     <div class="timeline-content">
                                         <p class="heading">{{ e.startdate }}</p>
-                                        <p>{{ e.title }}</p>
+                                        <p>Тема занятия "{{ e.title }}"</p>
+                                        <p>{{ e.description }}</p>
                                     </div>
                                     {% endfor %}
                                 </div>
