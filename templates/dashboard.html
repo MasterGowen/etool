@@ -133,6 +133,7 @@
 
 
     {% for t in themes %}
+        {{ t }}
         {% if not person|have_theme:theme %}
             <p>{{ t }}</p>
         {% else %}
