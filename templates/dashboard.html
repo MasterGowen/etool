@@ -156,14 +156,15 @@
                                 <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
                                     {% for i, e in p.enumerated_events|sort_by:"-_startdate" %}
-                                        {% if e|another_date:p.events.all[i] %}
+                                        {{ i }} {{ e }}
+{#                                        {% if e|another_date:p.events.all[i] %}#}
                                             <div class="timeline-content">
                                                 <p class="heading">{{ e.startdate }}</p>
                                                 <p>Тема занятия "{{ e.title }}"</p>
                                                 <p>{{ e.description }}</p>
                                                 <a href="" Class="button is-primary"> Записаться</a>
                                             </div>
-                                        {% endif %}
+{#                                        {% endif %}#}
                                     {% endfor %}
                                 </div>
 
