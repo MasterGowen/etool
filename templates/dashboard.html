@@ -143,9 +143,9 @@
     <section class="modal-card-body">
     {% for t in themes %}
         {% if person|have_theme:t %}
-            <input type="checkbox" checked >{{ t }}
+            <input type="radio" name="themes" checked >{{ t }}
         {% else %}
-            <input type="checkbox" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">{{ t.theme }}
+            <input type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">{{ t.theme }}
         {% endif %}
     {% endfor %}
     </section>
