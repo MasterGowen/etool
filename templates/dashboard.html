@@ -122,7 +122,7 @@
     </div>
 
     {% for c in courses %}
-        {% if c.type ==  "minor" %}
+        {% if c.type ==  "Майнор" %}
             {% if c.projects %}
                 {% for p in c.projects.all %}
                     {% for e in p.events.all %}
