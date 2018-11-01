@@ -45,7 +45,7 @@ def sort_by(queryset, order):
     res = []
     for i, e in queryset:
         res.append(e)
-    return res.sort(key=lambda x: x.startdate, reverse=True)
+    return res.sort(key=lambda x: x.startdate(), reverse=True)
 
 
 @register.filter
