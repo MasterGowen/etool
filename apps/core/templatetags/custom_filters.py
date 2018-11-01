@@ -43,3 +43,8 @@ def for_course_len(themes, course):
 @register.filter
 def sort_by(queryset, order):
     return queryset.order_by(order)
+
+
+@register.filter
+def another_date(a, b):
+    return a.startdate != b.startdate
