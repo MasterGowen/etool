@@ -266,6 +266,9 @@ class Event(models.Model):
 
     subevents = models.ManyToManyField("Subevent", blank=True)
 
+    def startdate(self):
+        return self._startdate
+
     def get_students(self):
         registrations = [s.person for s in EventUserRegistration.objects.filter(event=self, role="student")]
         return list(registrations)
