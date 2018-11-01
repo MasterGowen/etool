@@ -7,19 +7,20 @@
 {% block account %}
     <h1>{% trans "Sign Up" %}</h1>
 
-    {{ form.non_field_errors }}
-    {% if form.errors %}
-        {{ form.errors|pluralize }}
-    {% endif %}
-    {% for field in form %}
-        {{ field.error }}
-        {{ field.field.error }}
-    {% endfor %}
-
     <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
+
+        {{ form.non_field_errors }}
+        {% if form.errors %}
+            {{ form.errors|pluralize }}
+        {% endif %}
+        {% for field in form %}
+            {{ field.error }}
+            {{ field.field.error }}
+        {% endfor %}
+
         {#  {{ form.as_p }}#}
         <div class="field"><label class="label" for="id_username">Имя пользователя на английском языке:</label>
             <div class="control has-icons-left">
