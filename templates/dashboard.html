@@ -104,12 +104,11 @@
                         <h1 class="title">Ваша проектная проетная работа</h1>
                         <h2 class="subtitle">
                             Ваша тема по проектной работе:
-                            {% for t in themes|for_course:c %}
-                                {% if person|have_theme:t %}
+                            {% for t in person_themes %}
+                                {% if t.course == c %}
                                     {{ t }}
                                 {% endif %}
                             {% endfor %}
-                            Ваша тема по проектной работе: {{ t.theme }}
                         </h2>
                         <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
                     </div>
