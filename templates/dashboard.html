@@ -91,7 +91,7 @@
         </div>
     </div>
 
-    <section class="section">
+    <section class="section is-hidden">
         <div class="container">
 
             <h1 class="title">Образовательный Наборы</h1>
@@ -108,7 +108,12 @@
 
             <h1 class="title">Ваша проектная проетная работа</h1>
             <h2 class="subtitle">
-                Ваша тема по проектной работе: Название темы
+                Ваша тема по проектной работе:
+                  {% for t in themes %}
+                    {% if person|have_theme:t %}
+                      {{ t }}
+                    {% endif %}
+                  {% endfor %}
             </h2>
             <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
         </div>
