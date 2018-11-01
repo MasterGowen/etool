@@ -47,4 +47,7 @@ def sort_by(queryset, order):
 
 @register.filter
 def another_date(a, b):
-    return a.startdate() != b.startdate()
+    if b:
+        return a.startdate() != b.startdate()
+    else:
+        return True
