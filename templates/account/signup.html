@@ -5,44 +5,55 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block account %}
-<h1>{% trans "Sign Up" %}</h1>
+    <h1>{% trans "Sign Up" %}</h1>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+    {{ form.non_field_errors }}
+    {% if form.errors %}
+        {{ form.errors|pluralize }}
+    {% endif %}
+    {% for field in form %}
+        {{ field.error }}
+        {{ field.field.error }}
+    {% endfor %}
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-{#  {{ form.as_p }}#}
-    <div class="field"><label class="label" for="id_username">Имя пользователя на английском языке:</label>
-        <div class="control has-icons-left">
-            <input class="input" type="text" name="username" placeholder="Имя пользователя" autofocus="autofocus" minlength="1" maxlength="150" required="" id="id_username">
-            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {#  {{ form.as_p }}#}
+        <div class="field"><label class="label" for="id_username">Имя пользователя на английском языке:</label>
+            <div class="control has-icons-left">
+                <input class="input" type="text" name="username" placeholder="Имя пользователя" autofocus="autofocus" minlength="1" maxlength="150" required="" id="id_username">
+                <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+            </div>
         </div>
-    </div>
-    <div class="field"><label class="label" for="id_email">E-mail (опционально):</label>
-        <div class="control has-icons-left">
-            <input class="input" type="email" name="email" placeholder="E-mail адрес" id="id_email">
-            <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+        <div class="field"><label class="label" for="id_email">E-mail (опционально):</label>
+            <div class="control has-icons-left">
+                <input class="input" type="email" name="email" placeholder="E-mail адрес" id="id_email">
+                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <label class="label" for="id_password1">Пароль:</label>
-        <div class="control has-icons-left">
-            <input class="input" type="password" name="password1" placeholder="Пароль" required="" id="id_password1">
-            <span class="icon is-small is-left"><i class="fas fa-key"></i></span>
+        <div class="field">
+            <label class="label" for="id_password1">Пароль:</label>
+            <div class="control has-icons-left">
+                <input class="input" type="password" name="password1" placeholder="Пароль" required="" id="id_password1">
+                <span class="icon is-small is-left"><i class="fas fa-key"></i></span>
+            </div>
         </div>
-    </div>
-    <div class="field"><label class="label" for="id_password2">Пароль (еще раз):</label> <div class="control has-icons-left">
-        <input class="input" type="password" name="password2" placeholder="Пароль (еще раз)" required="" id="id_password2">
-        <span class="icon is-small is-left"><i class="fas fa-key"></i></span>
-    </div></div>
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-<div class="field is-grouped">
-  <div class="control">
-  <button class="button is-primary" type="submit">{% trans "Sign Up" %}</button>
-  </div>
-</div>
-</form>
+        <div class="field"><label class="label" for="id_password2">Пароль (еще раз):</label>
+            <div class="control has-icons-left">
+                <input class="input" type="password" name="password2" placeholder="Пароль (еще раз)" required="" id="id_password2">
+                <span class="icon is-small is-left"><i class="fas fa-key"></i></span>
+            </div>
+        </div>
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary" type="submit">{% trans "Sign Up" %}</button>
+            </div>
+        </div>
+    </form>
 
 {% endblock %}
