@@ -385,7 +385,12 @@ class Visit(models.Model):
 
 class PrTheme(models.Model):
     theme = models.CharField("Тема проектной работы", max_length=4096, blank=False)
+    description = models.TextField("Описание", blank=True)
+    chief = models.ForeignKey("Person", verbose_name="Руководитель", on_delete=models.CASCADE, null=True)
+    max_take = models.PositiveIntegerField("Максимальное количество студентов", null=True, blank=True)
+    close_register_datetime = models.DateTimeField("Закрытие регистрации", null=True, blank=True)
     course = models.ForeignKey("Course", blank=True, on_delete=models.CASCADE, null=True)
+
     students = models.ManyToManyField("Person", blank=True)
 
     class Meta:
@@ -394,3 +399,9 @@ class PrTheme(models.Model):
 
     def __str__(self):
         return self.theme
+
+    def choice(self, person, course):
+        for t in PrTheme.objects.filter(course=course):
+            t.students.remove(person)
+        if t.students.count < t.max_take and timezone.now() < t.close_register_datetime:
+            self.students.add(person)

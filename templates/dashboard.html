@@ -211,7 +211,7 @@
                                         {% if person|have_theme:t %}
                                             <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" checked><label for="theme_{{ t.id }}">{{ t }}</label>
                                         {% else %}
-                                            <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">
+                                            <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ c.id }}/{{ t.id }}">
                                             <label for="theme_{{ t.id }}">{{ t.theme }}</label>
                                         {% endif %}
                                     </div>

@@ -156,10 +156,8 @@ def unenroll(request, pk):
     return redirect('/')
 
 
-def theme_choice(request, pk):
-    for t in PrTheme.objects.all():
-        t.students.remove(request.user.person)
-    PrTheme.objects.get(pk=pk).students.add(request.user.person)
+def theme_choice(request, pk, course_pk):
+    PrTheme.objects.get(pk=pk).choice(request.user.person, Course.objects.get(pk=course_pk))
     return redirect('/')
 
 
