@@ -47,7 +47,7 @@
                     {% endif %}
                     <td>
                         {% for c in courses %}
-                            {% if c|enrolled:person %}
+                            {% if c|enrolled:p %}
                                 <p>{{ c }}</p>
                             {% endif %}
                         {% endfor %}
