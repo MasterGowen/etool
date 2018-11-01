@@ -252,7 +252,7 @@ class Project(models.Model):
         return ProjectImage.objects.filter(project=self)
 
     def enumerated_events(self):
-        return enumerate(self.events)
+        return enumerate(self.events.all())
 
 
 class Event(models.Model):
