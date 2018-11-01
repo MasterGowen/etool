@@ -257,7 +257,7 @@ class Event(models.Model):
         ('h', "Скрыт"),
         ('p', "Опубликован"),
     )
-    code = models.CharField("Короткий ИД", max_length=256, blank=False)
+    code = models.CharField("Короткий ИД", max_length=256, blank=True, null=True)
     title = models.CharField("Название события", max_length=256, blank=False)
     description = models.TextField("Описание события", blank=True, default="")
     status = models.CharField("Статус публикации", max_length=1, choices=STATUSES, default='h')
