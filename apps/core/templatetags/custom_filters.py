@@ -33,3 +33,8 @@ def have_theme(student, theme):
 @register.filter
 def for_course(themes, course):
     return [t for t in themes if course in t.courses]
+
+
+@register.filter
+def for_course_len(themes, course):
+    return len([t for t in themes if course in t.courses])
