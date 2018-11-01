@@ -123,8 +123,8 @@
 
     {% for c in courses %}
         {% if c.projects %}
-            {{ c.projects_set }}
-            {% if c.project_set.count == 1 %}
+            {{ c.projects.count }}
+            {% if c.projects.count == 1 %}
                 {% for p in c.projects.all %}
                     {% for e in p.events.all %}
                         {{ e }}
