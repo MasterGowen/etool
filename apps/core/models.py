@@ -291,12 +291,8 @@ class Event(models.Model):
         verbose_name_plural = 'события'
 
     def __str__(self):
-        s = ""
         if self.code:
-            s += self.code
-        if self._enddate:
-            s += f" {self._startdate}"
-
+            s = self.code
         return f"{s} {self.title}"
 
 
