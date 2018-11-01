@@ -389,7 +389,7 @@ class Visit(models.Model):
 class PrTheme(models.Model):
     theme = models.CharField("Тема проектной работы", max_length=4096, blank=False)
     description = models.TextField("Описание", blank=True)
-    chief = models.ForeignKey("Person", verbose_name="Руководитель", on_delete=models.CASCADE, null=True)
+    chief = models.ForeignKey("Person", verbose_name="Руководитель", on_delete=models.CASCADE, null=True, related_name='prtheme_chief')
     max_take = models.PositiveIntegerField("Максимальное количество студентов", null=True, blank=True)
     close_register_datetime = models.DateTimeField("Закрытие регистрации", null=True, blank=True)
     course = models.ForeignKey("Course", blank=True, on_delete=models.CASCADE, null=True)
