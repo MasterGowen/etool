@@ -251,7 +251,7 @@ class Project(models.Model):
     def get_images(self):
         return ProjectImage.objects.filter(project=self)
 
-    def enumerate(self):
+    def enumerated_events(self):
         return enumerate(self.events)
 
 
