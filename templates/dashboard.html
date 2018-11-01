@@ -156,7 +156,9 @@
                                 <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
                                   {% for e in p.events.all|sort_by:"-_startdate" %}
-                                      {% if e|another_date:forloop.last %}
+                                      {% ifchanged e.startdate %}
+                                          <hr>
+                                        {% endifchanged %}
                                     <div class="timeline-content">
                                         <p class="heading">{{ e.startdate }}</p>
                                         <p>Тема занятия "{{ e.title }}"</p>
