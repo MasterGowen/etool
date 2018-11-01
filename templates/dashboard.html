@@ -195,9 +195,8 @@
                     {% endif %}
                 {% endif %}
 
-            {% for t in person_themes %}
-                {% if t.course == c %}
-
+            {% for t in themes|for_course:c %}
+                {% if person|have_theme:t %}
                     <div id="modal_theme_{{ t.id }}" class="modal">
                         <div class="modal-background"></div>
                         <div class="modal-card">
