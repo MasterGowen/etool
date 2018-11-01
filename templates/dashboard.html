@@ -162,7 +162,7 @@
             <h2 class="subtitle">
                 Ваша тема по проектной работе: Название темы
             </h2>
-            <button class="button is-primary is-right" onclick="$('.modal_theme').addClass('is-active')">Изменить</button>
+            <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
         </div>
     </section>
 
@@ -185,12 +185,12 @@
 
 
 
-  <div class="modal_theme">
+  <div id="modal_theme" class="modal">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
       <p class="modal-card-title">Изменить выбранную тему</p>
-      <button class="delete" aria-label="close" onclick="$('#is-success').removeAttr('href');$('.modal_theme').removeClass('is-active')"></button>
+      <button class="delete" aria-label="close" onclick="$('#is-success').removeAttr('href');$('#modal_theme').removeClass('is-active')"></button>
     </header>
     <section class="modal-card-body">
     {% for t in themes %}
@@ -206,7 +206,7 @@
     </section>
     <footer class="modal-card-foot">
       <a id="is-success" class="button is-success">Save changes</a>
-      <button class="button" onclick="$('#is-success').removeAttr('href');$('.modal_theme').removeClass('is-active')">Cancel</button>
+      <button class="button" onclick="$('#is-success').removeAttr('href');$('#modal_theme').removeClass('is-active')">Cancel</button>
     </footer>
   </div>
 </div>
