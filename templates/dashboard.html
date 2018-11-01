@@ -98,22 +98,21 @@
 
         <div class="container">
 
-
-            {% if themes|length > 0 %}
+            {% if themes|for_course:c | length > 0 %}
                 <section class="section">
                     <div class="container">
 
                         <h1 class="title">Ваша проектная проетная работа</h1>
                         <h2 class="subtitle">
                             Ваша тема по проектной работе:
-                            {% for t in themes %}
+                            {% for t in themes|for_course:c %}
                                 {% if t.course == c %}
                                     {% if person|have_theme:t %}
                                         {{ t }}
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
-                            Ваша тема по проектной работе: Название темы
+                            Ваша тема по проектной работе: {{ t.theme }}
                         </h2>
                         <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
                     </div>

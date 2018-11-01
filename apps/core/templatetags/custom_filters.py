@@ -28,3 +28,8 @@ def have_theme(student, theme):
     if student in theme.students.all():
         return True
     return False
+
+
+@register.filter
+def for_course(themes, course):
+    return [t for t in themes if course in t.courses]
