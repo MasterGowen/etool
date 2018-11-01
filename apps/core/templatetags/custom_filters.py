@@ -21,3 +21,10 @@ def has_answer(diag, person):
 @register.filter
 def enrolled(course, person):
     return CourseUserRegistration.objects.filter(person=person, course=course).exists()
+
+
+@register.filter
+def have_theme(student, theme):
+    if student in theme.students.all():
+        return True
+    return False

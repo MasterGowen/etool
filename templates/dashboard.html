@@ -4,8 +4,6 @@
     <!-- Hero content: will be in the middle -->
 
 
-
-
     <section class="section">
         <div class="container">
 
@@ -120,6 +118,27 @@
 
         </div>
     </div>
+
+    {% for c in courses %}
+        {% if c.projects %}
+            {% if c.projects.count == 1 %}
+                {% for p in c.projects.all %}
+                    {% for e in p.events.all %}
+                        {{ e }}
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+
+    {% for t in themes %}
+        {% if person|have_theme:t %}
+            <p><strong>{{ t }}</strong></p>
+        {% else %}
+            <p><a href="/theme_choice/{{ t.id }}">{{ t.theme }}</a></p>
+        {% endif %}
+    {% endfor %}
 
 {% endblock %}
 

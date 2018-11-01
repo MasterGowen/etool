@@ -94,3 +94,8 @@ class DiagnosticAdmin(admin.ModelAdmin):
 class StudentDiagAdmin(admin.ModelAdmin):
     list_display = ["person", "diagnostic"]
     search_fields = ["person", "diagnostic"]
+
+
+@admin.register(PrTheme)
+class PrThemeAdmin(admin.ModelAdmin):
+    list_display = ("__str__",)
