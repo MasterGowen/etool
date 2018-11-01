@@ -133,9 +133,7 @@
 
 
     {% for t in themes %}
-        {{ t }}
-        {{ person|have_theme:t }}
-        {% if not person|have_theme:t %}
+        {% if person|have_theme:t %}
             <p>{{ t }}</p>
         {% else %}
             <a href="theme_choice/{{ t.id }}">{{ t.title }}</a>
