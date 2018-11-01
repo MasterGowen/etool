@@ -415,3 +415,6 @@ class PrTheme(models.Model):
             t.students.remove(person)
         if t.students.count < t.max_take and timezone.now() < t.close_register_datetime:
             self.students.add(person)
+            return True
+        else:
+            return False
