@@ -2,7 +2,7 @@
 {% load static %}
 {% load custom_filters %}
 {% block head_title %}
-    Курсы
+  Курсы
 {% endblock %}
 
 {% block extra_head %}
@@ -10,53 +10,54 @@
 
 {% block body %}
 
-    {% block content %}
+  {% block content %}
+    <div class="container">
+    <section class="section">
+      <div class="container">
 
-        <section class="section">
-            <div class="container">
+        <h1 class="title">Курсы</h1>
+        <h2 class="subtitle">
+          Список курсов доступных для записи
+        </h2>
+      </div>
+    </section>
+    <div class="container">
+      <div class="columns">
 
-                <h1 class="title">Курсы</h1>
-                <h2 class="subtitle">
-                    Список курсов доступных для записи
-                </h2>
+        {% for c in courses %}
+
+
+
+          <div class="column">
+            <div class="card">
+              <div class="card-content">
+                <p class="title">
+                  {{ c.title }}
+                </p>
+                <p class="subtitle">
+                  {{ c.description }}
+                </p>
+              </div>
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  {% if c|enrolled:person %}
+                    Вы записаны на курс
+                  {% endif %}
+                </p>
+                <p class="card-footer-item enroll">
+                  {% if not c|enrolled:person %}
+                    <a href="/courses/enroll/{{ c.id }}/">Записаться на курс</a>
+                  {% else %}
+                    <a href="/courses/unenroll/{{ c.id }}/">Отписаться</a>
+                  {% endif %}
+                </p>
+              </footer>
             </div>
-        </section>
-        <div class="container">
-        <div class="columns">
-
-            {% for c in courses %}
-
-
-
-                <div class="column">
-                    <div class="card">
-                        <div class="card-content">
-                            <p class="title">
-                                {{ c.title }}
-                            </p>
-                            <p class="subtitle">
-                                {{ c.description }}
-                            </p>
-                        </div>
-                        <footer class="card-footer">
-                            <p class="card-footer-item">
-                              {% if c|enrolled:person %}
-                              Вы записаны на курс
-                              {% endif %}
-                            </p>
-                            <p class="card-footer-item enroll">
-                                {% if not c|enrolled:person %}
-                                    <a href="/courses/enroll/{{ c.id }}/">Записаться на курс</a>
-                                {% else %}
-                                    <a href="/courses/unenroll/{{ c.id }}/">Отписаться</a>
-                                {% endif %}
-                            </p>
-                        </footer>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endblock %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endblock %}
 
 </div>
 {% endblock %}
