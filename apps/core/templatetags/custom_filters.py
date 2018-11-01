@@ -38,3 +38,8 @@ def for_course(themes, course):
 @register.filter
 def for_course_len(themes, course):
     return len([t for t in themes if t.course == course])
+
+
+@register.filter
+def sort_by(queryset, order):
+    return queryset.order_by(order)
