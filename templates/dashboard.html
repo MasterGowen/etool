@@ -94,14 +94,15 @@
     <section class="section is-hidden">
         <div class="container">
 
-            <h1 class="title">Образовательный Наборы</h1>
+            <h1 class="title">Образовательные Наборы</h1>
             <h2 class="subtitle">
-                Краткое описаине ваших проектов
+                Краткое описание ваших проектов
             </h2>
 
         </div>
     </section>
 
+    {% if person.get_person_projects|length > 0 %}
     <div class="container">
         <section class="section">
         <div class="container">
@@ -114,6 +115,7 @@
                       {{ t }}
                     {% endif %}
                   {% endfor %}
+                Ваша тема по проектной работе: Название темы
             </h2>
             <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
         </div>
@@ -133,6 +135,7 @@
             {% endif %}
 
         </div>
+    {% endif %}
 
     <div class="timeline is-centered">
   <header class="timeline-header">
