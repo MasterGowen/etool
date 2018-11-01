@@ -137,8 +137,8 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
-      <button class="delete" aria-label="close"></button>
+      <p class="modal-card-title">Изменить выбранную тему</p>
+      <button class="delete" aria-label="close" onclick="$('#is-success').removeAttr('href');$('.modal').removeClass('is-active')"></button>
     </header>
     <section class="modal-card-body">
     {% for t in themes %}
@@ -151,7 +151,7 @@
     </section>
     <footer class="modal-card-foot">
       <a id="is-success" class="button is-success">Save changes</a>
-      <button class="button">Cancel</button>
+      <button class="button" onclick="$('#is-success').removeAttr('href');$('.modal').removeClass('is-active')">Cancel</button>
     </footer>
   </div>
 </div>
