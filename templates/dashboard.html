@@ -152,15 +152,19 @@
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">Start</span>
                                 </header>
-                                {% for e in p.events.all|sort_by:"-_startdate" %}
+
                                 <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
+                                  {% for e in p.events.all|sort_by:"-_startdate" %}
                                     <div class="timeline-content">
-                                        <p class="heading">{{ e._startdate }}</p>
-                                        <p>{{ e.title }}</p>
+                                        <p class="heading">{{ e.startdate }}</p>
+                                        <p>Тема занятия "{{ e.title }}"</p>
+                                        <p>{{ e.description }}</p>
+                                      <a href="" Class="button is-primary"> Записаться</a>
                                     </div>
+                                    {% endfor %}
                                 </div>
-                                {% endfor %}
+
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">End</span>
                                 </header>
