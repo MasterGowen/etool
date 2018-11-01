@@ -148,25 +148,25 @@
                           {% if c.projects %}
                     {% if c.projects.count == 1 %}
                         {% for p in c.projects.all %}
-                            {% for e in p.events.all|sort_by:"-_startdate" %}
-                            <div class="timeline is-centered">
+                            <div class="timeline is-left">
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">Start</span>
                                 </header>
+                                {% for e in p.events.all|sort_by:"-_startdate" %}
                                 <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
                                     <div class="timeline-content">
-                                        <p class="heading">January 2016</p>
+                                        <p class="heading">{{ e._startdate }}</p>
                                         <p>{{ e.title }}</p>
                                     </div>
                                 </div>
+                                {% endfor %}
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">End</span>
                                 </header>
                             </div>
 
                             </div>
-                            {% endfor %}
                         {% endfor %}
                     {% endif %}
                 {% endif %}
