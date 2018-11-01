@@ -251,6 +251,9 @@ class Project(models.Model):
     def get_images(self):
         return ProjectImage.objects.filter(project=self)
 
+    def enumerate(self):
+        return enumerate(self.events)
+
 
 class Event(models.Model):
     STATUSES = (
