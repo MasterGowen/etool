@@ -42,10 +42,7 @@ def for_course_len(themes, course):
 
 @register.filter
 def sort_by(queryset, order):
-    res = []
-    for i, e in queryset:
-        res.append(e)
-    return res.sort(key=lambda x: x.startdate(), reverse=True)
+    return queryset.order_by(order)
 
 
 @register.filter
