@@ -412,9 +412,12 @@ class PrTheme(models.Model):
 
     def choice(self, person, course):
         for t in PrTheme.objects.filter(course=course):
-            t.students.remove(person)
-        if t.students.count < t.max_take and timezone.now() < t.close_register_datetime:
-            self.students.add(person)
-            return True
-        else:
-            return False
+            if t.max_take:
+                if t.students.count < t.max_take:
+                    if t.close_register_datetime:
+                        if timezone.now() < t.close_register_datetime:
+                            t.students.remove(person)
+                        self.students.add(person)
+                        return True
+                    else:
+                        return False
