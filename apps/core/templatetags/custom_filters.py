@@ -21,3 +21,8 @@ def has_answer(diag, person):
 @register.filter
 def enrolled(course, person):
     return CourseUserRegistration.objects.filter(person=person, course=course).exists()
+
+
+@register.filter
+def have_theme(student, theme):
+    PrTheme.objects.filter(~Q(student__in=theme.students.all()))

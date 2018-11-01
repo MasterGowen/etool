@@ -133,7 +133,7 @@
 
 
     {% for t in themes %}
-        {% if person in t.students.all %}
+        {% if have_theme|person:theme %}
             <p>{{ t }}</p>
         {% else %}
             <a href="theme_choice/{{ t.id }}">{{ t.title }}</a>
