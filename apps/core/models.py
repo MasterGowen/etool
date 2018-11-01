@@ -292,8 +292,9 @@ class Event(models.Model):
 
     def __str__(self):
         if self.code:
-            s = self.code
-        return f"{s} {self.title}"
+            return f"{self.code} {self.title}"
+        else:
+            return f"{self.title}"
 
 
 class Diagnostic(models.Model):

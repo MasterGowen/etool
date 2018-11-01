@@ -156,7 +156,7 @@ def unenroll(request, pk):
     return redirect('/')
 
 
-def theme_choice(request, pk, course_pk):
+def theme_choice(request, course_pk, pk):
     PrTheme.objects.get(pk=pk).choice(request.user.person, Course.objects.get(pk=course_pk))
     return redirect('/dashboard')
 
