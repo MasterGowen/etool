@@ -182,6 +182,7 @@ def a_persons(request):
     context["persons"] = Person.objects.filter(user__is_staff=False)
     context["person"] = Person.objects.get(user=request.user)
     context["diagnostics"] = Diagnostic.objects.all()
+    context["courses"] = Course.objects.all()
     return render(request, "a_persons.html", context)
 
 

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block head_title %}
-Индекс
+    Индекс
 {% endblock %}
 
 {% block extra_head %}
@@ -10,63 +10,71 @@
 {% block body %}
 
 
-{% block content %}
-<table class="table">
-<thead>
-<tr>
-    <th>Имя</th>
-    <th>Фамилия</th>
-    <th>Отчество</th>
-    <th>Пол</th>
-    <th>Инситут</th>
-    <th>Номер группы</th>
-    <th>user</th>
-    <th>Активен</th>
-    {% for d in diagnostics %}
-    <th>{{ d.title }}</th>
-    {% endfor %}
-</tr>
-</thead>
-<tbody>
-
-{% for p in persons %}
-    <tr>
-    <td>{{ p.first_name }}</td>
-    <td>{{ p.last_name }}</td>
-    <td>{{ p.second_name }}</td>
-    <td>{{ p.sex }}</td>
-    <td>{{ p.department }}</td>
-    <td>{{ p.group_number }}</td>
-    <td>{{ p.user }}</td>
-        {% if p.checked %}
-        <td><a href="/persons/deactivate/{{p.id}}/">Deactivate</a></td>
-        {% else %}
-        <td><a href="/persons/activate/{{p.id}}/">Activate</a></td>
-    {% endif %}
-        {% for d in diagnostics %}
-            <td>
-                {% for sd in p.get_person_diagnostics %}
-                    {% if d.id == sd.diagnostic.id %}
-
-                            {% if sd.is_checked %}
-                            <a href="/persons/recheck/{{sd.id}}/">"{{sd.diagnostic.title}}" Перепроверить</a><br>
-                            <a href="/persons/result/{{sd.id}}/">"{{sd.diagnostic.title}}" Результат</a>
-                            {% else %}
-                            <a href="/persons/recheck/{{sd.id}}/">"{{sd.diagnostic.title}}" Проверить</a><br>
-                            {% endif %}
-
-                    {% endif %}
+    {% block content %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+                <th>Пол</th>
+                <th>Инситут</th>
+                <th>Номер группы</th>
+                <th>user</th>
+                <th>Активен</th>
+                <th>Курсы</th>
+                {% for d in diagnostics %}
+                    <th>{{ d.title }}</th>
                 {% endfor %}
-            </td>
-        {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
 
-    </tr>
-{% endfor %}
+            {% for p in persons %}
+                <tr>
+                    <td>{{ p.first_name }}</td>
+                    <td>{{ p.last_name }}</td>
+                    <td>{{ p.second_name }}</td>
+                    <td>{{ p.sex }}</td>
+                    <td>{{ p.department }}</td>
+                    <td>{{ p.group_number }}</td>
+                    <td>{{ p.user }}</td>
+                    {% if p.checked %}
+                        <td><a href="/persons/deactivate/{{ p.id }}/">Deactivate</a></td>
+                    {% else %}
+                        <td><a href="/persons/activate/{{ p.id }}/">Activate</a></td>
+                    {% endif %}
+                    <td>
+                        {% for c in courses %}
+                            {% if c|enrolled:person %}
+                                <p>{{ c }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    {% for d in diagnostics %}
+                        <td>
+                            {% for sd in p.get_person_diagnostics %}
+                                {% if d.id == sd.diagnostic.id %}
 
-</tbody>
-</table>
+                                    {% if sd.is_checked %}
+                                        <a href="/persons/recheck/{{ sd.id }}/">"{{ sd.diagnostic.title }}" Перепроверить</a><br>
+                                        <a href="/persons/result/{{ sd.id }}/">"{{ sd.diagnostic.title }}" Результат</a>
+                                    {% else %}
+                                        <a href="/persons/recheck/{{ sd.id }}/">"{{ sd.diagnostic.title }}" Проверить</a><br>
+                                    {% endif %}
 
-{% endblock %}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    {% endblock %}
 {% endblock %}
 {% block extra_body %}
 {% endblock %}
