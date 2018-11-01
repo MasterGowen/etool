@@ -111,7 +111,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </h2>
-                            <button class="button is-primary" onclick="$('#modal_theme').addClass('is-active')">Изменить</button>
+                            <button class="button is-primary" onclick="$('#modal_theme_{{ t.id }}').addClass('is-active')">Изменить</button>
                         </div>
                     </section>
                 {% endif %}
@@ -191,32 +191,36 @@
                     {% endif %}
                 {% endif %}
 
+            {% for t in person_themes %}
+                {% if t.course == c %}
 
-            <div id="modal_theme" class="modal">
-                <div class="modal-background"></div>
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title">Изменить выбранную тему</p>
-                        <button class="delete" aria-label="close" onclick="$('#is-success').removeAttr('href');$('#modal_theme').removeClass('is-active')"></button>
-                    </header>
-                    <section class="modal-card-body">
-                        {% for t in themes|for_course:c %}
-                            <div class="field">
-                                {% if person|have_theme:t %}
-                                    <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" checked><label for="theme_{{ t.id }}">{{ t }}</label>
-                                {% else %}
-                                    <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">
-                                    <label for="theme_{{ t.id }}">{{ t.theme }}</label>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    </section>
-                    <footer class="modal-card-foot">
-                        <a id="is-success" class="button is-success">Save changes</a>
-                        <button class="button" onclick="$('#is-success').removeAttr('href');$('#modal_theme').removeClass('is-active')">Cancel</button>
-                    </footer>
-                </div>
-            </div>
+                    <div id="modal_theme_{{ t.id }}" class="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-card">
+                            <header class="modal-card-head">
+                                <p class="modal-card-title">Изменить выбранную тему</p>
+                                <button class="delete" aria-label="close" onclick="$('#is-success').removeAttr('href');$('#modal_theme_{{ t.id }}').removeClass('is-active')"></button>
+                            </header>
+                            <section class="modal-card-body">
+                                {% for t in themes|for_course:c %}
+                                    <div class="field">
+                                        {% if person|have_theme:t %}
+                                            <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" checked><label for="theme_{{ t.id }}">{{ t }}</label>
+                                        {% else %}
+                                            <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ t.id }}">
+                                            <label for="theme_{{ t.id }}">{{ t.theme }}</label>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </section>
+                            <footer class="modal-card-foot">
+                                <a id="is-success" class="button is-success">Save changes</a>
+                                <button class="button" onclick="$('#is-success').removeAttr('href');$('#modal_theme_{{ t.id }}').removeClass('is-active')">Cancel</button>
+                            </footer>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         {% endif %}
     {% endfor %}
 {% endblock %}
