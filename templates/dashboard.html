@@ -145,7 +145,7 @@
                 {#    EVENTS #}
 
 
-                          {% if c.projects %}
+                {% if c.projects %}
                     {% if c.projects.count == 1 %}
                         {% for p in c.projects.all %}
                             <div class="timeline is-left">
@@ -155,17 +155,17 @@
 
                                 <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
-                                  {% for e in p.events.all|sort_by:"-_startdate" %}
-                                      {% ifchanged e.startdate %}
-                                          <hr>
+                                    {% for e in p.events.all|sort_by:"-_startdate" %}
+                                        {% ifchanged e.startdate %}
+                                            <hr>
                                         {% endifchanged %}
-                                    <div class="timeline-content">
-                                        <p class="heading">{{ e.startdate }}</p>
-                                        <p>Тема занятия "{{ e.title }}"</p>
-                                        <p>{{ e.description }}</p>
-                                      <a href="" Class="button is-primary"> Записаться</a>
-                                    </div>
-                                      {% endif %}
+                                        <div class="timeline-content">
+                                            <p class="heading">{{ e.startdate }}</p>
+                                            <p>Тема занятия "{{ e.title }}"</p>
+                                            <p>{{ e.description }}</p>
+                                            <a href="" Class="button is-primary"> Записаться</a>
+                                        </div>
+
                                     {% endfor %}
                                 </div>
 
