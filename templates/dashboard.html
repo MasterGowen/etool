@@ -122,7 +122,13 @@
     </div>
 
     {% for c in courses %}
-    <p>{{ c }}</p>
+        {% if c.projects %}
+            {% for p in c.projects.all %}
+                {% for e in p.events.all %}
+                    {{ e }}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
     {% endfor %}
 
 {% endblock %}
