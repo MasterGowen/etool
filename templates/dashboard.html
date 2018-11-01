@@ -122,12 +122,14 @@
     </div>
 
     {% for c in courses %}
-        {% if c.projects %}
-            {% for p in c.projects.all %}
-                {% for e in p.events.all %}
-                    {{ e }}
+        {% if c.type ==  "minor" %}
+            {% if c.projects %}
+                {% for p in c.projects.all %}
+                    {% for e in p.events.all %}
+                        {{ e }}
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            {% endif %}
         {% endif %}
     {% endfor %}
 
