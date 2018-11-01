@@ -381,3 +381,15 @@ class Visit(models.Model):
     project = models.ForeignKey("Project", on_delete=models.CASCADE, null=True)
     event = models.ForeignKey("Event", on_delete=models.CASCADE, null=True)
     person = models.ForeignKey("Person", on_delete=models.CASCADE, null=True)
+
+
+class PrTheme(models.Model):
+    theme = models.CharField("Тема проектной работы", max_length=4096, blank=False)
+    students = models.ManyToManyField("Person", blank=True)
+
+    class Meta:
+        verbose_name = 'тема проектной работы'
+        verbose_name_plural = 'темы проектных работ'
+
+    def __str__(self):
+        return self.theme
