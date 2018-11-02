@@ -104,7 +104,7 @@
 
                             {% if person|theme_choiced:c %}
 
-                                <h1 class="title">Ваша проектная проектная работа</h1>
+                                <h1 class="title">Ваша проектная работа</h1>
                                 <h2 class="subtitle">
                                     Ваша тема по проектной работе:
                                     {% for t in themes|for_course:c %}
@@ -119,7 +119,12 @@
                                     {% endif %}
                                 {% endfor %}
                             {% else %}
-                                Choice
+                                <h1 class="title">Выберите тему проектной работы</h1>
+                                {% for t in themes|for_course:c %}
+                                    {% if t.course == c %}
+                                        <button class="button is-primary" onclick="$('#modal_theme_{{ t.id }}').addClass('is-active')">Выбрать</button>
+                                    {% endif %}
+                                {% endfor %}
                             {% endif %}
                         </div>
                     </section>
