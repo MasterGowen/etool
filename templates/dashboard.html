@@ -172,7 +172,7 @@
                                         {% if not e|event_enrolled:person %}
                                             <a href="/events/enroll/{{ e.pk }}" Class="button is-primary"> Записаться</a>
                                         {% else %}
-                                            <a href="/events/unenroll/{{ e.pk }}" Class="button is-primary"> Отписаться</a>
+                                            <a href="/events/unenroll/{{ e.pk }}" Class="button is-danger"> Отписаться</a>
                                         {% endif %}
                                         </div>
                                {% endfor %}
