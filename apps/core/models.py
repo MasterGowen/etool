@@ -293,6 +293,8 @@ class Event(models.Model):
         return Visit.objects.filter(event=self, person=person, project=project)
 
     def enroll(self, person):
+        some_time_events = Event.objects.filter(_startdate=self._startdate)
+        EventUserRegistration.objects.filter(event__in=some_time_events, person=person).delete()
         EventUserRegistration.objects.create(
             person=person,
             event=self,
