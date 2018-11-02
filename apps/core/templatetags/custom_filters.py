@@ -36,6 +36,14 @@ def have_theme(student, theme):
 
 
 @register.filter
+def theme_choiced(student, course):
+    for t in PrTheme.objects.filter(course=course):
+        if student in t.students.all():
+            return True
+    return False
+
+
+@register.filter
 def for_course(themes, course):
     return [t for t in themes if t.course == course]
 

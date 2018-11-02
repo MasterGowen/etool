@@ -102,20 +102,25 @@
                     <section class="section">
                         <div class="container">
 
-                            <h1 class="title">Ваша проектная проектная работа</h1>
-                            <h2 class="subtitle">
-                                Ваша тема по проектной работе:
-                                {% for t in themes|for_course:c %}
-                                    {% if person|have_theme:t %}
-                                        {{ t }}
+                            {% if person|theme_choiced:c %}
+
+                                <h1 class="title">Ваша проектная проектная работа</h1>
+                                <h2 class="subtitle">
+                                    Ваша тема по проектной работе:
+                                    {% for t in themes|for_course:c %}
+                                        {% if person|have_theme:t %}
+                                            {{ t }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </h2>
+                                {% for t in person_themes %}
+                                    {% if t.course == c %}
+                                        <button class="button is-primary" onclick="$('#modal_theme_{{ t.id }}').addClass('is-active')">Изменить</button>
                                     {% endif %}
                                 {% endfor %}
-                            </h2>
-                            {% for t in person_themes %}
-                                {% if t.course == c %}
-                                    <button class="button is-primary" onclick="$('#modal_theme_{{ t.id }}').addClass('is-active')">Изменить</button>
-                                {% endif %}
-                            {% endfor %}
+                            {% else %}
+                                Choice
+                            {% endif %}
                         </div>
                     </section>
                 {% endif %}
