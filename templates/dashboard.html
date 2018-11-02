@@ -107,7 +107,11 @@
                                 Ваша тема по проектной работе:
                                 {% for t in themes|for_course:c %}
                                     {% if person|have_theme:t %}
-                                        {{ t }}
+                                        {% if t %}
+                                            {{ t }}
+                                        {% else %}
+                                            <p>Не выбрана</p>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             </h2>
@@ -152,31 +156,31 @@
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">Начало</span>
                                 </header>
-                                  <div class="timeline-item is-primary">
+                                <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
-                                {% for e in p.events.all|sort_by:"_startdate" %}
-                                  {% ifchanged e.startdate %}
-                                </div>
-                                      <div class="timeline-item is-primary">
-                                    <div class="timeline-marker is-primary"></div>
-                              {% endifchanged %}
+                                    {% for e in p.events.all|sort_by:"_startdate" %}
+                                        {% ifchanged e.startdate %}
+                                            </div>
+                                            <div class="timeline-item is-primary">
+                                            <div class="timeline-marker is-primary"></div>
+                                        {% endifchanged %}
                                         <div class="timeline-content">
                                             <p class="heading">{{ e.startdate }}</p>
                                             <p>Тема занятия "{{ e.title }}"</p>
                                             <p>{{ e.description }}</p>
-                                          {% if e.get_staff|length != 0 %}
-                                            {% for s in e.get_staff %}
-                                              <p>{{ s }}</p>
-                                            {% endfor %}
-                                          {% endif %}
-                                        {% if not e|event_enrolled:person %}
-                                            <a href="/events/enroll/{{ e.pk }}" Class="button is-primary"> Записаться</a>
-                                        {% else %}
-                                            <a href="/events/unenroll/{{ e.pk }}" Class="button is-danger"> Отписаться</a>
-                                        {% endif %}
+                                            {% if e.get_staff|length != 0 %}
+                                                {% for s in e.get_staff %}
+                                                    <p>{{ s }}</p>
+                                                {% endfor %}
+                                            {% endif %}
+                                            {% if not e|event_enrolled:person %}
+                                                <a href="/events/enroll/{{ e.pk }}" Class="button is-primary"> Записаться</a>
+                                            {% else %}
+                                                <a href="/events/unenroll/{{ e.pk }}" Class="button is-danger"> Отписаться</a>
+                                            {% endif %}
                                         </div>
-                               {% endfor %}
-</div>
+                                    {% endfor %}
+                                    </div>
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">Конец</span>
                                 </header>
