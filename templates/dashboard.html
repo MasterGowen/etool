@@ -153,6 +153,7 @@
 
                 {% if c.projects %}
                     {% if c.projects.count == 1 %}
+                        <h1 class="title">Таймлайн</h1>
                         {% for p in c.projects.all %}
                             <div class="timeline is-left">
                                 <header class="timeline-header">
@@ -234,8 +235,8 @@
                         <section class="modal-card-body">
                             {% for t in themes|for_course:c %}
                                 <div class="field">
-                                        <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ c.id }}/{{ t.id }}">
-                                        <label for="theme_{{ t.id }}">{{ t.theme }}</label>
+                                    <input class="is-checkradio" id="theme_{{ t.id }}" type="radio" name="themes" onclick="$('#is-success').attr('href', this.dataset.href)" data-href="/theme_choice/{{ c.id }}/{{ t.id }}">
+                                    <label for="theme_{{ t.id }}">{{ t.theme }}</label>
                                 </div>
                             {% endfor %}
                         </section>
