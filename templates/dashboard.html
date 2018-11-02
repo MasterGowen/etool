@@ -164,8 +164,8 @@
                                             <p class="heading">{{ e.startdate }}</p>
                                             <p>Тема занятия "{{ e.title }}"</p>
                                             <p>{{ e.description }}</p>
-                                          {% if event.get_staff|length != 0 %}
-                                            {% for s in event.get_staff %}
+                                          {% if e.get_staff|length != 0 %}
+                                            {% for s in e.get_staff %}
                                               <p>{{ s }}</p>
                                             {% endfor %}
                                           {% endif %}
