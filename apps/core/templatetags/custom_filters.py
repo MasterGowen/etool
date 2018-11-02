@@ -24,6 +24,11 @@ def enrolled(course, person):
 
 
 @register.filter
+def event_enrolled(event, person):
+    return EventUserRegistration.objects.filter(person=person, event=event).exists()
+
+
+@register.filter
 def have_theme(student, theme):
     if student in theme.students.all():
         return True
