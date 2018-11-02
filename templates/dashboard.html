@@ -156,10 +156,10 @@
 {% for e in p.events.all|sort_by:"-_startdate" %}
 
 
-                                        {% ifchanged e.startdate %}
+
                                            <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
-                                        {% endifchanged %}
+
                                         <div class="timeline-content">
                                             <p class="heading">{{ e.startdate }}</p>
                                             <p>Тема занятия "{{ e.title }}"</p>
@@ -169,9 +169,11 @@
 
                                    {% ifchanged e.startdate %}
                                 </div>
-{% endifchanged %}
-   {% endfor %}
-
+                                      <div class="timeline-item is-primary">
+                                    <div class="timeline-marker is-primary"></div>
+                              {% endifchanged %}
+                               {% endfor %}
+</div>
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">End</span>
                                 </header>
