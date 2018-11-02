@@ -95,6 +95,8 @@
     {% for c in courses %}
         {% if c|enrolled:person %}
 
+            <h1 class="title">{{ c }}</h1>
+
             {#     THEME     #}
 
             <div class="container">
