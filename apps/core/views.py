@@ -156,6 +156,20 @@ def unenroll(request, pk):
     return redirect('/')
 
 
+def event_enroll(request, pk):
+    e = Event.objects.get(pk=pk)
+    person = Person.objects.filter(user=request.user).first()
+    e.enroll(person)
+    return redirect('/dashboard')
+
+
+def event_unenroll(request, pk):
+    e = Event.objects.get(pk=pk)
+    person = Person.objects.filter(user=request.user).first()
+    e.unenroll(person)
+    return redirect('/dashboard')
+
+
 def theme_choice(request, course_pk, pk):
     PrTheme.objects.get(pk=pk).choice(request.user.person, Course.objects.get(pk=course_pk))
     return redirect('/dashboard')

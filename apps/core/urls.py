@@ -26,5 +26,7 @@ urlpatterns = [
     path('courses/', courses, name="courses"),
     path('courses/enroll/<int:pk>/', enroll),
     path('courses/unenroll/<int:pk>/', unenroll),
+    path('events/enroll/<int:pk>/', event_enroll),
+    path('events/unenroll/<int:pk>/', event_unenroll),
     path('theme_choice/<int:course_pk>/<int:pk>/', theme_choice),
 ]

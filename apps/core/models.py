@@ -292,6 +292,20 @@ class Event(models.Model):
     def visited_by(self, person, project):
         return Visit.objects.filter(event=self, person=person, project=project)
 
+    def enroll(self, person):
+        EventUserRegistration.objects.create(
+            person=person,
+            event=self,
+            role="student"
+        )
+
+    def unenroll(self, person):
+        EventUserRegistration.objects.filter(
+            person=person,
+            event=self,
+        ).delete()
+
+
     class Meta:
         verbose_name = 'событие'
         verbose_name_plural = 'события'
