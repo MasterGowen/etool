@@ -107,11 +107,9 @@
                                 Ваша тема по проектной работе:
                                 {% for t in themes|for_course:c %}
                                     {% if person|have_theme:t %}
-                                        {% if t %}
-                                            {{ t }}
-                                        {% else %}
-                                            <p>Не выбрана</p>
-                                        {% endif %}
+                                        {{ t }}
+                                    {% else %}
+                                        <p>Не выбрана</p>
                                     {% endif %}
                                 {% endfor %}
                             </h2>
