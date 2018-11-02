@@ -152,8 +152,11 @@
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">Начало занятий</span>
                                 </header>
+                                  <div class="timeline-item is-primary">
+                                    <div class="timeline-marker is-primary"></div>
                                 {% for e in p.events.all|sort_by:"_startdate" %}
                                   {% ifchanged e.startdate %}
+                                </div>
                                       <div class="timeline-item is-primary">
                                     <div class="timeline-marker is-primary"></div>
                               {% endifchanged %}
@@ -163,11 +166,8 @@
                                             <p>{{ e.description }}</p>
                                             <a href="" Class="button is-primary"> Записаться</a>
                                         </div>
-                                  {% ifchanged e.startdate %}
-                                    </div>
-                                  {% endifchanged %}
                                {% endfor %}
-
+</div>
                                 <header class="timeline-header">
                                     <span class="tag is-medium is-primary">Конец</span>
                                 </header>
