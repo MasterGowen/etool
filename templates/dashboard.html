@@ -169,7 +169,11 @@
                                               <p>{{ s }}</p>
                                             {% endfor %}
                                           {% endif %}
-                                            <a href="" Class="button is-primary"> Записаться</a>
+                                        {% if not e|event_enrolled:person %}
+                                            <a href="/events/enroll/{{ e.pk }}" Class="button is-primary"> Записаться</a>
+                                        {% else %}
+                                            <a href="/events/unenroll/{{ e.pk }}" Class="button is-primary"> Отписаться</a>
+                                        {% endif %}
                                         </div>
                                {% endfor %}
 </div>
