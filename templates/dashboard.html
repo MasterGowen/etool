@@ -119,12 +119,7 @@
                                     {% endif %}
                                 {% endfor %}
                             {% else %}
-                                <h1 class="title">Выберите тему проектной работы</h1>
-                                {% for t in themes|for_course:c %}
-                                    {% if t.course == c %}
-                                        <button class="button is-primary" onclick="$('#modal_theme_{{ t.id }}').addClass('is-active')">Выбрать</button>
-                                    {% endif %}
-                                {% endfor %}
+                                <button class="button is-primary" onclick="$('#modal_theme_{{ t.id }}').addClass('is-active')">Выбрать</button>
                             {% endif %}
                         </div>
                     </section>
