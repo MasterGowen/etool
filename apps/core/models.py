@@ -57,7 +57,11 @@ class Person(models.Model):
 
     def __str__(self):
         if self.first_name and self.last_name:
+            if self.second_name:
+                return f"{self.first_name} {self.second_name} {self.last_name}"
+
             return ' '.join([str(self.first_name), str(self.last_name)])
+
         else:
             return str(self.user)
 
