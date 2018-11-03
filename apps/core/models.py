@@ -215,7 +215,11 @@ class Course(models.Model):
             person=person,
             course=self,
         ).delete()
-        person.current_course = None
+        try:
+            person.current_course = CourseUserRegistration.objects.filter(
+                person=person)[0]
+        except:
+            person.current_course = 0
         person.save()
 
 
@@ -306,7 +310,6 @@ class Event(models.Model):
             person=person,
             event=self,
         ).delete()
-
 
     class Meta:
         verbose_name = 'событие'
