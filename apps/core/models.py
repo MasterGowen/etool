@@ -217,7 +217,7 @@ class Course(models.Model):
         ).delete()
         try:
             person.current_course = CourseUserRegistration.objects.filter(
-                person=person)[0]
+                person=person)[0].course
         except:
             person.current_course = 0
         person.save()
